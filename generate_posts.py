@@ -11,7 +11,7 @@ import random
 import textwrap
 from datetime import datetime, timedelta
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 # === CONFIG ===
 OUTPUT_DIR = Path(__file__).parent / "posts"
@@ -81,6 +81,28 @@ GRADIENT_PALETTES = [
     {"grad_start": "#43E97B", "grad_end": "#38F9D7", "accent": "#1A1A2E", "text": "#1A1A2E", "subtext": "#2D3748"},
     {"grad_start": "#FA709A", "grad_end": "#FEE140", "accent": "#1A1A2E", "text": "#1A1A2E", "subtext": "#2D3748"},
 ]
+
+# Deliberately no yellow/neon here — flat, print-poster colors instead
+# (cream/charcoal/stone base with one bold but not fluorescent accent).
+BRUTALIST_PALETTES = [
+    {"bg": "#F4F1EA", "ink": "#111111", "card_bg": "#FFFFFF", "accent": "#D7263D"},
+    {"bg": "#1A1A1A", "ink": "#F4F1EA", "card_bg": "#F4F1EA", "accent": "#3D5AFE"},
+    {"bg": "#DCD6C9", "ink": "#161616", "card_bg": "#FFFFFF", "accent": "#2F5233"},
+]
+
+# Auto-color a stat value green/red off its own +/- sign, for styles where
+# the number's direction is the visual point (aurora, skyline, poster).
+STAT_POSITIVE = (52, 211, 153)
+STAT_NEGATIVE = (248, 113, 113)
+
+
+def _is_negative_stat(value):
+    v = value.strip()
+    return v.startswith("-") or v.startswith("−")
+
+
+def _stat_sign_color(value):
+    return STAT_NEGATIVE if _is_negative_stat(value) else STAT_POSITIVE
 
 
 def hex_to_rgb(hex_color):
@@ -556,6 +578,292 @@ def generate_news_post_stat_hero_gradient(headline, summary, category, source, s
     return img.convert("RGB")
 
 
+# === POST TYPE: NEWS POST (Brutalist) ===
+# Thick black borders, hard offset shadows (no blur), flat print-poster
+# color — reads as a handmade poster, not a corporate infographic. Colors
+# are deliberately non-neon (see BRUTALIST_PALETTES).
+def generate_news_post_brutalist(headline, summary, category, source, stat_label=None, stat_value=None):
+    palette = random.choice(BRUTALIST_PALETTES)
+    bg = hex_to_rgb(palette["bg"])
+    ink = hex_to_rgb(palette["ink"])
+    card_bg = hex_to_rgb(palette["card_bg"])
+    accent = hex_to_rgb(palette["accent"])
+
+    img = Image.new("RGB", SIZE, bg)
+    draw = ImageDraw.Draw(img)
+
+    def hard_shadow_rect(xy, fill, offset=10, border=5):
+        x1, y1, x2, y2 = xy
+        draw.rectangle([x1 + offset, y1 + offset, x2 + offset, y2 + offset], fill=ink)
+        draw.rectangle([x1, y1, x2, y2], fill=fill, outline=ink, width=border)
+
+    cat_font = ImageFont.truetype(FONT_BOLD, 24)
+    cat_text = f" {category.upper()} "
+    cat_w = cat_font.getlength(cat_text)
+    hard_shadow_rect((60, 50, 60 + cat_w + 14, 96), accent, offset=6, border=4)
+    draw.text((67, 60), cat_text, font=cat_font, fill=ink)
+
+    headline_font = ImageFont.truetype(FONT_BOLD, 58)
+    y_pos = 140
+    headline_h = draw_text_wrapped(
+        draw, headline.upper(), 60, y_pos, SIZE[0] - 120, headline_font, ink, line_spacing=6,
+        max_height=_lines_height(headline_font, 4, 6),
+    )
+    y_pos += headline_h + 35
+
+    if stat_label and stat_value:
+        box_h = 190
+        hard_shadow_rect((60, y_pos, SIZE[0] - 60, y_pos + box_h), card_bg, offset=12, border=6)
+        val_font = ImageFont.truetype(FONT_BOLD, 84)
+        draw.text((90, y_pos + 25), stat_value, font=val_font, fill=accent)
+        lbl_font = ImageFont.truetype(FONT_BOLD, 22)
+        draw.text((90, y_pos + 130), stat_label.upper(), font=lbl_font, fill=ink)
+        y_pos += box_h + 40
+
+    draw.line([(60, y_pos), (SIZE[0] - 60, y_pos)], fill=ink, width=5)
+    y_pos += 25
+    summary_font = ImageFont.truetype(FONT_MEDIUM, 27)
+    budget = max(CONTENT_BOTTOM - y_pos, _lines_height(summary_font, 2, 8))
+    draw_text_wrapped(draw, summary, 60, y_pos, SIZE[0] - 120, summary_font, ink, line_spacing=8, max_height=budget)
+
+    src_font = ImageFont.truetype(FONT_BOLD, 18)
+    draw.text((60, SIZE[1] - 130), f"SOURCE: {source.upper()}", font=src_font, fill=ink)
+    draw.line([(60, SIZE[1] - 100), (SIZE[0] - 60, SIZE[1] - 100)], fill=ink, width=4)
+    brand_font = ImageFont.truetype(FONT_BOLD, 22)
+    draw.text((60, SIZE[1] - 80), BRAND.upper(), font=brand_font, fill=ink)
+    handle_font = ImageFont.truetype(FONT_MEDIUM, 16)
+    brand_w = brand_font.getlength(BRAND.upper())
+    draw.text((60 + brand_w + 15, SIZE[1] - 77), HANDLE, font=handle_font, fill=ink)
+    follow_font = ImageFont.truetype(FONT_BOLD, 18)
+    ftext = "FOLLOW FOR MORE >"
+    fw = follow_font.getlength(ftext)
+    draw.text((SIZE[0] - 60 - fw, SIZE[1] - 77), ftext, font=follow_font, fill=accent)
+
+    return img
+
+
+# === POST TYPE: NEWS POST (Aurora) ===
+# Procedurally generated soft-blob "photo" backdrop (no stock photo needed)
+# with a dark bottom scrim for legibility — editorial photo-card look
+# instead of a flat color card. Content is bottom-anchored to the fixed
+# footer so a long headline just pushes the stat badge up, never overflows.
+AURORA_PALETTE_SETS = [
+    [(255, 94, 148), (120, 60, 220), (30, 20, 60)],
+    [(0, 200, 180), (30, 40, 120), (10, 10, 30)],
+    [(255, 170, 50), (200, 30, 90), (20, 10, 40)],
+]
+
+
+def _aurora_background(colors):
+    base = Image.new("RGB", (SIZE[0] // 2, SIZE[1] // 2), colors[-1])
+    draw = ImageDraw.Draw(base)
+    w, h = base.size
+    for c in colors:
+        for _ in range(4):
+            cx = random.randint(int(w * -0.1), int(w * 1.1))
+            cy = random.randint(int(h * -0.1), int(h * 1.1))
+            r = random.randint(int(w * 0.18), int(w * 0.4))
+            draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=c)
+    base = base.filter(ImageFilter.GaussianBlur(35))
+    return base.resize(SIZE, Image.LANCZOS)
+
+
+def generate_news_post_aurora(headline, summary, category, source, stat_label=None, stat_value=None):
+    colors = random.choice(AURORA_PALETTE_SETS)
+    img = _aurora_background(colors).convert("RGBA")
+
+    scrim = Image.new("RGBA", SIZE, (0, 0, 0, 0))
+    sdraw = ImageDraw.Draw(scrim)
+    scrim_top = int(SIZE[1] * 0.42)
+    for y in range(scrim_top, SIZE[1]):
+        alpha = int(235 * (y - scrim_top) / (SIZE[1] - scrim_top))
+        sdraw.line([(0, y), (SIZE[0], y)], fill=(0, 0, 0, alpha))
+    img = Image.alpha_composite(img, scrim)
+    draw = ImageDraw.Draw(img)
+
+    text_color = (255, 255, 255)
+    subtext = (225, 225, 235)
+
+    cat_font = ImageFont.truetype(FONT_BOLD, 20)
+    cat_text = f"  {category.upper()}  "
+    cat_w = cat_font.getlength(cat_text)
+    draw_rounded_rect(draw, (60, 55, 60 + cat_w + 10, 92), 18, (255, 255, 255, 235))
+    draw.text((65, 60), cat_text, font=cat_font, fill=(20, 20, 20))
+
+    headline_font = ImageFont.truetype(FONT_BOLD, 50)
+    max_h = _lines_height(headline_font, 3, 12)
+    dummy = ImageDraw.Draw(Image.new("RGBA", (10, 10)))
+    headline_h = draw_text_wrapped(dummy, headline, 0, 0, SIZE[0] - 120, headline_font, text_color,
+                                    line_spacing=12, max_height=max_h)
+    headline_y = CONTENT_BOTTOM - headline_h
+    draw_text_wrapped(draw, headline, 60, headline_y, SIZE[0] - 120, headline_font, text_color,
+                       line_spacing=12, max_height=max_h)
+
+    if stat_label and stat_value:
+        stat_color = _stat_sign_color(stat_value)
+        badge_w, badge_h = 300, 100
+        badge_top = headline_y - 30 - badge_h
+        badge = Image.new("RGBA", (badge_w, badge_h), (0, 0, 0, 0))
+        bd = ImageDraw.Draw(badge)
+        draw_rounded_rect(bd, (0, 0, badge_w, badge_h), 22, (255, 255, 255, 40))
+        bd.rounded_rectangle([0, 0, badge_w, badge_h], radius=22, outline=(255, 255, 255, 120), width=2)
+        img.paste(badge, (60, badge_top), badge)
+        draw = ImageDraw.Draw(img)
+        val_font = ImageFont.truetype(FONT_BOLD, 44)
+        draw.text((60 + 22, badge_top + 16), stat_value, font=val_font, fill=stat_color)
+        lbl_font = ImageFont.truetype(FONT_MEDIUM, 17)
+        draw.text((60 + 22, badge_top + 68), stat_label.upper(), font=lbl_font, fill=(235, 235, 240))
+
+    src_font = ImageFont.truetype(FONT_REGULAR, 18)
+    draw.text((60, SIZE[1] - 130), f"Source: {source}", font=src_font, fill=subtext)
+    draw_brand_footer(draw, SIZE, {"accent": "#FFFFFF", "text": "#FFFFFF", "subtext": "#C8C8D2"})
+
+    return img.convert("RGB")
+
+
+# === POST TYPE: NEWS POST (Skyline) ===
+# Procedural financial-district night skyline — no stock photo, on-theme
+# ("markets never sleep"). Buildings are capped to a fixed-height band at
+# the bottom so there's always a clear stretch of sky for text above them.
+SKYLINE_BAND_H = 260
+SKY_BOTTOM = SIZE[1] - SKYLINE_BAND_H - 30
+
+
+def _skyline_background():
+    img = create_gradient(SIZE, "#050814", "#131a33", "vertical")
+    draw = ImageDraw.Draw(img)
+
+    for _ in range(70):
+        x = random.randint(0, SIZE[0])
+        y = random.randint(0, SIZE[1] - SKYLINE_BAND_H - 40)
+        r = random.choice([1, 1, 1, 2])
+        b = random.randint(120, 255)
+        draw.ellipse([x - r, y - r, x + r, y + r], fill=(b, b, b))
+
+    def draw_layer(base_y, color, min_h, max_h, min_w, max_w, window_color):
+        x = -20
+        while x < SIZE[0] + 20:
+            w = random.randint(min_w, max_w)
+            h = random.randint(min_h, max_h)
+            draw.rectangle([x, base_y - h, x + w, base_y + 10], fill=color)
+            for wx in range(x + 8, x + w - 8, 14):
+                for wy in range(base_y - h + 14, base_y - 6, 20):
+                    if random.random() < 0.55:
+                        draw.rectangle([wx, wy, wx + 6, wy + 10], fill=window_color)
+            x += w + random.randint(4, 14)
+
+    horizon = SIZE[1] - 40
+    draw_layer(horizon, (16, 20, 38), int(SKYLINE_BAND_H * 0.45), int(SKYLINE_BAND_H * 0.7), 50, 100, (60, 70, 110))
+    draw_layer(horizon + 15, (8, 10, 22), int(SKYLINE_BAND_H * 0.65), SKYLINE_BAND_H, 60, 130, (255, 200, 90))
+    return img
+
+
+def generate_news_post_skyline(headline, summary, category, source, stat_label=None, stat_value=None):
+    img = _skyline_background().convert("RGBA")
+    accent = (255, 200, 90)
+    subtext = (170, 178, 200)
+
+    # Strong scrim behind the footer strip — it sits over the busiest, most
+    # brightly-lit part of the skyline, so needs more contrast than a light
+    # gradient gives.
+    scrim = Image.new("RGBA", SIZE, (0, 0, 0, 0))
+    sdraw = ImageDraw.Draw(scrim)
+    scrim_start = SIZE[1] - 190
+    for y in range(scrim_start, SIZE[1]):
+        sdraw.line([(0, y), (SIZE[0], y)], fill=(0, 0, 0, int(210 * (y - scrim_start) / (SIZE[1] - scrim_start))))
+    img = Image.alpha_composite(img, scrim)
+    draw = ImageDraw.Draw(img)
+
+    cat_font = ImageFont.truetype(FONT_BOLD, 20)
+    cat_text = f"  {category.upper()}  "
+    cat_w = cat_font.getlength(cat_text)
+    draw_rounded_rect(draw, (60, 55, 60 + cat_w + 10, 92), 18, accent)
+    draw.text((65, 60), cat_text, font=cat_font, fill=(10, 10, 20))
+
+    headline_font = ImageFont.truetype(FONT_BOLD, 50)
+    y_pos = 130
+    headline_h = draw_text_wrapped(
+        draw, headline, 60, y_pos, SIZE[0] - 120, headline_font, (255, 255, 255), line_spacing=12,
+        max_height=_lines_height(headline_font, 3, 12),
+    )
+    y_pos += headline_h + 25
+
+    reserved_for_stat = 150 if (stat_label and stat_value) else 0
+    summary_font = ImageFont.truetype(FONT_REGULAR, 27)
+    budget = max(SKY_BOTTOM - y_pos - reserved_for_stat, _lines_height(summary_font, 1, 8))
+    summary_h = draw_text_wrapped(draw, summary, 60, y_pos, SIZE[0] - 120, summary_font, subtext,
+                                   line_spacing=8, max_height=budget)
+    y_pos += summary_h + 30
+
+    if stat_label and stat_value:
+        stat_color = _stat_sign_color(stat_value)
+        y = min(y_pos, SKY_BOTTOM - 122)
+        val_font = ImageFont.truetype(FONT_BOLD, 90)
+        draw.text((60, y), stat_value, font=val_font, fill=stat_color)
+        lbl_font = ImageFont.truetype(FONT_MEDIUM, 22)
+        draw.text((64, y + 100), stat_label.upper(), font=lbl_font, fill=subtext)
+
+    src_font = ImageFont.truetype(FONT_REGULAR, 18)
+    draw.text((60, SIZE[1] - 130), f"Source: {source}", font=src_font, fill=subtext)
+    draw_brand_footer(draw, SIZE, {"accent": "#FFC85A", "text": "#FFFFFF", "subtext": "#AAB2C8"})
+
+    return img.convert("RGB")
+
+
+# === POST TYPE: NEWS POST (Poster) ===
+# Let scale do the work — the stat number is drawn as big as will fit and
+# dominates the canvas; everything else stays quiet. Falls back to a
+# headline-forward layout when there's no stat to build around.
+def generate_news_post_poster(headline, summary, category, source, stat_label=None, stat_value=None):
+    bg = (13, 13, 13)
+    img = Image.new("RGB", SIZE, bg)
+    draw = ImageDraw.Draw(img)
+    text_color = (255, 255, 255)
+    subtext = (150, 150, 150)
+    accent = _stat_sign_color(stat_value) if stat_value else (0, 245, 212)
+
+    cat_font = ImageFont.truetype(FONT_BOLD, 20)
+    draw.text((60, 55), f"{category.upper()} · {source}", font=cat_font, fill=subtext)
+    draw.line([(60, 95), (SIZE[0] - 60, 95)], fill=(50, 50, 50), width=1)
+
+    if stat_value:
+        val_font = ImageFont.truetype(FONT_BOLD, 260)
+        while val_font.getlength(stat_value) > SIZE[0] - 40 and val_font.size > 100:
+            val_font = ImageFont.truetype(FONT_BOLD, val_font.size - 10)
+        val_bbox = val_font.getbbox(stat_value)
+        val_w = val_bbox[2] - val_bbox[0]
+        draw.text(((SIZE[0] - val_w) / 2 - val_bbox[0], 200), stat_value, font=val_font, fill=accent)
+        # val_bbox[3] is the ink's bottom offset from the draw origin, not a
+        # height to add a second time — see the stat-hero fix above.
+        y_pos = 200 + val_bbox[3] + 40
+    else:
+        y_pos = 220
+
+    headline_font = ImageFont.truetype(FONT_BOLD, 42)
+    headline_h = draw_text_wrapped(
+        draw, headline.upper(), 60, y_pos, SIZE[0] - 120, headline_font, text_color, line_spacing=10,
+        max_height=_lines_height(headline_font, 3, 10),
+    )
+    y_pos += headline_h + 25
+
+    summary_font = ImageFont.truetype(FONT_REGULAR, 24)
+    budget = max(CONTENT_BOTTOM - y_pos, _lines_height(summary_font, 2, 8))
+    draw_text_wrapped(draw, summary, 60, y_pos, SIZE[0] - 120, summary_font, subtext, line_spacing=8, max_height=budget)
+
+    draw.line([(60, SIZE[1] - 100), (SIZE[0] - 60, SIZE[1] - 100)], fill=(50, 50, 50), width=1)
+    brand_font = ImageFont.truetype(FONT_BOLD, 22)
+    draw.text((60, SIZE[1] - 80), BRAND, font=brand_font, fill=accent)
+    handle_font = ImageFont.truetype(FONT_REGULAR, 18)
+    brand_w = brand_font.getlength(BRAND)
+    draw.text((60 + brand_w + 15, SIZE[1] - 77), HANDLE, font=handle_font, fill=subtext)
+    follow_font = ImageFont.truetype(FONT_MEDIUM, 18)
+    ftext = "Follow for more >"
+    fw = follow_font.getlength(ftext)
+    draw.text((SIZE[0] - 60 - fw, SIZE[1] - 77), ftext, font=follow_font, fill=text_color)
+
+    return img
+
+
 # Pool of interchangeable news-post renderers (same call signature), so
 # generate_all_daily_posts() can vary the layout day-to-day without repeating
 # a style within the same day.
@@ -564,6 +872,10 @@ NEWS_POST_STYLES = [
     generate_news_post_gradient,
     generate_news_post_split_dark,
     generate_news_post_stat_hero_gradient,
+    generate_news_post_brutalist,
+    generate_news_post_aurora,
+    generate_news_post_skyline,
+    generate_news_post_poster,
 ]
 
 
