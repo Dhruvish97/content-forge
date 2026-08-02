@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ByteAndBull daily post runner — loads today's (or a given day's) content
+"""Daily post runner — loads today's (or a given day's) content
 from content/YYYY-MM-DD.json and generates the 3 daily posts."""
 import json
 import re
