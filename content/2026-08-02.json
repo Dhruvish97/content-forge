@@ -1,27 +1,27 @@
 {
   "news": [
     {
-      "headline": "Inside the London hacker house taking a stand against founder burnout",
-      "summary": "A London founder house is experimenting with a radical idea: what if work-life balance actually prevented burnout instead of just sounding nice in mission statements? The collective is putting structure around downtime and mental health as core operating principles rather than afterthoughts, betting that founders who aren't running on fumes make better decisions and build stronger companies. It's a direct challenge to the hustle-culture playbook that's defined tech for decades.",
+      "headline": "HP\u2019s HyperX Omen 15 isn\u2019t quite the budget-friendly gaming laptop its predecessor was",
+      "summary": "HP's rebranding of its gaming lineup means the new Omen 15 is stepping into bigger shoes\u2014literally and figuratively. While it brings genuine upgrades like the RTX 5050 GPU compared to its Victus predecessor, the price tag has climbed from that accessible $800 entry point, making it less of a budget-friendly option for gaming newcomers. The trade-off between improved specs and lost affordability will force buyers to decide if the performance gains justify the premium.",
       "category": "TECH",
-      "source": "TechCrunch"
+      "source": "The Verge"
     },
     {
-      "headline": "This $9 key physically locks your most addictive apps",
-      "summary": "A startup is selling a $9 NFC key that forces you to physically scan it every time you want to access your phone's most addictive apps. The hardware-based approach sidesteps typical digital willpower by adding a friction layer between you and the apps designed to keep you scrolling. It's a throwback to the pre-smartphone era of self-control\u2014except you're literally holding the key.",
-      "category": "AI",
-      "source": "TechCrunch"
+      "headline": "My ex-husband\u2019s sister died \u2014 so why is Fidelity asking me for her death certificate?",
+      "summary": "When a family member passes, the paperwork doesn't stop\u2014it multiplies. Fidelity's request for a death certificate from someone with no direct account connection highlights a broader issue: financial institutions are caught between regulatory compliance and customer frustration. The real cost? Not just the certificate itself, but the emotional labor of navigating byzantine estate and beneficiary verification processes that can feel unnecessarily rigid.",
+      "category": "MARKETS",
+      "source": "MarketWatch"
     }
   ],
   "educational": {
-    "title": "What Is Diversification, Really?",
-    "category": "INVESTING 101",
+    "title": "How Interest Rates Actually Move Your Money",
+    "category": "FINANCIAL LITERACY",
     "points": [
-      "Diversification means spreading money across many assets, not just many stocks",
-      "It won't stop losses, but it stops one bad bet from wiping you out",
-      "Owning 10 tech stocks isn't diversified \u2014 that's still one sector's risk",
-      "True diversification spans asset classes: stocks, bonds, cash, real estate",
-      "The goal isn't more returns \u2014 it's smoother, more survivable ones"
+      "The Fed sets a target rate that ripples into loans, mortgages, and savings",
+      "Higher rates make borrowing pricier \u2014 car loans and mortgages cost more",
+      "Higher rates also make saving pay better \u2014 bank yields tend to rise too",
+      "Stocks often wobble on rate news because future profits get discounted more",
+      "You don't need to predict rates \u2014 just understand why headlines move markets"
     ]
   }
 }
