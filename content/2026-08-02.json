@@ -1,27 +1,27 @@
 {
   "news": [
     {
-      "headline": "Information Technology Sector & Industry Performance",
-      "summary": "Reported by Bloomberg.com.",
+      "headline": "As AI hits software sector, defense-tech flourishes",
+      "summary": "Reported by The Jerusalem Post.",
       "category": "TECH",
-      "source": "Bloomberg.com"
+      "source": "The Jerusalem Post"
     },
     {
-      "headline": "Market Rebounds, Now Watch For This",
-      "summary": "Reported by Investor's Business Daily.",
+      "headline": "America Is Great at Creating Stock Market Bubbles\u2014and Shrugging Them Off",
+      "summary": "Reported by WSJ.",
       "category": "MARKETS",
-      "source": "Investor's Business Daily"
+      "source": "WSJ"
     }
   ],
   "educational": {
-    "title": "How Interest Rates Actually Move Your Money",
-    "category": "FINANCIAL LITERACY",
+    "title": "What Is Diversification, Really?",
+    "category": "INVESTING 101",
     "points": [
-      "The Fed sets a target rate that ripples into loans, mortgages, and savings",
-      "Higher rates make borrowing pricier \u2014 car loans and mortgages cost more",
-      "Higher rates also make saving pay better \u2014 bank yields tend to rise too",
-      "Stocks often wobble on rate news because future profits get discounted more",
-      "You don't need to predict rates \u2014 just understand why headlines move markets"
+      "Diversification means spreading money across many assets, not just many stocks",
+      "It won't stop losses, but it stops one bad bet from wiping you out",
+      "Owning 10 tech stocks isn't diversified \u2014 that's still one sector's risk",
+      "True diversification spans asset classes: stocks, bonds, cash, real estate",
+      "The goal isn't more returns \u2014 it's smoother, more survivable ones"
     ]
   }
 }
