@@ -1,27 +1,27 @@
 {
   "news": [
     {
-      "headline": "HP\u2019s HyperX Omen 15 isn\u2019t quite the budget-friendly gaming laptop its predecessor was",
-      "summary": "HP's rebranding of its gaming lineup means the new Omen 15 is stepping into bigger shoes\u2014literally and figuratively. While it brings genuine upgrades like the RTX 5050 GPU compared to its Victus predecessor, the price tag has climbed from that accessible $800 entry point, making it less of a budget-friendly option for gaming newcomers. The trade-off between improved specs and lost affordability will force buyers to decide if the performance gains justify the premium.",
+      "headline": "Inside the London hacker house taking a stand against founder burnout",
+      "summary": "A London founder house is rethinking startup culture by prioritizing work-life balance as the antidote to burnout. Their experiment challenges the hustle-at-all-costs mentality that's long defined the tech world.",
       "category": "TECH",
-      "source": "The Verge"
+      "source": "TechCrunch"
     },
     {
-      "headline": "My ex-husband\u2019s sister died \u2014 so why is Fidelity asking me for her death certificate?",
-      "summary": "When a family member passes, the paperwork doesn't stop\u2014it multiplies. Fidelity's request for a death certificate from someone with no direct account connection highlights a broader issue: financial institutions are caught between regulatory compliance and customer frustration. The real cost? Not just the certificate itself, but the emotional labor of navigating byzantine estate and beneficiary verification processes that can feel unnecessarily rigid.",
-      "category": "MARKETS",
-      "source": "MarketWatch"
+      "headline": "Judge denies xAI\u2019s request to block Minnesota ban on \u2018nudify\u2019 apps",
+      "summary": "A Minnesota court ruled against xAI's challenge to the state's ban on \"nudify\" apps\u2014software that generates nude images from clothed photos. The decision clears the way for the restriction to take effect, marking a legal win for lawmakers seeking to combat nonconsensual deepfake imagery.",
+      "category": "AI",
+      "source": "TechCrunch"
     }
   ],
   "educational": {
-    "title": "How Interest Rates Actually Move Your Money",
-    "category": "FINANCIAL LITERACY",
+    "title": "What Is Diversification, Really?",
+    "category": "INVESTING 101",
     "points": [
-      "The Fed sets a target rate that ripples into loans, mortgages, and savings",
-      "Higher rates make borrowing pricier \u2014 car loans and mortgages cost more",
-      "Higher rates also make saving pay better \u2014 bank yields tend to rise too",
-      "Stocks often wobble on rate news because future profits get discounted more",
-      "You don't need to predict rates \u2014 just understand why headlines move markets"
+      "Diversification means spreading money across many assets, not just many stocks",
+      "It won't stop losses, but it stops one bad bet from wiping you out",
+      "Owning 10 tech stocks isn't diversified \u2014 that's still one sector's risk",
+      "True diversification spans asset classes: stocks, bonds, cash, real estate",
+      "The goal isn't more returns \u2014 it's smoother, more survivable ones"
     ]
   }
 }
