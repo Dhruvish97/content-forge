@@ -45,19 +45,25 @@ NEWS_SIMILARITY_THRESHOLD = 0.3
 # outright wrong for display purposes (CNBC's earnings feed titles itself
 # just "Earnings", not "CNBC").
 #
+# Deliberately avoid each publisher's general "top stories" firehose for
+# TECH/MARKETS — those mix in reviews, buying guides, and (for MarketWatch
+# specifically) the first-person "Moneyist" advice column alongside real
+# news, which is how posts about gaming-laptop reviews and inheritance
+# etiquette ended up in the feed. Section-specific feeds (funding/enterprise
+# for tech, market-moving headlines for finance) stay on-topic instead.
+#
 # Multiple feeds per category let fetch_candidate_news() prefer stories
 # corroborated across independent outlets (see NEWS_SIMILARITY_THRESHOLD
 # clustering below) as a free proxy for "popular," since RSS carries no
 # engagement metrics of its own. EARNINGS has no second free feed, so it
 # always falls back to "most recent" for that category.
 FEED_SOURCES = [
-    {"url": "https://techcrunch.com/feed/", "category": "TECH", "source": "TechCrunch"},
-    {"url": "https://www.theverge.com/rss/index.xml", "category": "TECH", "source": "The Verge"},
-    {"url": "https://feeds.arstechnica.com/arstechnica/index", "category": "TECH", "source": "Ars Technica"},
+    {"url": "https://techcrunch.com/category/venture/feed/", "category": "TECH", "source": "TechCrunch"},
+    {"url": "https://techcrunch.com/tag/enterprise/feed/", "category": "TECH", "source": "TechCrunch"},
     {"url": "https://techcrunch.com/category/artificial-intelligence/feed/", "category": "AI", "source": "TechCrunch"},
     {"url": "https://venturebeat.com/category/ai/feed/", "category": "AI", "source": "VentureBeat"},
-    {"url": "https://feeds.marketwatch.com/marketwatch/topstories/", "category": "MARKETS", "source": "MarketWatch"},
-    {"url": "https://www.cnbc.com/id/100003114/device/rss/rss.html", "category": "MARKETS", "source": "CNBC"},
+    {"url": "https://feeds.marketwatch.com/marketwatch/marketpulse/", "category": "MARKETS", "source": "MarketWatch"},
+    {"url": "https://www.cnbc.com/id/10000664/device/rss/rss.html", "category": "MARKETS", "source": "CNBC"},
     {"url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15839135", "category": "EARNINGS", "source": "CNBC"},
     {"url": "https://decrypt.co/feed", "category": "CRYPTO", "source": "Decrypt"},
     {"url": "https://www.coindesk.com/arc/outboundfeeds/rss/", "category": "CRYPTO", "source": "CoinDesk"},
@@ -364,14 +370,15 @@ def _polish_summary(headline, category, source, rss_description, api_key):
     try:
         client = anthropic.Anthropic(api_key=api_key)
         resp = client.messages.create(
-            model=ANTHROPIC_MODEL, max_tokens=300,
+            model=ANTHROPIC_MODEL, max_tokens=180,
             messages=[{"role": "user", "content": (
-                "Expand this brief news description into a 2-4 sentence Instagram caption "
-                "summary, in a punchy, informative finance/tech newsletter voice. Stay grounded "
-                "in the facts given below — do not invent additional facts, figures, or details "
-                "not present in the description. No hashtags, no headline restatement, no "
-                f"preamble.\n\nHeadline: {headline}\nCategory: {category}\nSource: {source}\n\n"
-                f"Description: {rss_description}"
+                "Expand this brief news description into a 2-3 sentence Instagram caption "
+                "summary (under 320 characters total — this renders on a fixed-size image "
+                "with limited space), in a punchy, informative finance/tech newsletter voice. "
+                "Stay grounded in the facts given below — do not invent additional facts, "
+                "figures, or details not present in the description. No hashtags, no headline "
+                f"restatement, no preamble.\n\nHeadline: {headline}\nCategory: {category}\n"
+                f"Source: {source}\n\nDescription: {rss_description}"
             )}],
         )
         text = next((b.text for b in resp.content if b.type == "text"), "").strip()

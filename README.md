@@ -22,11 +22,14 @@ tracking recent output so it won't repeat headlines or topics.
   summary, category, source, educational title/points) before rendering,
   failing fast with a clear message instead of crashing mid-render.
 - **Free news auto-fetch** — `fetch_news.py` pulls candidate headlines from
-  2-3 direct publisher RSS feeds per sector (TechCrunch/The Verge/Ars
-  Technica for tech, TechCrunch/VentureBeat for AI, MarketWatch/CNBC for
-  markets, CNBC for earnings, Decrypt/CoinDesk/Cointelegraph for crypto — no
-  API key required), pre-filtered through the same dedup logic as a manual
-  run. Within each sector, stories published in the last 24h are clustered
+  2 direct publisher RSS feeds per sector (TechCrunch Venture/Enterprise for
+  tech, TechCrunch AI/VentureBeat for AI, MarketWatch MarketPulse/CNBC
+  Finance for markets, CNBC for earnings, Decrypt/CoinDesk/Cointelegraph for
+  crypto — no API key required), pre-filtered through the same dedup logic
+  as a manual run. These are deliberately section-specific feeds rather than
+  each publisher's general "top stories" firehose — the latter mixes in
+  reviews, buying guides, and first-person advice columns alongside real
+  news. Within each sector, stories published in the last 24h are clustered
   by headline overlap and the story corroborated by the most independent
   outlets wins — a free proxy for "what's actually popular today" since RSS
   itself has no engagement metrics. A sector with only one covering outlet

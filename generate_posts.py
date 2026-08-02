@@ -143,12 +143,36 @@ def draw_rounded_rect(draw, xy, radius, fill):
     draw.pieslice([x2 - 2*radius, y2 - 2*radius, x2, y2], 0, 90, fill=fill)
 
 
-def draw_text_wrapped(draw, text, x, y, max_width, font, fill, line_spacing=8):
-    """Draw wrapped text and return the total height used."""
-    # Estimate chars per line
+def draw_text_wrapped(draw, text, x, y, max_width, font, fill, line_spacing=8, max_height=None):
+    """Draw wrapped text and return the total height used.
+
+    When max_height is given, stop before exceeding it and ellipsize the last
+    line instead — the canvas is a fixed 1080x1080 square with source/footer
+    text pinned at fixed Y coordinates below the body copy, so unbounded text
+    (e.g. a long LLM-polished summary) would otherwise just draw straight
+    through them.
+    """
     avg_char_w = font.getlength("M")
     chars_per_line = max(1, int(max_width / avg_char_w))
     lines = textwrap.wrap(text, width=chars_per_line)
+
+    if max_height is not None and lines:
+        kept = []
+        h = 0
+        for line in lines:
+            bbox = font.getbbox(line)
+            line_h = bbox[3] - bbox[1]
+            extra = line_h + (line_spacing if kept else 0)
+            if kept and h + extra > max_height:
+                break
+            kept.append(line)
+            h += extra
+        if len(kept) < len(lines):
+            last = kept[-1]
+            while last and font.getlength(last + "…") > max_width:
+                last = last[:-1].rstrip()
+            kept[-1] = (last + "…") if last else "…"
+        lines = kept
 
     total_h = 0
     for line in lines:
@@ -157,6 +181,17 @@ def draw_text_wrapped(draw, text, x, y, max_width, font, fill, line_spacing=8):
         draw.text((x, y + total_h), line, font=font, fill=fill)
         total_h += line_h + line_spacing
     return total_h
+
+
+def _lines_height(font, n_lines, line_spacing):
+    """Pixel height budget for n_lines of this font, matching draw_text_wrapped's math."""
+    lh = font.getbbox("Mg")[3] - font.getbbox("Mg")[1]
+    return n_lines * lh + (n_lines - 1) * line_spacing
+
+
+# Body copy (headline + summary + optional stat box) must end above this Y so
+# it never collides with the source line (SIZE[1] - 130) or brand footer below it.
+CONTENT_BOTTOM = SIZE[1] - 150
 
 
 def draw_decorative_elements(draw, size, color, style="circles"):
@@ -243,12 +278,24 @@ def generate_news_post_dark(headline, summary, category, source, stat_label=None
     # Headline
     headline_font = ImageFont.truetype(FONT_BOLD, 54)
     y_pos = 130
-    headline_h = draw_text_wrapped(draw, headline, 60, y_pos, SIZE[0] - 120, headline_font, text_color, line_spacing=14)
+    headline_h = draw_text_wrapped(
+        draw, headline, 60, y_pos, SIZE[0] - 120, headline_font, text_color, line_spacing=14,
+        max_height=_lines_height(headline_font, 4, 14),
+    )
 
-    # Summary
+    # Summary — bounded to whatever vertical room is left above the fixed
+    # source/footer text (and the stat box, if one will be drawn after it).
     summary_font = ImageFont.truetype(FONT_REGULAR, 30)
     y_pos += headline_h + 30
-    summary_h = draw_text_wrapped(draw, summary, 60, y_pos, SIZE[0] - 120, summary_font, subtext, line_spacing=8)
+    reserved_for_stat = 180 if (stat_label and stat_value) else 0
+    summary_budget = max(
+        CONTENT_BOTTOM - y_pos - reserved_for_stat,
+        _lines_height(summary_font, 2, 8),
+    )
+    summary_h = draw_text_wrapped(
+        draw, summary, 60, y_pos, SIZE[0] - 120, summary_font, subtext, line_spacing=8,
+        max_height=summary_budget,
+    )
 
     # Stat box (if provided)
     if stat_label and stat_value:
@@ -310,16 +357,28 @@ def generate_news_post_gradient(headline, summary, category, source, stat_label=
     # Headline
     headline_font = ImageFont.truetype(FONT_BOLD, 52)
     y_pos = 160
-    headline_h = draw_text_wrapped(draw, headline, 80, y_pos, SIZE[0] - 160, headline_font, text_color, line_spacing=14)
+    headline_h = draw_text_wrapped(
+        draw, headline, 80, y_pos, SIZE[0] - 160, headline_font, text_color, line_spacing=14,
+        max_height=_lines_height(headline_font, 4, 14),
+    )
 
     # Divider
     y_pos += headline_h + 20
     draw.line([(80, y_pos), (SIZE[0] - 80, y_pos)], fill=text_color + (100,), width=2)
     y_pos += 25
 
-    # Summary
+    # Summary — bounded to the room left above the fixed source/footer text
+    # (and the stat box, if one will be drawn after it).
     summary_font = ImageFont.truetype(FONT_REGULAR, 29)
-    summary_h = draw_text_wrapped(draw, summary, 80, y_pos, SIZE[0] - 160, summary_font, subtext, line_spacing=8)
+    reserved_for_stat = 165 if (stat_label and stat_value) else 0
+    summary_budget = max(
+        CONTENT_BOTTOM - y_pos - reserved_for_stat,
+        _lines_height(summary_font, 2, 8),
+    )
+    summary_h = draw_text_wrapped(
+        draw, summary, 80, y_pos, SIZE[0] - 160, summary_font, subtext, line_spacing=8,
+        max_height=summary_budget,
+    )
 
     # Stat box
     if stat_label and stat_value:
@@ -366,14 +425,27 @@ def generate_news_post_split_dark(headline, summary, category, source, stat_labe
     draw.text((65, 53), cat_text, font=cat_font, fill=bg_color)
 
     # Headline (inside the banner, in white/text_color for guaranteed contrast
-    # against the vivid secondary palette colors)
+    # against the vivid secondary palette colors). Bounded to the banner's
+    # own fixed height so it can't spill into the summary below it.
     headline_font = ImageFont.truetype(FONT_BOLD, 50)
-    draw_text_wrapped(draw, headline, 60, 130, SIZE[0] - 120, headline_font, text_color, line_spacing=13)
+    draw_text_wrapped(
+        draw, headline, 60, 130, SIZE[0] - 120, headline_font, text_color, line_spacing=13,
+        max_height=top_block_h - 130 - 20,
+    )
 
-    # Summary (below the banner)
+    # Summary (below the banner) — bounded to the room left above the fixed
+    # source/footer text (and the stat box, if one will be drawn after it).
     y_pos = top_block_h + 40
     summary_font = ImageFont.truetype(FONT_REGULAR, 30)
-    summary_h = draw_text_wrapped(draw, summary, 60, y_pos, SIZE[0] - 120, summary_font, subtext, line_spacing=8)
+    reserved_for_stat = 180 if (stat_label and stat_value) else 0
+    summary_budget = max(
+        CONTENT_BOTTOM - y_pos - reserved_for_stat,
+        _lines_height(summary_font, 2, 8),
+    )
+    summary_h = draw_text_wrapped(
+        draw, summary, 60, y_pos, SIZE[0] - 120, summary_font, subtext, line_spacing=8,
+        max_height=summary_budget,
+    )
 
     # Stat box (if provided)
     if stat_label and stat_value:
@@ -454,11 +526,18 @@ def generate_news_post_stat_hero_gradient(headline, summary, category, source, s
         headline_font = ImageFont.truetype(FONT_BOLD, 52)
         summary_font_size = 29
 
-    headline_h = draw_text_wrapped(draw, headline, 80, y_pos, SIZE[0] - 160, headline_font, text_color, line_spacing=12)
+    headline_h = draw_text_wrapped(
+        draw, headline, 80, y_pos, SIZE[0] - 160, headline_font, text_color, line_spacing=12,
+        max_height=_lines_height(headline_font, 4, 12),
+    )
     y_pos += headline_h + 25
 
     summary_font = ImageFont.truetype(FONT_REGULAR, summary_font_size)
-    draw_text_wrapped(draw, summary, 80, y_pos, SIZE[0] - 160, summary_font, subtext, line_spacing=8)
+    summary_budget = max(CONTENT_BOTTOM - y_pos, _lines_height(summary_font, 2, 8))
+    draw_text_wrapped(
+        draw, summary, 80, y_pos, SIZE[0] - 160, summary_font, subtext, line_spacing=8,
+        max_height=summary_budget,
+    )
 
     src_font = ImageFont.truetype(FONT_REGULAR, 18)
     draw.text((80, SIZE[1] - 130), f"Source: {source}", font=src_font, fill=subtext)
@@ -515,18 +594,26 @@ def generate_educational_post(title, points, category="LEARN"):
     # Title
     title_font = ImageFont.truetype(FONT_BOLD, 47)
     y_pos = 120
-    title_h = draw_text_wrapped(draw, title, 60, y_pos, SIZE[0] - 120, title_font, text_color, line_spacing=12)
+    title_h = draw_text_wrapped(
+        draw, title, 60, y_pos, SIZE[0] - 120, title_font, text_color, line_spacing=12,
+        max_height=_lines_height(title_font, 2, 12),
+    )
 
     # Accent line under title
     y_pos += title_h + 15
     draw.line([(60, y_pos), (300, y_pos)], fill=accent, width=4)
     y_pos += 30
 
-    # Numbered points
+    # Numbered points — the footer divider is fixed at SIZE[1] - 100, so points
+    # stop being drawn once there's no room left above it rather than overlapping it.
     point_num_font = ImageFont.truetype(FONT_BOLD, 34)
     point_text_font = ImageFont.truetype(FONT_MEDIUM, 28)
+    points_bottom = SIZE[1] - 120
 
     for i, point in enumerate(points[:5], 1):  # Max 5 points
+        if y_pos + _lines_height(point_text_font, 1, 6) > points_bottom:
+            break
+
         # Number circle
         circle_r = 22
         cx = 85
@@ -544,7 +631,10 @@ def generate_educational_post(title, points, category="LEARN"):
         draw.text((text_x, text_y), num_text, font=point_num_font, fill=num_color)
 
         # Point text
-        point_h = draw_text_wrapped(draw, point, 130, y_pos, SIZE[0] - 200, point_text_font, text_color, line_spacing=6)
+        point_h = draw_text_wrapped(
+            draw, point, 130, y_pos, SIZE[0] - 200, point_text_font, text_color, line_spacing=6,
+            max_height=min(_lines_height(point_text_font, 3, 6), points_bottom - y_pos),
+        )
         y_pos += max(point_h, 50) + 25
 
     # Brand footer
