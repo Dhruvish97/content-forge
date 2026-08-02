@@ -3,8 +3,6 @@ __pycache__/
 .DS_Store
 .venv/
 
-config.json
-
 posts/*.png
 posts/*.jpg
 posts/*_caption.txt

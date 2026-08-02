@@ -49,8 +49,12 @@ pip install -r requirements.txt
 
 ## Configuration
 
-Copy the example config and set your own brand/handle — this file is
-gitignored so your real account details never get committed:
+Copy the example config and set your own brand/handle. Unlike most local
+config files, `config.json` is tracked in git here — your brand name and
+handle are already public on every generated post, so there's nothing to
+protect by hiding them, and committing it means the automated GitHub
+Actions workflow renders with your real brand instead of the generic
+placeholder:
 
 ```bash
 cp config.example.json config.json
@@ -205,7 +209,8 @@ doesn't require `IG_ACCESS_TOKEN`/`IG_USER_ID`.
   (gitignored — per-run Instagram publish results), and `content_log.json`
   (tracked — this is what dedup checks against)
 - `fonts/` — bundled Poppins font files (SIL OFL, see `fonts/OFL.txt`)
-- `config.json` — your local brand/handle (gitignored)
+- `config.json` — your brand/handle (tracked in git — see
+  [Configuration](#configuration) for why)
 - `config.example.json` — generic template, tracked in git
 
 ## Tests
