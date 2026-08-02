@@ -1,18 +1,21 @@
 #!/usr/bin/env python3
-"""Fetches candidate news headlines from Google News RSS (free, no API key)
-and drafts content/YYYY-MM-DD.json for run_today.py to pick up.
+"""Fetches candidate news headlines from direct publisher RSS feeds (free, no
+API key) and drafts content/YYYY-MM-DD.json for run_today.py to pick up.
+Optionally polishes each summary via Claude Haiku if ANTHROPIC_API_KEY is set
+(gracefully degrades to the real RSS description otherwise).
 
 Reuses generate_posts' existing dedup logic so fetched candidates are
 pre-filtered against recent history the same way hand-written content is.
 """
 import argparse
 import json
+import os
 import re
 import sys
 from datetime import datetime
 from pathlib import Path
-from urllib.parse import quote
 
+import anthropic
 import feedparser
 
 from generate_posts import (
@@ -24,13 +27,20 @@ from generate_posts import (
 
 CONTENT_DIR = Path(__file__).parent / "content"
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+ANTHROPIC_MODEL = "claude-haiku-4-5"
 
-NEWS_QUERIES = [
-    {"query": "technology industry news", "category": "TECH"},
-    {"query": "stock market", "category": "MARKETS"},
-    {"query": "quarterly earnings report", "category": "EARNINGS"},
-    {"query": "artificial intelligence", "category": "AI"},
-    {"query": "cryptocurrency bitcoin", "category": "CRYPTO"},
+# Direct publisher RSS feeds — their <link> is the real article URL (no Google
+# News redirect-decoding needed), and they include real editorial descriptions.
+# "source" is set explicitly rather than trusting each feed's raw <title> —
+# some are clunky ("AI News & Artificial Intelligence | TechCrunch") or
+# outright wrong for display purposes (CNBC's earnings feed titles itself
+# just "Earnings", not "CNBC").
+FEED_SOURCES = [
+    {"url": "https://techcrunch.com/feed/", "category": "TECH", "source": "TechCrunch"},
+    {"url": "https://techcrunch.com/category/artificial-intelligence/feed/", "category": "AI", "source": "TechCrunch"},
+    {"url": "https://feeds.marketwatch.com/marketwatch/topstories/", "category": "MARKETS", "source": "MarketWatch"},
+    {"url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15839135", "category": "EARNINGS", "source": "CNBC"},
+    {"url": "https://decrypt.co/feed", "category": "CRYPTO", "source": "Decrypt"},
 ]
 
 # Rotating fallback educational content for fully-automated runs (--auto-educational).
@@ -208,47 +218,25 @@ def _strip_html(text):
     return re.sub(r"<[^>]+>", "", text or "").strip()
 
 
-def _entry_to_news_item(entry, category):
-    source = (entry.get("source") or {}).get("title")
-    title = entry.get("title", "").strip()
-    headline = title
-    if source and title.endswith(f" - {source}"):
-        headline = title[: -len(f" - {source}")].strip()
-
-    plain_summary = _strip_html(entry.get("summary", ""))
-    # Google News RSS summaries are just a link wrapping the (often truncated)
-    # headline — not real body text. Fall back to a generic line when the
-    # "summary" is really just the headline restated.
-    is_redundant = (
-        not plain_summary
-        or plain_summary.lower().rstrip(".…").startswith(headline.lower()[:20])
-    )
-    if is_redundant:
-        summary = f"Reported by {source}." if source else "Details developing — check the source for full coverage."
-    else:
-        summary = plain_summary
-
+def _entry_to_news_item(entry, category, source):
+    headline = _strip_html(entry.get("title", "")).strip()
+    summary = _strip_html(entry.get("summary", "")).strip()
     return {
         "headline": headline,
-        "summary": summary,
+        "summary": summary or f"Reported by {source}.",
         "category": category,
-        "source": source or "Unknown",
+        "source": source,
     }
 
 
-def _fetch_query(query, max_results=5):
-    url = f"https://news.google.com/rss/search?q={quote(query)}+when:1d&hl=en-US&gl=US&ceid=US:en"
-    feed = feedparser.parse(url)
-    return feed.entries[:max_results]
-
-
 def fetch_candidate_news(n=2):
-    """Fetch, dedupe, and pick n news items across the configured topic queries."""
+    """Fetch, dedupe, and pick n news items across the configured feed sources."""
     raw_candidates = []
     seen_headlines = set()
-    for q in NEWS_QUERIES:
-        for entry in _fetch_query(q["query"]):
-            item = _entry_to_news_item(entry, q["category"])
+    for feed_src in FEED_SOURCES:
+        parsed = feedparser.parse(feed_src["url"])
+        for entry in parsed.entries[:5]:
+            item = _entry_to_news_item(entry, feed_src["category"], feed_src["source"])
             key = item["headline"].lower().strip()
             if key and key not in seen_headlines:
                 seen_headlines.add(key)
@@ -292,6 +280,42 @@ def pick_educational():
     return EDUCATIONAL_BANK[0]
 
 
+def _polish_summary(headline, category, source, rss_description, api_key):
+    try:
+        client = anthropic.Anthropic(api_key=api_key)
+        resp = client.messages.create(
+            model=ANTHROPIC_MODEL, max_tokens=300,
+            messages=[{"role": "user", "content": (
+                "Expand this brief news description into a 2-4 sentence Instagram caption "
+                "summary, in a punchy, informative finance/tech newsletter voice. Stay grounded "
+                "in the facts given below — do not invent additional facts, figures, or details "
+                "not present in the description. No hashtags, no headline restatement, no "
+                f"preamble.\n\nHeadline: {headline}\nCategory: {category}\nSource: {source}\n\n"
+                f"Description: {rss_description}"
+            )}],
+        )
+        text = next((b.text for b in resp.content if b.type == "text"), "").strip()
+        return text or None
+    except Exception:
+        return None
+
+
+def enrich_news_items(items):
+    """Best-effort: polish each item's real RSS description via Haiku into a fuller
+    summary. Never fails the caller — leaves the item untouched if anything goes wrong,
+    or if there's no real description to work from (just the thin fallback)."""
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        return items
+    for item in items:
+        if not item["summary"] or item["summary"].startswith("Reported by"):
+            continue  # nothing real to polish — leave the thin fallback as-is
+        polished = _polish_summary(item["headline"], item["category"], item["source"], item["summary"], api_key)
+        if polished:
+            item["summary"] = polished
+    return items
+
+
 def write_draft(date_str, news_items, auto_educational=False, force=False):
     path = CONTENT_DIR / f"{date_str}.json"
     existing = {}
@@ -319,7 +343,7 @@ def write_draft(date_str, news_items, auto_educational=False, force=False):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Fetch candidate news via Google News RSS and draft content/{date}.json"
+        description="Fetch candidate news via direct publisher RSS feeds and draft content/{date}.json"
     )
     parser.add_argument("date", nargs="?", default=datetime.now().strftime("%Y-%m-%d"))
     parser.add_argument("-n", "--count", type=int, default=2, help="Number of news items to draft")
@@ -339,6 +363,8 @@ if __name__ == "__main__":
     if not news_items:
         print("❌ No candidate news found (everything was filtered as duplicate/overused, or the feed was empty).")
         sys.exit(1)
+
+    news_items = enrich_news_items(news_items)
 
     for item in news_items:
         print(f"   • [{item['category']}] {item['headline']} ({item['source']})")

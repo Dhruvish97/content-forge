@@ -22,12 +22,16 @@ tracking recent output so it won't repeat headlines or topics.
   summary, category, source, educational title/points) before rendering,
   failing fast with a clear message instead of crashing mid-render.
 - **Free news auto-fetch** — `fetch_news.py` pulls candidate headlines from
-  Google News RSS (no API key required) across tech/markets/earnings/AI/
-  crypto, pre-filtered through the same dedup logic as a manual run.
+  direct publisher RSS feeds (TechCrunch, MarketWatch, CNBC, Decrypt — no
+  API key required) across tech/AI/markets/earnings/crypto, pre-filtered
+  through the same dedup logic as a manual run. Optionally polishes each
+  summary into a fuller, multi-sentence caption via Claude Haiku (see
+  [News Summary Enrichment](#news-summary-enrichment)) — this is the one
+  place an LLM is used in the pipeline; everything else is plain Python +
+  Pillow.
 - **Automated daily scheduling** — a GitHub Actions workflow
   (`.github/workflows/daily-posts.yml`) fetches, validates, and generates
-  posts daily, entirely in the cloud — no LLM/API calls involved anywhere
-  in this pipeline, just Python + Pillow.
+  posts daily, entirely in the cloud.
 - **Instagram auto-posting** — `post_to_instagram.py` publishes the day's
   posts live to your Instagram Business/Creator account via the Graph API,
   fully wired into the daily workflow (see [Instagram Auto-Posting
@@ -64,18 +68,21 @@ If `config.json` is absent, the tool falls back to the generic values in
 
 ## Daily workflow
 
-**Option A — auto-fetch news (free, no API key):**
+**Option A — auto-fetch news (free, no API key required):**
 
 ```bash
-python3 fetch_news.py                        # drafts content/{today}.json from Google News RSS
+python3 fetch_news.py                        # drafts content/{today}.json from direct publisher RSS feeds
 python3 fetch_news.py --auto-educational      # also fills in educational content from a rotating bank
 python3 fetch_news.py 2026-05-23 --force      # target a specific date, overwriting existing news
 ```
 
-Review/edit the drafted `content/{date}.json` (fetched summaries are often
-thin — Google News RSS doesn't provide real article body text), then run it
-as below. Or skip the review and use `--auto-educational` for a fully
-unattended run (this is what the GitHub Actions workflow does).
+Pulls real headlines + real editorial descriptions directly from each
+publisher's own RSS feed (see [News Summary
+Enrichment](#news-summary-enrichment) for optionally polishing those
+descriptions into fuller captions). Review/edit the drafted
+`content/{date}.json`, then run it as below — or skip the review and use
+`--auto-educational` for a fully unattended run (this is what the GitHub
+Actions workflow does).
 
 **Option B — hand-write it:**
 
@@ -116,6 +123,25 @@ Auto-Posting Setup](#instagram-auto-posting-setup) — requires one-time
 manual setup first), and uploads the generated PNGs/captions/publish log as
 a downloadable Actions artifact regardless of publish outcome. Trigger it
 manually anytime via the Actions tab → "Run workflow".
+
+## News Summary Enrichment
+
+`fetch_news.py` pulls a real one-sentence editorial description directly
+from each publisher's RSS feed (a genuine step up from the placeholder text
+a search-aggregator like Google News gives you). Optionally, if
+`ANTHROPIC_API_KEY` is set, it sends that description to **Claude Haiku
+4.5** to expand it into a fuller 2-4 sentence caption — explicitly
+instructed to stay grounded in the given facts rather than inventing new
+ones. At the volume this runs (up to 2 calls/day), cost is roughly
+**$0.20–0.35/month**.
+
+This step is entirely optional and fails safe: no key set (or the API call
+fails for any reason) → falls back to the real RSS description as-is, or
+the thin `"Reported by X."` placeholder if a feed had no description that
+day. Nothing here can block a post from generating.
+
+To enable it, add `ANTHROPIC_API_KEY` as a repo secret (Settings → Secrets
+and variables → Actions) alongside the Instagram secrets below.
 
 ## Instagram Auto-Posting Setup
 
@@ -167,7 +193,9 @@ doesn't require `IG_ACCESS_TOKEN`/`IG_USER_ID`.
   educational layout) + dedup logic
 - `run_today.py` — validates and loads `content/{date}.json`, generates the
   day's posts
-- `fetch_news.py` — fetches/drafts news content from Google News RSS
+- `fetch_news.py` — fetches/drafts news content from direct publisher RSS
+  feeds, optionally polished via Claude Haiku (see [News Summary
+  Enrichment](#news-summary-enrichment))
 - `post_to_instagram.py` — publishes the day's posts to Instagram via the
   Graph API (see [Instagram Auto-Posting Setup](#instagram-auto-posting-setup))
 - `.github/workflows/daily-posts.yml` — scheduled automation (fetch →

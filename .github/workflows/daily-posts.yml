@@ -21,7 +21,10 @@ jobs:
 
       - run: pip install -r requirements.txt
 
-      - run: python3 fetch_news.py --force --auto-educational
+      - name: Fetch news
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 fetch_news.py --force --auto-educational
 
       - run: python3 run_today.py
 
