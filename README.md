@@ -28,6 +28,10 @@ tracking recent output so it won't repeat headlines or topics.
   (`.github/workflows/daily-posts.yml`) fetches, validates, and generates
   posts daily, entirely in the cloud — no LLM/API calls involved anywhere
   in this pipeline, just Python + Pillow.
+- **Instagram auto-posting** — `post_to_instagram.py` publishes the day's
+  posts live to your Instagram Business/Creator account via the Graph API,
+  fully wired into the daily workflow (see [Instagram Auto-Posting
+  Setup](#instagram-auto-posting-setup)).
 - **Config-driven brand** — your account name/handle live in a local,
   gitignored config file, not hardcoded into the tool.
 
@@ -107,9 +111,55 @@ unattended run (this is what the GitHub Actions workflow does).
 `.github/workflows/daily-posts.yml` runs `fetch_news.py --force
 --auto-educational` then `run_today.py` daily at 8:00 AM America/Chicago,
 commits the fetched `content/*.json` and updated `content_log.json` back to
-the repo, and uploads the generated PNGs/captions as a downloadable Actions
-artifact (they aren't committed, since `posts/*.png` is gitignored). Trigger
-it manually anytime via the Actions tab → "Run workflow".
+the repo, **publishes the 3 posts live to Instagram** (see [Instagram
+Auto-Posting Setup](#instagram-auto-posting-setup) — requires one-time
+manual setup first), and uploads the generated PNGs/captions/publish log as
+a downloadable Actions artifact regardless of publish outcome. Trigger it
+manually anytime via the Actions tab → "Run workflow".
+
+## Instagram Auto-Posting Setup
+
+`post_to_instagram.py` publishes the day's 3 posts live to Instagram using
+the **Instagram API with Instagram Login** flow — no Facebook Page linking
+required. This is a one-time manual setup you do yourself in a browser
+(can't be automated from here):
+
+1. Convert your Instagram account to a **Business** or **Creator** account
+   (Settings → Account type, in the Instagram app).
+2. Create a Meta Developer App at
+   [developers.facebook.com/apps](https://developers.facebook.com/apps),
+   then add the **Instagram** product configured for **"API setup with
+   Instagram login"**.
+3. Complete the authorization flow in the app dashboard to connect your own
+   Instagram account and generate a long-lived access token, plus note your
+   Instagram-scoped user ID.
+4. Because you're only posting to your own account (added as the app's own
+   tester), Meta's **Standard Access** tier applies — no App Review or
+   Business Verification needed.
+5. Add two repository secrets (Settings → Secrets and variables → Actions
+   on GitHub): `IG_ACCESS_TOKEN` and `IG_USER_ID`. (`GITHUB_TOKEN` needs no
+   setup — it's Actions' built-in token, already used to create/upload the
+   GitHub Release assets described below.)
+
+**Image hosting:** Instagram's API requires each image to be fetchable at a
+public URL at post-time — it won't accept a direct file upload. Since PNGs
+stay out of git (see `.gitignore`), each day's run instead creates (or
+reuses) a GitHub Release tagged `daily-posts-{date}` and uploads that day's
+3 JPEGs as release assets, using the resulting download URLs as the
+`image_url` passed to the Graph API. Releases accumulate over time (not
+pruned) — trivial storage cost, not a correctness concern.
+
+**Token lifecycle:** the long-lived access token expires every 60 days and
+is **not** auto-refreshed by this project. Regenerate it roughly every
+45–50 days and update the `IG_ACCESS_TOKEN` secret. An expired token shows
+up as a failed red "Publish to Instagram" step in the Actions tab (and
+GitHub emails you on workflow failure by default) — that's your signal it's
+time to refresh.
+
+**Local dry-run:** `python3 post_to_instagram.py --dry-run` converts images
+to JPEG and really uploads them as GitHub Release assets (so you can verify
+hosting/URLs work), but stops before any actual Instagram publish call —
+doesn't require `IG_ACCESS_TOKEN`/`IG_USER_ID`.
 
 ## Layout
 
@@ -118,10 +168,13 @@ it manually anytime via the Actions tab → "Run workflow".
 - `run_today.py` — validates and loads `content/{date}.json`, generates the
   day's posts
 - `fetch_news.py` — fetches/drafts news content from Google News RSS
+- `post_to_instagram.py` — publishes the day's posts to Instagram via the
+  Graph API (see [Instagram Auto-Posting Setup](#instagram-auto-posting-setup))
 - `.github/workflows/daily-posts.yml` — scheduled automation (fetch →
-  validate → generate → commit + upload artifact)
+  validate → generate → commit → publish to Instagram → upload artifact)
 - `content/` — one JSON file per day, the input to each run
-- `posts/` — generated PNGs + captions (gitignored) and `content_log.json`
+- `posts/` — generated PNGs + captions (gitignored), `publish_log.json`
+  (gitignored — per-run Instagram publish results), and `content_log.json`
   (tracked — this is what dedup checks against)
 - `fonts/` — bundled Poppins font files (SIL OFL, see `fonts/OFL.txt`)
 - `config.json` — your local brand/handle (gitignored)

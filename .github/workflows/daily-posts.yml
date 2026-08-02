@@ -33,10 +33,19 @@ jobs:
           git diff --cached --quiet || git commit -m "Automated daily content ($(date +%Y-%m-%d))"
           git push
 
+      - name: Publish to Instagram
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 post_to_instagram.py
+
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: posts-${{ github.run_id }}
           path: |
             posts/*.png
             posts/*_caption.txt
+            posts/publish_log.json
           retention-days: 90
