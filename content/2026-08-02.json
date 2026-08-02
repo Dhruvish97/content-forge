@@ -1,16 +1,16 @@
 {
   "news": [
     {
-      "headline": "As AI hits software sector, defense-tech flourishes",
-      "summary": "Reported by The Jerusalem Post.",
+      "headline": "Information Technology Sector & Industry Performance",
+      "summary": "Reported by Bloomberg.com.",
       "category": "TECH",
-      "source": "The Jerusalem Post"
+      "source": "Bloomberg.com"
     },
     {
-      "headline": "America Is Great at Creating Stock Market Bubbles\u2014and Shrugging Them Off",
-      "summary": "Reported by WSJ.",
+      "headline": "Market Rebounds, Now Watch For This",
+      "summary": "Reported by Investor's Business Daily.",
       "category": "MARKETS",
-      "source": "WSJ"
+      "source": "Investor's Business Daily"
     }
   ],
   "educational": {
