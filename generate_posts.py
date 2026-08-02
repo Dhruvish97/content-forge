@@ -1,26 +1,35 @@
 #!/usr/bin/env python3
 """
-ByteAndBull Instagram Post Generator
+Content Forge — Instagram Post Generator
 Generates 2 news posts + 1 educational post daily.
 Styles: Mix of dark theme and gradient/vibrant.
 """
 
 import json
-import os
 import re
-import math
 import random
 import textwrap
 from datetime import datetime, timedelta
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import Image, ImageDraw, ImageFont
 
 # === CONFIG ===
 OUTPUT_DIR = Path(__file__).parent / "posts"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
-BRAND = "ByteAndBull"
-HANDLE = "@byteandbull"
+
+def _load_brand_config():
+    """Load brand/handle from config.json, falling back to the generic
+    config.example.json template if no local config has been set up."""
+    config_dir = Path(__file__).parent
+    cfg_path = config_dir / "config.json"
+    if not cfg_path.exists():
+        cfg_path = config_dir / "config.example.json"
+    cfg = json.loads(cfg_path.read_text())
+    return cfg["brand"], cfg["handle"]
+
+
+BRAND, HANDLE = _load_brand_config()
 SIZE = (1080, 1080)  # Instagram square
 CONTENT_LOG = OUTPUT_DIR / "content_log.json"
 DEDUP_DAYS = 7
@@ -407,7 +416,7 @@ def generate_educational_post(title, points, category="LEARN"):
 def generate_caption(post_type, headline, summary, category, hashtags=None):
     """Generate an Instagram caption with hashtags."""
     if hashtags is None:
-        base_tags = ["#ByteAndBull", "#TechNews", "#FinanceNews", "#InvestSmart"]
+        base_tags = [f"#{BRAND.replace(' ', '')}", "#TechNews", "#FinanceNews", "#InvestSmart"]
         if "tech" in category.lower() or "ai" in category.lower():
             hashtags = base_tags + ["#TechTrends", "#AI", "#Innovation", "#FutureTech", "#StartupLife"]
         elif "finance" in category.lower() or "market" in category.lower():
@@ -715,7 +724,7 @@ def generate_all_daily_posts(news_items=None, edu_item=None):
 
 
 if __name__ == "__main__":
-    print(f"🚀 ByteAndBull Post Generator")
+    print("🚀 Content Forge — Demo Post Generator (sample data)")
     print(f"📅 Date: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     print(f"📁 Output: {OUTPUT_DIR}")
     print("=" * 50)
