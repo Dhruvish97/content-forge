@@ -1,154 +1,21 @@
 {
-  "2026-05-18": {
+  "2026-08-02": {
     "headlines": [
-      "Microsoft AI Chief: All Office Jobs Automated in 18 Months",
-      "Moody's Strips U.S. of Perfect AAA Credit Rating"
-    ],
-    "categories": [
-      "AI",
-      "MARKETS"
-    ],
-    "edu_title": "What Credit Ratings Actually Mean for Your Money",
-    "edu_category": "FINANCIAL LITERACY",
-    "edu_points": [
-      "Credit ratings (AAA\u2192D) grade how likely a borrower is to repay its debt.",
-      "A downgrade raises borrowing costs \u2014 the U.S. could pay billions more in interest.",
-      "Moody's, S&P, and Fitch are the 'Big 3' agencies that rate countries and companies.",
-      "Lower ratings signal higher risk, pushing investors to demand better returns.",
-      "Even one notch down can trigger sell-offs in bonds, stocks, and the currency."
-    ]
-  },
-  "2026-05-20": {
-    "headlines": [
-      "OpenAI & Dell Partner to Run Codex Inside Enterprise Data Centers",
-      "Nvidia Reports Earnings Today \u2014 Wall Street Expects Record $79B Revenue"
+      "As AI hits software sector, defense-tech flourishes",
+      "America Is Great at Creating Stock Market Bubbles\u2014and Shrugging Them Off"
     ],
     "categories": [
       "TECH",
       "MARKETS"
     ],
-    "edu_title": "Dollar-Cost Averaging: Invest Smarter, Not Harder",
+    "edu_title": "What Is Diversification, Really?",
     "edu_category": "INVESTING 101",
     "edu_points": [
-      "Invest a fixed amount on a schedule \u2014 weekly or monthly \u2014 no matter the price",
-      "You automatically buy more shares when prices dip and fewer when they rise",
-      "It eliminates emotional trading and the trap of trying to time the market",
-      "Even $50 per month compounded over 30 years can grow to six figures",
-      "DCA works best with broad index funds and ETFs \u2014 low cost, diversified"
-    ]
-  },
-  "2026-05-21": {
-    "headlines": [
-      "Google Unveils Gemini 3.5 Flash \u2014 4\u00d7 Faster Than Rival AI Models",
-      "Nvidia Revenue Explodes 85% as AI Chip Demand Hits New Records"
-    ],
-    "categories": [
-      "TECH",
-      "MARKETS"
-    ],
-    "edu_title": "How to Read Earnings Reports Like a Pro",
-    "edu_category": "INVESTING 101",
-    "edu_points": [
-      "EPS beat = stock usually jumps; a miss means analysts expected more profit than delivered",
-      "Revenue growth shows if the company is winning more customers and expanding market share",
-      "Guidance (future outlook) moves stock prices more than any single past quarter result",
-      "Operating margin reveals how much profit remains after covering all core business costs",
-      "Always compare year-over-year (YoY) \u2014 quarterly seasonality can distort the real picture"
-    ]
-  },
-  "2026-05-23": {
-    "headlines": [
-      "Meta Slashes 8,000 Jobs in Major AI Restructure",
-      "Nvidia Smashes Records With $81.6B Revenue, AI Boom Roars On"
-    ],
-    "categories": [
-      "TECH",
-      "EARNINGS"
-    ],
-    "edu_title": "What Is an ETF? The Easiest Way to Own the Market",
-    "edu_category": "INVESTING 101",
-    "edu_points": [
-      "An ETF (Exchange-Traded Fund) holds a basket of stocks you can buy like a single share.",
-      "One S&P 500 ETF gives you instant exposure to 500 top U.S. companies at once.",
-      "ETFs have ultra-low fees \u2014 often under 0.1% per year vs. 1%+ for mutual funds.",
-      "They trade on exchanges all day, giving you flexibility that mutual funds don't offer.",
-      "Beginners love ETFs: low cost, instant diversification, and no stock-picking needed."
-    ]
-  },
-  "2026-05-24": {
-    "headlines": [
-      "Anthropic & Gates Foundation Launch $200M AI Partnership",
-      "Bitcoin Surges Past $77K as AI Stocks Lead Global Rally"
-    ],
-    "categories": [
-      "TECH / AI",
-      "CRYPTO"
-    ],
-    "edu_title": "How AI Agents Actually Work Under the Hood",
-    "edu_category": "TECH EXPLAINED",
-    "edu_points": [
-      "Agents break big goals into smaller tasks, then act step-by-step autonomously",
-      "They use 'tools' \u2014 web search, code execution, APIs \u2014 to interact with the world",
-      "A feedback loop lets them check their own output and self-correct mistakes",
-      "Context windows store working 'memory' \u2014 agents lose context when this fills up",
-      "Multi-agent systems chain specialized bots together to solve complex problems"
-    ]
-  },
-  "2026-05-28": {
-    "headlines": [
-      "AMD's 256-Core Venice Chip: First 2nm CPU in Production",
-      "Goldman Sachs Lifts S&P 500 Target to 8,000 on AI Earnings Boom"
-    ],
-    "categories": [
-      "TECH",
-      "MARKETS"
-    ],
-    "edu_title": "Moore's Law: Why Chips Keep Getting Faster",
-    "edu_category": "TECH EXPLAINED",
-    "edu_points": [
-      "Moore's Law predicts transistor count doubles ~every 2 years, boosting speed & efficiency.",
-      "Today's 2nm chips pack 100 billion+ transistors into a space smaller than a fingernail.",
-      "More transistors = faster processing, less power draw, and smarter AI at lower cost.",
-      "Smaller nodes are harder to make \u2014 only TSMC & Samsung lead at the 2nm level today.",
-      "As physics limits shrink, chipmakers turn to 3D stacking and new materials to keep pace."
-    ]
-  },
-  "2026-05-29": {
-    "headlines": [
-      "Google Unveils Gemini Omni: AI That Creates From Any Input",
-      "Bitcoin ETFs Bleed $2.8B in Record 9-Day Outflow Streak"
-    ],
-    "categories": [
-      "AI",
-      "CRYPTO"
-    ],
-    "edu_title": "Dollar-Cost Averaging: Invest Without Timing the Market",
-    "edu_category": "INVESTING 101",
-    "edu_points": [
-      "Invest a fixed amount at regular intervals, no matter the price",
-      "Removes emotion \u2014 no stressing over when to buy the 'dip'",
-      "Small, consistent amounts compound into serious wealth over time",
-      "Lowers average cost per share by buying more when prices drop",
-      "Works for stocks, ETFs, and crypto \u2014 any asset you believe in long-term"
-    ]
-  },
-  "2026-05-30": {
-    "headlines": [
-      "AI Safety Guardrails Stripped From Meta & Google Models in Minutes",
-      "Dell Rockets 33% on Best Day Ever \u2014 AI Server Revenue Up 757%"
-    ],
-    "categories": [
-      "AI SAFETY",
-      "MARKETS"
-    ],
-    "edu_title": "The Rule of 72: How to Double Your Money",
-    "edu_category": "PERSONAL FINANCE",
-    "edu_points": [
-      "Divide 72 by your annual return rate to find years to double your money.",
-      "At 6% return: 72 \u00f7 6 = 12 years to double \u2014 no calculator needed.",
-      "Higher returns compound faster: 10% return doubles money in ~7.2 years.",
-      "Works for debt too \u2014 18% APR credit card doubles what you owe in 4 years.",
-      "Einstein reportedly called compound interest the '8th wonder of the world'."
+      "Diversification means spreading money across many assets, not just many stocks",
+      "It won't stop losses, but it stops one bad bet from wiping you out",
+      "Owning 10 tech stocks isn't diversified \u2014 that's still one sector's risk",
+      "True diversification spans asset classes: stocks, bonds, cash, real estate",
+      "The goal isn't more returns \u2014 it's smoother, more survivable ones"
     ]
   }
 }

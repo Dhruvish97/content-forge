@@ -1,0 +1,27 @@
+{
+  "news": [
+    {
+      "headline": "As AI hits software sector, defense-tech flourishes",
+      "summary": "Reported by The Jerusalem Post.",
+      "category": "TECH",
+      "source": "The Jerusalem Post"
+    },
+    {
+      "headline": "America Is Great at Creating Stock Market Bubbles\u2014and Shrugging Them Off",
+      "summary": "Reported by WSJ.",
+      "category": "MARKETS",
+      "source": "WSJ"
+    }
+  ],
+  "educational": {
+    "title": "What Is Diversification, Really?",
+    "category": "INVESTING 101",
+    "points": [
+      "Diversification means spreading money across many assets, not just many stocks",
+      "It won't stop losses, but it stops one bad bet from wiping you out",
+      "Owning 10 tech stocks isn't diversified \u2014 that's still one sector's risk",
+      "True diversification spans asset classes: stocks, bonds, cash, real estate",
+      "The goal isn't more returns \u2014 it's smoother, more survivable ones"
+    ]
+  }
+}
