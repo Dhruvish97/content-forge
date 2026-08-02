@@ -515,7 +515,11 @@ def generate_news_post_stat_hero_gradient(headline, summary, category, source, s
         val_bbox = val_font.getbbox(stat_value)
         val_x = center_x - (val_bbox[0] + val_bbox[2]) / 2
         draw.text((val_x, y_pos), stat_value, font=val_font, fill=val_color)
-        y_pos += (val_bbox[3] - val_bbox[1]) + 25
+        # val_bbox[3] is the ink's bottom offset *from the draw origin* — the
+        # real bottom edge is y_pos + val_bbox[3], not y_pos + (bbox height).
+        # The old formula undercounted by val_bbox[1] (~25-30px at this font
+        # size), letting the label sit a few px into the number's glyphs.
+        y_pos += val_bbox[3] + 25
 
         lbl_font = ImageFont.truetype(FONT_MEDIUM, 26)
         lbl_text = stat_label.upper()
