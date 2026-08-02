@@ -22,10 +22,17 @@ tracking recent output so it won't repeat headlines or topics.
   summary, category, source, educational title/points) before rendering,
   failing fast with a clear message instead of crashing mid-render.
 - **Free news auto-fetch** — `fetch_news.py` pulls candidate headlines from
-  direct publisher RSS feeds (TechCrunch, MarketWatch, CNBC, Decrypt — no
-  API key required) across tech/AI/markets/earnings/crypto, pre-filtered
-  through the same dedup logic as a manual run. Optionally polishes each
-  summary into a fuller, multi-sentence caption via Claude Haiku (see
+  2-3 direct publisher RSS feeds per sector (TechCrunch/The Verge/Ars
+  Technica for tech, TechCrunch/VentureBeat for AI, MarketWatch/CNBC for
+  markets, CNBC for earnings, Decrypt/CoinDesk/Cointelegraph for crypto — no
+  API key required), pre-filtered through the same dedup logic as a manual
+  run. Within each sector, stories published in the last 24h are clustered
+  by headline overlap and the story corroborated by the most independent
+  outlets wins — a free proxy for "what's actually popular today" since RSS
+  itself has no engagement metrics. A sector with only one covering outlet
+  (or no cross-outlet overlap that day) falls back to picking the most
+  recent story, same as before. Optionally polishes the winning summary into
+  a fuller, multi-sentence caption via Claude Haiku (see
   [News Summary Enrichment](#news-summary-enrichment)) — this is the one
   place an LLM is used in the pipeline; everything else is plain Python +
   Pillow.

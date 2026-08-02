@@ -12,22 +12,31 @@ import json
 import os
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import anthropic
 import feedparser
+import requests
 
 from generate_posts import (
     check_duplicates,
     check_topic_diversity,
     check_edu_content_similarity,
     _is_high_importance,
+    _keywords,
+    _jaccard,
 )
 
 CONTENT_DIR = Path(__file__).parent / "content"
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 ANTHROPIC_MODEL = "claude-haiku-4-5"
+USER_AGENT = "Mozilla/5.0 (compatible; ContentForgeBot/1.0; +https://github.com/Dhruvish97/content-forge)"
+# Jaccard threshold for clustering headlines about the same real-world story
+# across different outlets. Lower than EDU_SIMILARITY_THRESHOLD in
+# generate_posts.py (0.45) because headlines are short and more heavily
+# paraphrased between publishers than educational bullet points are.
+NEWS_SIMILARITY_THRESHOLD = 0.3
 
 # Direct publisher RSS feeds — their <link> is the real article URL (no Google
 # News redirect-decoding needed), and they include real editorial descriptions.
@@ -35,12 +44,24 @@ ANTHROPIC_MODEL = "claude-haiku-4-5"
 # some are clunky ("AI News & Artificial Intelligence | TechCrunch") or
 # outright wrong for display purposes (CNBC's earnings feed titles itself
 # just "Earnings", not "CNBC").
+#
+# Multiple feeds per category let fetch_candidate_news() prefer stories
+# corroborated across independent outlets (see NEWS_SIMILARITY_THRESHOLD
+# clustering below) as a free proxy for "popular," since RSS carries no
+# engagement metrics of its own. EARNINGS has no second free feed, so it
+# always falls back to "most recent" for that category.
 FEED_SOURCES = [
     {"url": "https://techcrunch.com/feed/", "category": "TECH", "source": "TechCrunch"},
+    {"url": "https://www.theverge.com/rss/index.xml", "category": "TECH", "source": "The Verge"},
+    {"url": "https://feeds.arstechnica.com/arstechnica/index", "category": "TECH", "source": "Ars Technica"},
     {"url": "https://techcrunch.com/category/artificial-intelligence/feed/", "category": "AI", "source": "TechCrunch"},
+    {"url": "https://venturebeat.com/category/ai/feed/", "category": "AI", "source": "VentureBeat"},
     {"url": "https://feeds.marketwatch.com/marketwatch/topstories/", "category": "MARKETS", "source": "MarketWatch"},
+    {"url": "https://www.cnbc.com/id/100003114/device/rss/rss.html", "category": "MARKETS", "source": "CNBC"},
     {"url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15839135", "category": "EARNINGS", "source": "CNBC"},
     {"url": "https://decrypt.co/feed", "category": "CRYPTO", "source": "Decrypt"},
+    {"url": "https://www.coindesk.com/arc/outboundfeeds/rss/", "category": "CRYPTO", "source": "CoinDesk"},
+    {"url": "https://cointelegraph.com/rss", "category": "CRYPTO", "source": "Cointelegraph"},
 ]
 
 # Rotating fallback educational content for fully-automated runs (--auto-educational).
@@ -229,21 +250,80 @@ def _entry_to_news_item(entry, category, source):
     }
 
 
-def fetch_candidate_news(n=2):
-    """Fetch, dedupe, and pick n news items across the configured feed sources."""
-    raw_candidates = []
+def _fetch_feed_entries(url):
+    """Fetch+parse one feed; returns [] on any failure (timeout, 4xx/5xx, bad XML)
+    so one broken/blocked feed can't take down the whole run. A plain
+    feedparser.parse(url) call gets redirected/blocked (308) on some hosts
+    (VentureBeat, CoinDesk) without a browser-like User-Agent, so fetch via
+    requests first and hand the raw bytes to feedparser."""
+    try:
+        resp = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=10)
+        resp.raise_for_status()
+        return feedparser.parse(resp.content).entries
+    except Exception:
+        return []
+
+
+def _entry_published(entry):
+    """Return the entry's publish time as a naive UTC datetime, or None if the
+    feed didn't supply a parseable one (missing timestamps are kept, not
+    penalized, by the caller)."""
+    struct = entry.get("published_parsed") or entry.get("updated_parsed")
+    return datetime(*struct[:6]) if struct else None
+
+
+def fetch_candidate_news(n=2, hours=24):
+    """Fetch from all configured feeds, cluster same-story coverage within each
+    category via headline word-overlap, and prefer the story with the most
+    distinct-source corroboration in the last `hours` — a free proxy for
+    "popular" since RSS carries no engagement metrics of its own. Falls back
+    to most-recent when nothing corroborates (e.g. a category backed by only
+    one feed)."""
+    cutoff = datetime.utcnow() - timedelta(hours=hours)
+
+    raw = []
     seen_headlines = set()
     for feed_src in FEED_SOURCES:
-        parsed = feedparser.parse(feed_src["url"])
-        for entry in parsed.entries[:5]:
+        for entry in _fetch_feed_entries(feed_src["url"])[:10]:
             item = _entry_to_news_item(entry, feed_src["category"], feed_src["source"])
             key = item["headline"].lower().strip()
-            if key and key not in seen_headlines:
-                seen_headlines.add(key)
-                raw_candidates.append(item)
+            if not key or key in seen_headlines:
+                continue
+            published = _entry_published(entry)
+            if published and published < cutoff:
+                continue
+            seen_headlines.add(key)
+            raw.append({"item": item, "published": published})
 
-    dupes = {h.lower().strip() for h in check_duplicates(raw_candidates, None)}
-    candidates = [c for c in raw_candidates if c["headline"].lower().strip() not in dupes]
+    by_category = {}
+    for r in raw:
+        by_category.setdefault(r["item"]["category"], []).append(r)
+
+    ranked_candidates = []
+    for entries in by_category.values():
+        clusters = []
+        for r in entries:
+            kw = _keywords(r["item"]["headline"])
+            for cluster in clusters:
+                if _jaccard(kw, _keywords(cluster[0]["item"]["headline"])) >= NEWS_SIMILARITY_THRESHOLD:
+                    cluster.append(r)
+                    break
+            else:
+                clusters.append([r])
+
+        def _cluster_sort_key(cluster):
+            source_count = len({c["item"]["source"] for c in cluster})
+            timestamps = [c["published"] for c in cluster if c["published"]]
+            newest = max(timestamps).timestamp() if timestamps else 0
+            return (-source_count, -newest)
+
+        clusters.sort(key=_cluster_sort_key)
+        for cluster in clusters:
+            rep = max(cluster, key=lambda c: len(c["item"]["summary"]))
+            ranked_candidates.append(rep["item"])
+
+    dupes = {h.lower().strip() for h in check_duplicates(ranked_candidates, None)}
+    candidates = [c for c in ranked_candidates if c["headline"].lower().strip() not in dupes]
 
     overused = {cat.lower() for cat, _ in check_topic_diversity(candidates)}
     filtered = [

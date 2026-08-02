@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for fetch_news.py — no real network calls (feedparser.parse is mocked)."""
+"""Tests for fetch_news.py — no real network calls (fn._fetch_feed_entries is mocked)."""
 import json
 import sys
 import tempfile
@@ -14,17 +14,12 @@ import generate_posts as gp
 import fetch_news as fn
 
 
-def _entry(title, summary=""):
-    return {"title": title, "summary": summary}
-
-
-def _fake_feed(entries, feed_title="Test Source"):
-    class FakeFeed:
-        pass
-    f = FakeFeed()
-    f.entries = entries
-    f.feed = {"title": feed_title}
-    return f
+def _entry(title, summary="", hours_ago=None):
+    e = {"title": title, "summary": summary}
+    if hours_ago is not None:
+        published = datetime.utcnow() - timedelta(hours=hours_ago)
+        e["published_parsed"] = published.timetuple()
+    return e
 
 
 class ContentLogTestCase(unittest.TestCase):
@@ -67,27 +62,47 @@ class TestEntryToNewsItem(unittest.TestCase):
         self.assertEqual(item["summary"], "Reported by Src.")
 
 
+class TestFetchFeedEntries(unittest.TestCase):
+    """_fetch_feed_entries is the seam every other test in this file mocks out,
+    so its own exception-catching behavior needs direct coverage."""
+
+    def test_returns_empty_list_on_request_exception(self):
+        with patch.object(fn.requests, "get", side_effect=fn.requests.exceptions.Timeout("boom")):
+            self.assertEqual(fn._fetch_feed_entries("https://example.com/feed"), [])
+
+    def test_returns_empty_list_on_http_error(self):
+        resp = Mock()
+        resp.raise_for_status.side_effect = fn.requests.exceptions.HTTPError("404")
+        with patch.object(fn.requests, "get", return_value=resp):
+            self.assertEqual(fn._fetch_feed_entries("https://example.com/feed"), [])
+
+    def test_returns_entries_on_success(self):
+        resp = Mock(content=b"<rss></rss>")
+        resp.raise_for_status.return_value = None
+        fake_parsed = Mock(entries=[{"title": "A Story"}])
+        with patch.object(fn.requests, "get", return_value=resp), patch.object(
+            fn.feedparser, "parse", return_value=fake_parsed
+        ):
+            self.assertEqual(fn._fetch_feed_entries("https://example.com/feed"), [{"title": "A Story"}])
+
+
 class TestFetchCandidateNews(ContentLogTestCase):
+    def _mock_fetch(self, entries_by_url):
+        return patch.object(fn, "_fetch_feed_entries", side_effect=lambda url: entries_by_url.get(url, []))
+
     def test_dedup_excludes_recent_headline(self):
         self._write_log({
             self._date(1): {"headlines": ["Repeated Headline"], "categories": ["TECH"]}
         })
-        fake_entries = {
-            "techcrunch.com/feed": [_entry("Repeated Headline", summary="desc")],
-            "marketwatch": [_entry("Fresh Market Story", summary="desc")],
+        entries_by_url = {
+            "https://techcrunch.com/feed/": [_entry("Repeated Headline", summary="desc")],
+            "https://feeds.marketwatch.com/marketwatch/topstories/": [_entry("Fresh Market Story", summary="desc")],
         }
-
-        def fake_parse(url):
-            if "techcrunch.com/feed" in url:
-                return _fake_feed(fake_entries["techcrunch.com/feed"], "TechCrunch")
-            if "marketwatch" in url:
-                return _fake_feed(fake_entries["marketwatch"], "MarketWatch")
-            return _fake_feed([])
 
         with patch.object(fn, "FEED_SOURCES", [
             {"url": "https://techcrunch.com/feed/", "category": "TECH", "source": "TechCrunch"},
             {"url": "https://feeds.marketwatch.com/marketwatch/topstories/", "category": "MARKETS", "source": "MarketWatch"},
-        ]), patch("feedparser.parse", side_effect=fake_parse):
+        ]), self._mock_fetch(entries_by_url):
             picked = fn.fetch_candidate_news(n=2)
 
         headlines = [p["headline"] for p in picked]
@@ -95,37 +110,114 @@ class TestFetchCandidateNews(ContentLogTestCase):
         self.assertIn("Fresh Market Story", headlines)
 
     def test_picks_diverse_categories_when_possible(self):
-        def fake_parse(url):
-            if "techcrunch.com/feed" in url:
-                return _fake_feed([
-                    _entry("Tech Story One", summary="d"),
-                    _entry("Tech Story Two", summary="d"),
-                ], "TechCrunch")
-            if "marketwatch" in url:
-                return _fake_feed([_entry("Market Story One", summary="d")], "MarketWatch")
-            return _fake_feed([])
+        entries_by_url = {
+            "https://techcrunch.com/feed/": [
+                _entry("Tech Story One", summary="d"),
+                _entry("Tech Story Two", summary="d"),
+            ],
+            "https://feeds.marketwatch.com/marketwatch/topstories/": [_entry("Market Story One", summary="d")],
+        }
 
         with patch.object(fn, "FEED_SOURCES", [
             {"url": "https://techcrunch.com/feed/", "category": "TECH", "source": "TechCrunch"},
             {"url": "https://feeds.marketwatch.com/marketwatch/topstories/", "category": "MARKETS", "source": "MarketWatch"},
-        ]), patch("feedparser.parse", side_effect=fake_parse):
+        ]), self._mock_fetch(entries_by_url):
             picked = fn.fetch_candidate_news(n=2)
 
         categories = {p["category"] for p in picked}
         self.assertEqual(len(picked), 2)
         self.assertEqual(categories, {"TECH", "MARKETS"})
 
-    def test_source_comes_from_configured_source_not_feed_title(self):
-        # Regression: some feeds' raw <title> is clunky or outright wrong for
-        # display (e.g. CNBC's earnings feed titles itself just "Earnings").
-        # Source must come from FEED_SOURCES config, not parsed.feed.title.
+    def test_source_comes_from_configured_source(self):
+        # Source must come from FEED_SOURCES config, never inferred from feed data —
+        # some feeds' raw <title> is clunky or outright wrong for display (e.g.
+        # CNBC's earnings feed titles itself just "Earnings").
+        entries_by_url = {"https://search.cnbc.com/...": [_entry("A Story", summary="d")]}
         with patch.object(fn, "FEED_SOURCES", [
             {"url": "https://search.cnbc.com/...", "category": "EARNINGS", "source": "CNBC"},
-        ]), patch("feedparser.parse", return_value=_fake_feed(
-            [_entry("A Story", summary="d")], feed_title="Earnings"
-        )):
+        ]), self._mock_fetch(entries_by_url):
             picked = fn.fetch_candidate_news(n=1)
         self.assertEqual(picked[0]["source"], "CNBC")
+
+    def test_corroborated_story_beats_lone_recent_story(self):
+        # Two outlets covering the same real story (paraphrased headlines) should
+        # outrank a single-source story even when the single-source one is newer —
+        # cross-source corroboration is the "popularity" proxy.
+        entries_by_url = {
+            "https://a.example/feed": [_entry(
+                "OpenAI Launches New Model For Developers", summary="d", hours_ago=5,
+            )],
+            "https://b.example/feed": [_entry(
+                "OpenAI launches new model targeting developers",
+                summary="A much longer, more detailed real editorial description of the launch.",
+                hours_ago=3,
+            )],
+            "https://c.example/feed": [_entry(
+                "Totally Different Story About Something Else", summary="d", hours_ago=1,
+            )],
+        }
+        with patch.object(fn, "FEED_SOURCES", [
+            {"url": "https://a.example/feed", "category": "TECH", "source": "SourceA"},
+            {"url": "https://b.example/feed", "category": "TECH", "source": "SourceB"},
+            {"url": "https://c.example/feed", "category": "TECH", "source": "SourceC"},
+        ]), self._mock_fetch(entries_by_url):
+            picked = fn.fetch_candidate_news(n=1)
+        self.assertEqual(len(picked), 1)
+        self.assertNotEqual(picked[0]["source"], "SourceC")
+
+    def test_no_corroboration_falls_back_to_most_recent(self):
+        entries_by_url = {
+            "https://a.example/feed": [_entry(
+                "Central Bank Raises Interest Rates Today", summary="d", hours_ago=10,
+            )],
+            "https://b.example/feed": [_entry(
+                "Retailer Reports Record Holiday Sales Growth", summary="d", hours_ago=2,
+            )],
+        }
+        with patch.object(fn, "FEED_SOURCES", [
+            {"url": "https://a.example/feed", "category": "MARKETS", "source": "SourceA"},
+            {"url": "https://b.example/feed", "category": "MARKETS", "source": "SourceB"},
+        ]), self._mock_fetch(entries_by_url):
+            picked = fn.fetch_candidate_news(n=1)
+        self.assertEqual(picked[0]["headline"], "Retailer Reports Record Holiday Sales Growth")
+
+    def test_stale_entries_older_than_24h_excluded(self):
+        entries_by_url = {
+            "https://tech.example/feed": [_entry("Fresh Tech Story", summary="d", hours_ago=2)],
+            "https://crypto.example/feed": [_entry("Old Crypto News Nobody Cares About", summary="d", hours_ago=30)],
+        }
+        with patch.object(fn, "FEED_SOURCES", [
+            {"url": "https://tech.example/feed", "category": "TECH", "source": "SourceA"},
+            {"url": "https://crypto.example/feed", "category": "CRYPTO", "source": "SourceB"},
+        ]), self._mock_fetch(entries_by_url):
+            picked = fn.fetch_candidate_news(n=2)
+        self.assertEqual(len(picked), 1)
+        self.assertEqual(picked[0]["category"], "TECH")
+
+    def test_missing_timestamp_entries_are_kept(self):
+        # No published_parsed/updated_parsed at all — should not be penalized.
+        entries_by_url = {"https://a.example/feed": [_entry("Undated Story", summary="d")]}
+        with patch.object(fn, "FEED_SOURCES", [
+            {"url": "https://a.example/feed", "category": "TECH", "source": "SourceA"},
+        ]), self._mock_fetch(entries_by_url):
+            picked = fn.fetch_candidate_news(n=1)
+        self.assertEqual(len(picked), 1)
+        self.assertEqual(picked[0]["headline"], "Undated Story")
+
+    def test_one_broken_feed_does_not_block_others(self):
+        # _fetch_feed_entries already swallows failures and returns [] — confirm
+        # fetch_candidate_news still surfaces the other feed's entries.
+        entries_by_url = {
+            "https://broken.example/feed": [],
+            "https://working.example/feed": [_entry("Working Feed Story", summary="d")],
+        }
+        with patch.object(fn, "FEED_SOURCES", [
+            {"url": "https://broken.example/feed", "category": "TECH", "source": "BrokenSource"},
+            {"url": "https://working.example/feed", "category": "MARKETS", "source": "WorkingSource"},
+        ]), self._mock_fetch(entries_by_url):
+            picked = fn.fetch_candidate_news(n=2)
+        headlines = [p["headline"] for p in picked]
+        self.assertIn("Working Feed Story", headlines)
 
 
 class TestWriteDraft(unittest.TestCase):
