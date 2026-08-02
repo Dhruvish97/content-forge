@@ -168,5 +168,32 @@ class TestFontLoadingSmoke(unittest.TestCase):
         self.assertEqual(img.size, gp.SIZE)
 
 
+class TestNewsPostStyles(unittest.TestCase):
+    """Smoke-render every style in the pool, with and without a stat, for every palette."""
+
+    def test_all_styles_render_with_stat(self):
+        for style in gp.NEWS_POST_STYLES:
+            for _ in range(4):  # covers random.choice() across all palette entries
+                img = style(
+                    headline="A Reasonably Long Test Headline For Wrapping",
+                    summary="A test summary sentence long enough to wrap across lines.",
+                    category="TECH",
+                    source="Test Source",
+                    stat_label="Test Stat",
+                    stat_value="42%",
+                )
+                self.assertEqual(img.size, gp.SIZE, f"{style.__name__} produced wrong size")
+
+    def test_all_styles_render_without_stat(self):
+        for style in gp.NEWS_POST_STYLES:
+            img = style(
+                headline="Headline With No Stat Provided",
+                summary="Summary text.",
+                category="MARKETS",
+                source="Test Source",
+            )
+            self.assertEqual(img.size, gp.SIZE, f"{style.__name__} produced wrong size")
+
+
 if __name__ == "__main__":
     unittest.main()

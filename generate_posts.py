@@ -98,6 +98,17 @@ def stat_box_fill(text_color_hex):
         return (255, 255, 255, 200)
 
 
+def _stat_colors(palette, box_fill, text_color):
+    """Pick a legible (value_color, label_color) pair for a stat value drawn on box_fill."""
+    val_color = hex_to_rgb(palette["accent"])
+    val_luminance = 0.299 * val_color[0] + 0.587 * val_color[1] + 0.114 * val_color[2]
+    box_is_dark = box_fill[3] < 180 or sum(box_fill[:3]) < 382
+    if box_is_dark and val_luminance < 80:
+        val_color = text_color
+    lbl_color = (220, 220, 220) if box_fill[0] == 0 else (50, 50, 50)
+    return val_color, lbl_color
+
+
 def create_gradient(size, color1, color2, direction="vertical"):
     """Create a gradient image."""
     img = Image.new("RGB", size)
@@ -318,16 +329,8 @@ def generate_news_post_gradient(headline, summary, category, source, stat_label=
 
         val_font = ImageFont.truetype(FONT_BOLD, 50)
         lbl_font = ImageFont.truetype(FONT_REGULAR, 22)
-        # Use accent for the value and a high-contrast color for the label
-        val_color = hex_to_rgb(palette["accent"])
-        lbl_luminance = 0.299 * val_color[0] + 0.587 * val_color[1] + 0.114 * val_color[2]
-        # If accent is too dark on a dark box, fall back to text_color
-        box_is_dark = box_fill[3] < 180 or sum(box_fill[:3]) < 382
-        if box_is_dark and lbl_luminance < 80:
-            val_color = text_color
+        val_color, lbl_color = _stat_colors(palette, box_fill, text_color)
         draw.text((110, y_pos + 15), stat_value, font=val_font, fill=val_color)
-        # Label: always use solid high-contrast color relative to box
-        lbl_color = (220, 220, 220) if box_fill[0] == 0 else (50, 50, 50)
         draw.text((110, y_pos + 80), stat_label, font=lbl_font, fill=lbl_color)
 
     # Source + footer
@@ -336,6 +339,143 @@ def generate_news_post_gradient(headline, summary, category, source, stat_label=
     draw_brand_footer(draw, SIZE, palette)
 
     return img.convert("RGB")
+
+
+# === POST TYPE: NEWS POST (Split Banner, Dark Style) ===
+def generate_news_post_split_dark(headline, summary, category, source, stat_label=None, stat_value=None):
+    """Generate a dark-themed news post with a solid color banner up top."""
+    palette = random.choice(DARK_PALETTES)
+    bg_color = hex_to_rgb(palette["bg"])
+    accent = hex_to_rgb(palette["accent"])
+    secondary = hex_to_rgb(palette["secondary"])
+    text_color = hex_to_rgb(palette["text"])
+    subtext = hex_to_rgb(palette["subtext"])
+
+    img = Image.new("RGBA", SIZE, bg_color + (255,))
+    draw = ImageDraw.Draw(img)
+
+    top_block_h = 400
+    draw.rectangle([0, 0, SIZE[0], top_block_h], fill=secondary)
+    draw.rectangle([0, top_block_h - 6, SIZE[0], top_block_h], fill=accent)
+
+    # Category badge
+    cat_font = ImageFont.truetype(FONT_BOLD, 20)
+    cat_text = f"  {category.upper()}  "
+    cat_w = cat_font.getlength(cat_text)
+    draw_rounded_rect(draw, (60, 50, 60 + cat_w + 10, 88), 8, accent)
+    draw.text((65, 53), cat_text, font=cat_font, fill=bg_color)
+
+    # Headline (inside the banner, in white/text_color for guaranteed contrast
+    # against the vivid secondary palette colors)
+    headline_font = ImageFont.truetype(FONT_BOLD, 50)
+    draw_text_wrapped(draw, headline, 60, 130, SIZE[0] - 120, headline_font, text_color, line_spacing=13)
+
+    # Summary (below the banner)
+    y_pos = top_block_h + 40
+    summary_font = ImageFont.truetype(FONT_REGULAR, 30)
+    summary_h = draw_text_wrapped(draw, summary, 60, y_pos, SIZE[0] - 120, summary_font, subtext, line_spacing=8)
+
+    # Stat box (if provided)
+    if stat_label and stat_value:
+        y_pos += summary_h + 40
+        box_h = 140
+        draw_rounded_rect(draw, (60, y_pos, SIZE[0] - 60, y_pos + box_h), 16, secondary)
+
+        val_font = ImageFont.truetype(FONT_BOLD, 52)
+        lbl_font = ImageFont.truetype(FONT_REGULAR, 22)
+        draw.text((90, y_pos + 20), stat_value, font=val_font, fill=accent)
+        draw.text((90, y_pos + 85), stat_label, font=lbl_font, fill=text_color)
+
+    # Source
+    src_font = ImageFont.truetype(FONT_REGULAR, 18)
+    draw.text((60, SIZE[1] - 130), f"Source: {source}", font=src_font, fill=subtext)
+
+    draw_brand_footer(draw, SIZE, palette, is_dark=True)
+
+    final = Image.new("RGB", SIZE, bg_color)
+    final.paste(img, mask=img.split()[3])
+    return final
+
+
+# === POST TYPE: NEWS POST (Stat Hero, Gradient Style) ===
+def generate_news_post_stat_hero_gradient(headline, summary, category, source, stat_label=None, stat_value=None):
+    """Generate a gradient news post with the stat value as the dominant, centered element.
+    Falls back to a headline-forward layout when no stat is provided."""
+    palette = random.choice(GRADIENT_PALETTES)
+    text_color = hex_to_rgb(palette["text"])
+    subtext = hex_to_rgb(palette["subtext"])
+
+    direction = random.choice(["vertical", "diagonal"])
+    img = create_gradient(SIZE, palette["grad_start"], palette["grad_end"], direction)
+    draw = ImageDraw.Draw(img)
+
+    # Overlay card — fill picked to contrast with this palette's own text color,
+    # so light-text AND dark-text gradient palettes both stay legible.
+    overlay_fill = stat_box_fill(palette["text"])
+    overlay = Image.new("RGBA", SIZE, (0, 0, 0, 0))
+    overlay_draw = ImageDraw.Draw(overlay)
+    draw_rounded_rect(overlay_draw, (40, 40, SIZE[0] - 40, SIZE[1] - 40), 24, overlay_fill)
+    img = Image.alpha_composite(img.convert("RGBA"), overlay)
+    draw = ImageDraw.Draw(img)
+
+    # Category badge
+    accent = hex_to_rgb(palette["accent"])
+    cat_font = ImageFont.truetype(FONT_BOLD, 20)
+    cat_text = f"  {category.upper()}  "
+    cat_w = cat_font.getlength(cat_text)
+    draw_rounded_rect(draw, (80, 80, 80 + cat_w + 10, 118), 8, accent + (230,))
+    badge_text_color = hex_to_rgb(palette.get("grad_start", "#000000"))
+    draw.text((85, 83), cat_text, font=cat_font, fill=badge_text_color)
+
+    y_pos = 170
+    center_x = SIZE[0] / 2
+
+    if stat_label and stat_value:
+        val_color, lbl_color = _stat_colors(palette, overlay_fill, text_color)
+
+        val_font = ImageFont.truetype(FONT_BOLD, 100)
+        val_bbox = val_font.getbbox(stat_value)
+        val_x = center_x - (val_bbox[0] + val_bbox[2]) / 2
+        draw.text((val_x, y_pos), stat_value, font=val_font, fill=val_color)
+        y_pos += (val_bbox[3] - val_bbox[1]) + 25
+
+        lbl_font = ImageFont.truetype(FONT_MEDIUM, 26)
+        lbl_text = stat_label.upper()
+        lbl_w = lbl_font.getlength(lbl_text)
+        draw.text((center_x - lbl_w / 2, y_pos), lbl_text, font=lbl_font, fill=lbl_color)
+        y_pos += 60
+
+        draw.line([(center_x - 80, y_pos), (center_x + 80, y_pos)], fill=text_color + (140,), width=3)
+        y_pos += 40
+
+        headline_font = ImageFont.truetype(FONT_BOLD, 42)
+        summary_font_size = 24
+    else:
+        headline_font = ImageFont.truetype(FONT_BOLD, 52)
+        summary_font_size = 29
+
+    headline_h = draw_text_wrapped(draw, headline, 80, y_pos, SIZE[0] - 160, headline_font, text_color, line_spacing=12)
+    y_pos += headline_h + 25
+
+    summary_font = ImageFont.truetype(FONT_REGULAR, summary_font_size)
+    draw_text_wrapped(draw, summary, 80, y_pos, SIZE[0] - 160, summary_font, subtext, line_spacing=8)
+
+    src_font = ImageFont.truetype(FONT_REGULAR, 18)
+    draw.text((80, SIZE[1] - 130), f"Source: {source}", font=src_font, fill=subtext)
+    draw_brand_footer(draw, SIZE, palette)
+
+    return img.convert("RGB")
+
+
+# Pool of interchangeable news-post renderers (same call signature), so
+# generate_all_daily_posts() can vary the layout day-to-day without repeating
+# a style within the same day.
+NEWS_POST_STYLES = [
+    generate_news_post_dark,
+    generate_news_post_gradient,
+    generate_news_post_split_dark,
+    generate_news_post_stat_hero_gradient,
+]
 
 
 # === POST TYPE 3: EDUCATIONAL POST ===
@@ -691,18 +831,20 @@ def generate_all_daily_posts(news_items=None, edu_item=None):
 
     results = []
 
-    # News Post 1 (Dark style)
+    style1, style2 = random.sample(NEWS_POST_STYLES, 2)
+
+    # News Post 1
     n1 = news_items[0]
-    img1 = generate_news_post_dark(
+    img1 = style1(
         n1["headline"], n1["summary"], n1["category"], n1["source"],
         n1.get("stat_label"), n1.get("stat_value")
     )
     cap1 = generate_caption("news", n1["headline"], n1["summary"], n1["category"])
     results.append(save_post(img1, cap1, "news", 1))
 
-    # News Post 2 (Gradient style)
+    # News Post 2
     n2 = news_items[1] if len(news_items) > 1 else news_items[0]
-    img2 = generate_news_post_gradient(
+    img2 = style2(
         n2["headline"], n2["summary"], n2["category"], n2["source"],
         n2.get("stat_label"), n2.get("stat_value")
     )

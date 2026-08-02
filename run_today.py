@@ -24,6 +24,29 @@ SCHEMA_EXAMPLE = """{
   }
 }"""
 
+REQUIRED_NEWS_FIELDS = ("headline", "summary", "category", "source")
+
+
+def _validate_news_item(item, idx):
+    if not isinstance(item, dict):
+        return [f"news[{idx}] must be an object, got {type(item).__name__}"]
+    return [
+        f"news[{idx}].{field} is missing or empty"
+        for field in REQUIRED_NEWS_FIELDS
+        if not isinstance(item.get(field), str) or not item[field].strip()
+    ]
+
+
+def _validate_educational(edu):
+    if not isinstance(edu, dict):
+        return ["educational must be an object"]
+    errors = []
+    if not isinstance(edu.get("title"), str) or not edu["title"].strip():
+        errors.append("educational.title is missing or empty")
+    if not isinstance(edu.get("points"), list) or len(edu["points"]) == 0:
+        errors.append("educational.points must be a non-empty list")
+    return errors
+
 
 def load_content(date_str):
     if not DATE_RE.match(date_str):
@@ -46,6 +69,26 @@ def load_content(date_str):
     if missing:
         print(f"❌ {path.name} is missing required key(s): {', '.join(missing)}")
         return None
+
+    if not isinstance(data["news"], list) or len(data["news"]) == 0:
+        print(f"❌ {path.name}: \"news\" must be a non-empty list.")
+        return None
+
+    errors = []
+    for idx, item in enumerate(data["news"]):
+        errors.extend(_validate_news_item(item, idx))
+    errors.extend(_validate_educational(data["educational"]))
+    if errors:
+        print(f"❌ {path.name} failed validation:")
+        for e in errors:
+            print(f"   • {e}")
+        return None
+
+    if len(data["news"]) == 1:
+        print("⚠️  Only 1 news item provided — post 2 will reuse it.")
+    points = data["educational"].get("points", [])
+    if 0 < len(points) < 5:
+        print(f"⚠️  Only {len(points)} educational points provided — layout supports up to 5.")
 
     return data
 
