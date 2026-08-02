@@ -278,7 +278,7 @@ class TestMainDryRun(OutputDirTestCase):
 
         self.assertEqual(exit_code, 0)
         urls_called = [c[0][1] for c in mock_req.call_args_list]
-        self.assertTrue(all("graph.facebook.com" not in u for u in urls_called))
+        self.assertTrue(all(pti.GRAPH_BASE not in u for u in urls_called))
         log = json.loads(pti.PUBLISH_LOG.read_text())
         self.assertEqual(log["2026-01-01"][0]["status"], "dry-run")
 

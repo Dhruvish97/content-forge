@@ -24,7 +24,11 @@ DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 GITHUB_API = "https://api.github.com"
 GRAPH_API_VERSION = "v21.0"
-GRAPH_BASE = f"https://graph.facebook.com/{GRAPH_API_VERSION}"
+# Instagram-Login-flow tokens (the "IGAA..." prefix this project uses) must be
+# sent to graph.instagram.com, not graph.facebook.com — the latter is for the
+# older Facebook-Login-for-Business flow's "EAA..." tokens and rejects IGAA
+# tokens with a generic "Cannot parse access token" error.
+GRAPH_BASE = f"https://graph.instagram.com/{GRAPH_API_VERSION}"
 
 POLL_INTERVAL_SECONDS = 3
 POLL_MAX_ATTEMPTS = 15
