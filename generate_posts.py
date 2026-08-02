@@ -690,12 +690,24 @@ def generate_news_post_aurora(headline, summary, category, source, stat_label=No
     draw_rounded_rect(draw, (60, 55, 60 + cat_w + 10, 92), 18, (255, 255, 255, 235))
     draw.text((65, 60), cat_text, font=cat_font, fill=(20, 20, 20))
 
+    # Bottom-anchored block (summary, then headline above it, then stat badge
+    # above that) — measured with a throwaway draw first so a long headline
+    # pushes the whole stack up instead of overflowing past the footer.
+    dummy = ImageDraw.Draw(Image.new("RGBA", (10, 10)))
+
+    summary_font = ImageFont.truetype(FONT_REGULAR, 24)
+    summary_max_h = _lines_height(summary_font, 2, 6)
+    summary_h = draw_text_wrapped(dummy, summary, 0, 0, SIZE[0] - 120, summary_font, subtext,
+                                   line_spacing=6, max_height=summary_max_h)
+    summary_y = CONTENT_BOTTOM - summary_h
+    draw_text_wrapped(draw, summary, 60, summary_y, SIZE[0] - 120, summary_font, subtext,
+                       line_spacing=6, max_height=summary_max_h)
+
     headline_font = ImageFont.truetype(FONT_BOLD, 50)
     max_h = _lines_height(headline_font, 3, 12)
-    dummy = ImageDraw.Draw(Image.new("RGBA", (10, 10)))
     headline_h = draw_text_wrapped(dummy, headline, 0, 0, SIZE[0] - 120, headline_font, text_color,
                                     line_spacing=12, max_height=max_h)
-    headline_y = CONTENT_BOTTOM - headline_h
+    headline_y = summary_y - 18 - headline_h
     draw_text_wrapped(draw, headline, 60, headline_y, SIZE[0] - 120, headline_font, text_color,
                        line_spacing=12, max_height=max_h)
 
