@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+
+posts/*.png
+posts/*_caption.txt
+!posts/content_log.json

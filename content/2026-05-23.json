@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "Meta Slashes 8,000 Jobs in Major AI Restructure",
+      "summary": "Meta has launched the first wave of a 10% workforce reduction, cutting roughly 8,000 roles while reassigning 7,000 employees to AI-focused teams. The move is tied to record AI infrastructure spending.",
+      "category": "TECH",
+      "source": "Reuters",
+      "stat_label": "Jobs cut globally",
+      "stat_value": "8,000"
+    },
+    {
+      "headline": "Nvidia Smashes Records With $81.6B Revenue, AI Boom Roars On",
+      "summary": "Nvidia reported record Q1 FY2027 revenue of $81.6 billion — up 85% year-over-year — driven by insatiable demand for AI chips. Data center revenue alone hit $75.2B, and Q2 guidance came in at $91 billion.",
+      "category": "EARNINGS",
+      "source": "Nvidia IR / SEC",
+      "stat_label": "Revenue YoY growth",
+      "stat_value": "+85%"
+    }
+  ],
+  "educational": {
+    "title": "What Is an ETF? The Easiest Way to Own the Market",
+    "category": "INVESTING 101",
+    "points": [
+      "An ETF (Exchange-Traded Fund) holds a basket of stocks you can buy like a single share.",
+      "One S&P 500 ETF gives you instant exposure to 500 top U.S. companies at once.",
+      "ETFs have ultra-low fees — often under 0.1% per year vs. 1%+ for mutual funds.",
+      "They trade on exchanges all day, giving you flexibility that mutual funds don't offer.",
+      "Beginners love ETFs: low cost, instant diversification, and no stock-picking needed."
+    ]
+  }
+}
