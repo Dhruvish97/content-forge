@@ -61,6 +61,26 @@ class TestConvertToJpeg(OutputDirTestCase):
             self.assertEqual(img.size, (50, 40))
 
 
+class TestCleanToken(unittest.TestCase):
+    def test_strips_whitespace_and_newlines(self):
+        self.assertEqual(pti._clean_token("  abc123\n"), "abc123")
+
+    def test_strips_bearer_prefix(self):
+        self.assertEqual(pti._clean_token("Bearer abc123"), "abc123")
+        self.assertEqual(pti._clean_token("bearer abc123"), "abc123")
+
+    def test_strips_surrounding_quotes(self):
+        self.assertEqual(pti._clean_token('"abc123"'), "abc123")
+        self.assertEqual(pti._clean_token("'abc123'"), "abc123")
+
+    def test_leaves_clean_token_untouched(self):
+        self.assertEqual(pti._clean_token("abc123"), "abc123")
+
+    def test_handles_none_and_empty(self):
+        self.assertEqual(pti._clean_token(None), None)
+        self.assertEqual(pti._clean_token(""), "")
+
+
 class TestTruncateCaption(unittest.TestCase):
     def test_short_caption_untouched(self):
         self.assertEqual(pti._truncate_caption("short"), "short")

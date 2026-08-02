@@ -67,6 +67,18 @@ def convert_to_jpeg(png_path):
     return jpg_path
 
 
+def _clean_token(token):
+    """Strip whitespace/newlines and an accidentally-included 'Bearer ' prefix
+    from a copy-pasted token — the most common cause of Meta's "Cannot parse
+    access token" error."""
+    if not token:
+        return token
+    token = token.strip()
+    if token.lower().startswith("bearer "):
+        token = token[len("bearer "):].strip()
+    return token.strip('"').strip("'")
+
+
 def _redact(text, secrets):
     """Strip any live secret value out of text before it's printed or persisted."""
     for secret in secrets:
@@ -279,16 +291,21 @@ def main(date_str, dry_run):
         print(f"ℹ️  No generated posts found for {date_str} — nothing to publish.")
         return 0
 
-    github_token = os.environ.get("GITHUB_TOKEN")
+    github_token = _clean_token(os.environ.get("GITHUB_TOKEN"))
     if not github_token:
         print("❌ GITHUB_TOKEN is not set — needed to create/upload GitHub Release assets.")
         return 1
 
-    access_token = os.environ.get("IG_ACCESS_TOKEN")
-    ig_user_id = os.environ.get("IG_USER_ID")
+    access_token = _clean_token(os.environ.get("IG_ACCESS_TOKEN"))
+    ig_user_id = os.environ.get("IG_USER_ID", "").strip()
     if not dry_run and not (access_token and ig_user_id):
         print("❌ IG_ACCESS_TOKEN / IG_USER_ID must be set (unless using --dry-run).")
         return 1
+
+    if access_token:
+        # Length only — never the value — so a malformed secret is diagnosable
+        # from CI logs without exposing it.
+        print(f"ℹ️  IG_ACCESS_TOKEN length: {len(access_token)} chars, IG_USER_ID: {ig_user_id!r}")
 
     secrets = [t for t in (access_token, github_token) if t]
 
