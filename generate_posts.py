@@ -184,8 +184,14 @@ def draw_text_wrapped(draw, text, x, y, max_width, font, fill, line_spacing=8, m
 
 
 def _lines_height(font, n_lines, line_spacing):
-    """Pixel height budget for n_lines of this font, matching draw_text_wrapped's math."""
-    lh = font.getbbox("Mg")[3] - font.getbbox("Mg")[1]
+    """Pixel height budget for n_lines of this font, matching draw_text_wrapped's math.
+
+    Measured off "Mgjpqy" rather than just "Mg" — real wrapped lines regularly
+    contain descenders (g/j/p/q/y), and a plain "Mg" reference undershoots
+    their true height by a few px per line, which was enough to trip the
+    max_height cutoff a line early on perfectly reasonable text.
+    """
+    lh = font.getbbox("Mgjpqy")[3] - font.getbbox("Mgjpqy")[1]
     return n_lines * lh + (n_lines - 1) * line_spacing
 
 
@@ -596,7 +602,7 @@ def generate_educational_post(title, points, category="LEARN"):
     y_pos = 120
     title_h = draw_text_wrapped(
         draw, title, 60, y_pos, SIZE[0] - 120, title_font, text_color, line_spacing=12,
-        max_height=_lines_height(title_font, 2, 12),
+        max_height=_lines_height(title_font, 3, 12),
     )
 
     # Accent line under title
