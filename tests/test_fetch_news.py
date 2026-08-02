@@ -174,6 +174,21 @@ class TestWriteDraft(unittest.TestCase):
         data = json.loads(path.read_text())
         self.assertEqual(data["educational"]["title"], "Kept")
 
+    def test_force_with_auto_educational_regenerates_stale_pick(self):
+        # Regression: a same-day rerun must not get stuck reusing an educational
+        # pick that's already a same-day duplicate (this blocked a real run).
+        path = fn.CONTENT_DIR / "2026-01-01.json"
+        path.write_text(json.dumps({
+            "news": [],
+            "educational": {"title": "Stale Pick", "category": "LEARN", "points": ["p1"]},
+        }))
+        items = [{"headline": "H", "summary": "S", "category": "TECH", "source": "Src"}]
+        with patch.object(fn, "pick_educational", return_value=fn.EDUCATIONAL_BANK[1]) as mock_pick:
+            fn.write_draft("2026-01-01", items, auto_educational=True, force=True)
+        mock_pick.assert_called_once()
+        data = json.loads(path.read_text())
+        self.assertEqual(data["educational"]["title"], fn.EDUCATIONAL_BANK[1]["title"])
+
 
 class TestPickEducational(ContentLogTestCase):
     def test_skips_recently_used_title(self):

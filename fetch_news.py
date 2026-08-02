@@ -146,6 +146,61 @@ EDUCATIONAL_BANK = [
             "Nearly every app you use — banking, social media, streaming — runs on someone's cloud",
         ],
     },
+    {
+        "title": "Bull Market vs. Bear Market — What the Terms Actually Mean",
+        "category": "MARKETS 101",
+        "points": [
+            "A bull market is a sustained rise in prices; a bear market is a sustained fall",
+            "The common threshold: a 20%+ drop from a recent high defines a bear market",
+            "Bull markets historically last far longer than bear markets on average",
+            "Investor psychology often overshoots in both directions — greed, then fear",
+            "Long-term investors are taught to expect both phases, not just the good one",
+        ],
+    },
+    {
+        "title": "How a Stock Split Actually Works",
+        "category": "INVESTING 101",
+        "points": [
+            "A stock split divides each share into multiple shares — e.g. 1 becomes 4",
+            "Your total investment value doesn't change, just the share count and price",
+            "Companies split shares to make each one look more affordable to new buyers",
+            "It's a cosmetic change, not a sign the company suddenly became more valuable",
+            "Reverse splits do the opposite — often a red flag, not a good one",
+        ],
+    },
+    {
+        "title": "What Inflation Actually Does to Your Money",
+        "category": "FINANCIAL LITERACY",
+        "points": [
+            "Inflation means the same dollar buys less over time as prices rise",
+            "Cash sitting idle quietly loses purchasing power every year to inflation",
+            "This is a core reason people invest rather than just save in cash",
+            "Central banks target a small amount of inflation (often ~2%) as \"healthy\"",
+            "Wages that don't keep pace with inflation mean a real pay cut, even if the number goes up",
+        ],
+    },
+    {
+        "title": "How Venture Capital Actually Funds Startups",
+        "category": "TECH 101",
+        "points": [
+            "VCs invest other people's money (a \"fund\") in exchange for equity, not loans",
+            "Most funded startups fail — VC math relies on a few huge wins covering the rest",
+            "Funding rounds (seed, Series A, B...) mark stages of growth and rising valuation",
+            "Taking VC money means giving up some ownership and control in exchange for capital",
+            "Not every business should raise VC — it's built for high-growth, high-risk bets",
+        ],
+    },
+    {
+        "title": "What a 401(k) Match Actually Means (Free Money, Really)",
+        "category": "PERSONAL FINANCE",
+        "points": [
+            "A 401(k) match is your employer adding money when you contribute to retirement",
+            "Not contributing enough to get the full match is leaving guaranteed money on the table",
+            "It's typically the best first place to invest, before other accounts",
+            "Contributions often reduce your taxable income today, on top of the match",
+            "Vesting schedules can delay when employer-matched money is fully yours — check the terms",
+        ],
+    },
 ]
 
 
@@ -251,7 +306,7 @@ def write_draft(date_str, news_items, auto_educational=False, force=False):
         return None
 
     educational = existing.get("educational")
-    if not educational and auto_educational:
+    if auto_educational and (force or not educational):
         educational = pick_educational()
 
     data = {"news": news_items, "educational": educational}
