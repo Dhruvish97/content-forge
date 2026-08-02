@@ -38,6 +38,24 @@ USER_AGENT = "Mozilla/5.0 (compatible; ContentForgeBot/1.0; +https://github.com/
 # paraphrased between publishers than educational bullet points are.
 NEWS_SIMILARITY_THRESHOLD = 0.3
 
+# Matches dollar amounts with a scale (e.g. $33 billion, $380B, $1,200,000),
+# percentages (+14.2%, -9%), and large comma-grouped counts (8,000) — the
+# "hard number" signal used to prefer stories with a concrete, market-moving
+# figure over softer feature/opinion pieces within the same category. Bare
+# small dollar amounts ($9, $800) deliberately don't count — those are
+# product prices, not financial news, and are how gadget posts slipped in.
+_HARD_NUMBER_RE = re.compile(
+    r"\$\s?\d[\d,]*(?:\.\d+)?\s?(?:billion|million|trillion|bn|mn|tn|[bmt])\b"
+    r"|\$\s?\d{1,3}(?:,\d{3})+(?:\.\d+)?\b"
+    r"|[+\-−]?\d+(?:\.\d+)?\s?%"
+    r"|\b\d{1,3}(?:,\d{3})+\b",
+    re.IGNORECASE,
+)
+
+
+def _has_hard_numbers(text):
+    return bool(_HARD_NUMBER_RE.search(text or ""))
+
 # Direct publisher RSS feeds — their <link> is the real article URL (no Google
 # News redirect-decoding needed), and they include real editorial descriptions.
 # "source" is set explicitly rather than trusting each feed's raw <title> —
@@ -317,16 +335,23 @@ def fetch_candidate_news(n=2, hours=24):
             else:
                 clusters.append([r])
 
-        def _cluster_sort_key(cluster):
+        # Each cluster's rep (the fullest-text member) is what actually gets
+        # published, so rank clusters by that rep's own signal — a cluster
+        # with 3 corroborating outlets is worthless if the representative
+        # summary is thin.
+        reps = [max(cluster, key=lambda c: len(c["item"]["summary"])) for cluster in clusters]
+
+        def _cluster_sort_key(entry):
+            cluster, rep = entry
+            has_numbers = _has_hard_numbers(f'{rep["item"]["headline"]} {rep["item"]["summary"]}')
             source_count = len({c["item"]["source"] for c in cluster})
             timestamps = [c["published"] for c in cluster if c["published"]]
             newest = max(timestamps).timestamp() if timestamps else 0
-            return (-source_count, -newest)
+            # Concrete-number stories sort first; ties broken by corroboration, then recency.
+            return (not has_numbers, -source_count, -newest)
 
-        clusters.sort(key=_cluster_sort_key)
-        for cluster in clusters:
-            rep = max(cluster, key=lambda c: len(c["item"]["summary"]))
-            ranked_candidates.append(rep["item"])
+        ranked = sorted(zip(clusters, reps), key=_cluster_sort_key)
+        ranked_candidates.extend(rep["item"] for _, rep in ranked)
 
     dupes = {h.lower().strip() for h in check_duplicates(ranked_candidates, None)}
     candidates = [c for c in ranked_candidates if c["headline"].lower().strip() not in dupes]
@@ -366,31 +391,59 @@ def pick_educational():
     return EDUCATIONAL_BANK[0]
 
 
+# A stat line the model may append to its response, e.g. "STAT: Anthropic
+# valuation|$380B". Parsed out of the summary rather than requested as
+# separate structured output so the existing single Haiku call per item still
+# covers both jobs (cost stays the same).
+_STAT_LINE_RE = re.compile(r"^\s*STAT:\s*(.+?)\s*\|\s*(.+?)\s*$", re.IGNORECASE)
+
+
 def _polish_summary(headline, category, source, rss_description, api_key):
+    """Returns {"summary": str, "stat_label": str|None, "stat_value": str|None}, or
+    None on any failure — the caller falls back to the untouched RSS description."""
     try:
         client = anthropic.Anthropic(api_key=api_key)
         resp = client.messages.create(
-            model=ANTHROPIC_MODEL, max_tokens=180,
+            model=ANTHROPIC_MODEL, max_tokens=200,
             messages=[{"role": "user", "content": (
                 "Expand this brief news description into a 2-3 sentence Instagram caption "
                 "summary (under 320 characters total — this renders on a fixed-size image "
                 "with limited space), in a punchy, informative finance/tech newsletter voice. "
                 "Stay grounded in the facts given below — do not invent additional facts, "
                 "figures, or details not present in the description. No hashtags, no headline "
-                f"restatement, no preamble.\n\nHeadline: {headline}\nCategory: {category}\n"
-                f"Source: {source}\n\nDescription: {rss_description}"
+                "restatement, no preamble.\n\n"
+                "Then, ONLY if the description contains one standout dollar figure, percentage, "
+                "or large count that best captures the story (e.g. a deal size, valuation, "
+                "market move, or funding amount) — not a product price — add a final line in "
+                "exactly this format: STAT: <2-4 word label>|<the number formatted for display, "
+                "e.g. $380B or +14.2%>. If there's no such standout number, omit that line "
+                f"entirely.\n\nHeadline: {headline}\nCategory: {category}\nSource: {source}\n\n"
+                f"Description: {rss_description}"
             )}],
         )
         text = next((b.text for b in resp.content if b.type == "text"), "").strip()
-        return text or None
+        if not text:
+            return None
+
+        lines = text.splitlines()
+        stat_label = stat_value = None
+        if lines:
+            m = _STAT_LINE_RE.match(lines[-1])
+            if m:
+                stat_label, stat_value = m.group(1).strip(), m.group(2).strip()
+                lines = lines[:-1]
+        summary = "\n".join(lines).strip()
+        return {"summary": summary or None, "stat_label": stat_label, "stat_value": stat_value}
     except Exception:
         return None
 
 
 def enrich_news_items(items):
     """Best-effort: polish each item's real RSS description via Haiku into a fuller
-    summary. Never fails the caller — leaves the item untouched if anything goes wrong,
-    or if there's no real description to work from (just the thin fallback)."""
+    summary, and attach a stat_label/stat_value pulled from the same response when the
+    story has a standout figure worth calling out. Never fails the caller — leaves the
+    item untouched if anything goes wrong, or if there's no real description to work
+    from (just the thin fallback)."""
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
         return items
@@ -398,8 +451,13 @@ def enrich_news_items(items):
         if not item["summary"] or item["summary"].startswith("Reported by"):
             continue  # nothing real to polish — leave the thin fallback as-is
         polished = _polish_summary(item["headline"], item["category"], item["source"], item["summary"], api_key)
-        if polished:
-            item["summary"] = polished
+        if not polished:
+            continue
+        if polished["summary"]:
+            item["summary"] = polished["summary"]
+        if polished["stat_label"] and polished["stat_value"]:
+            item["stat_label"] = polished["stat_label"]
+            item["stat_value"] = polished["stat_value"]
     return items
 
 

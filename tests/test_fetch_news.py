@@ -22,6 +22,28 @@ def _entry(title, summary="", hours_ago=None):
     return e
 
 
+class TestHasHardNumbers(unittest.TestCase):
+    def test_dollar_amount_with_scale_word_counts(self):
+        self.assertTrue(fn._has_hard_numbers("Amazon commits $33 billion to Anthropic"))
+
+    def test_dollar_amount_with_letter_suffix_counts(self):
+        self.assertTrue(fn._has_hard_numbers("Anthropic now valued at $380B"))
+
+    def test_percentage_counts(self):
+        self.assertTrue(fn._has_hard_numbers("S&P 500 climbs +1.2% as Netflix drops 9%"))
+
+    def test_large_comma_grouped_count_counts(self):
+        self.assertTrue(fn._has_hard_numbers("Meta cuts 8,000 jobs in restructuring"))
+
+    def test_bare_product_price_does_not_count(self):
+        # Small dollar amounts with no scale word are product prices, not financial news —
+        # this is the exact pattern that let a gadget review slip into the feed before.
+        self.assertFalse(fn._has_hard_numbers("This $9 key physically locks your apps"))
+
+    def test_no_numbers_does_not_count(self):
+        self.assertFalse(fn._has_hard_numbers("Founders reflect on culture and burnout"))
+
+
 class ContentLogTestCase(unittest.TestCase):
     def setUp(self):
         self._tmpdir = tempfile.TemporaryDirectory()
@@ -181,6 +203,25 @@ class TestFetchCandidateNews(ContentLogTestCase):
             picked = fn.fetch_candidate_news(n=1)
         self.assertEqual(picked[0]["headline"], "Retailer Reports Record Holiday Sales Growth")
 
+    def test_story_with_concrete_number_beats_newer_soft_story(self):
+        # A story with a headline-worthy dollar figure should win even against
+        # a more recent, single-source story with no numbers — concrete
+        # numbers outrank both recency and corroboration count.
+        entries_by_url = {
+            "https://a.example/feed": [_entry(
+                "Startup Raises $50 Million In New Funding Round", summary="d", hours_ago=10,
+            )],
+            "https://b.example/feed": [_entry(
+                "Founders Reflect On Culture And Burnout In Tech", summary="d", hours_ago=1,
+            )],
+        }
+        with patch.object(fn, "FEED_SOURCES", [
+            {"url": "https://a.example/feed", "category": "TECH", "source": "SourceA"},
+            {"url": "https://b.example/feed", "category": "TECH", "source": "SourceB"},
+        ]), self._mock_fetch(entries_by_url):
+            picked = fn.fetch_candidate_news(n=1)
+        self.assertEqual(picked[0]["headline"], "Startup Raises $50 Million In New Funding Round")
+
     def test_stale_entries_older_than_24h_excluded(self):
         entries_by_url = {
             "https://tech.example/feed": [_entry("Fresh Tech Story", summary="d", hours_ago=2)],
@@ -290,12 +331,26 @@ class TestPolishSummary(unittest.TestCase):
     def test_happy_path_returns_polished_text(self):
         with patch.object(fn.anthropic, "Anthropic", return_value=_mock_anthropic_client("Polished, richer summary.")):
             result = fn._polish_summary("Headline", "TECH", "Src", "Thin real description.", "fake-key")
-        self.assertEqual(result, "Polished, richer summary.")
+        self.assertEqual(result, {"summary": "Polished, richer summary.", "stat_label": None, "stat_value": None})
 
     def test_exception_returns_none(self):
         with patch.object(fn.anthropic, "Anthropic", side_effect=RuntimeError("boom")):
             result = fn._polish_summary("Headline", "TECH", "Src", "Thin real description.", "fake-key")
         self.assertIsNone(result)
+
+    def test_stat_line_parsed_out_of_summary(self):
+        text = "Amazon commits $33B to Anthropic in one of the biggest AI bets yet.\nSTAT: Anthropic valuation|$380B"
+        with patch.object(fn.anthropic, "Anthropic", return_value=_mock_anthropic_client(text)):
+            result = fn._polish_summary("Headline", "AI", "Src", "Some description.", "fake-key")
+        self.assertEqual(result["summary"], "Amazon commits $33B to Anthropic in one of the biggest AI bets yet.")
+        self.assertEqual(result["stat_label"], "Anthropic valuation")
+        self.assertEqual(result["stat_value"], "$380B")
+
+    def test_no_stat_line_leaves_stat_fields_none(self):
+        with patch.object(fn.anthropic, "Anthropic", return_value=_mock_anthropic_client("Just a summary, no stat.")):
+            result = fn._polish_summary("Headline", "TECH", "Src", "Thin real description.", "fake-key")
+        self.assertIsNone(result["stat_label"])
+        self.assertIsNone(result["stat_value"])
 
 
 class TestEnrichNewsItems(unittest.TestCase):
@@ -311,11 +366,32 @@ class TestEnrichNewsItems(unittest.TestCase):
     def test_real_description_gets_polished(self):
         items = [self._item("A real description.")]
         with patch.dict("os.environ", {"ANTHROPIC_API_KEY": "fake-key"}), patch.object(
-            fn, "_polish_summary", return_value="Polished version."
+            fn, "_polish_summary",
+            return_value={"summary": "Polished version.", "stat_label": None, "stat_value": None},
         ) as mock_polish:
             result = fn.enrich_news_items(items)
         mock_polish.assert_called_once()
         self.assertEqual(result[0]["summary"], "Polished version.")
+
+    def test_stat_from_polish_is_attached_to_item(self):
+        items = [self._item("A real description.")]
+        with patch.dict("os.environ", {"ANTHROPIC_API_KEY": "fake-key"}), patch.object(
+            fn, "_polish_summary",
+            return_value={"summary": "Polished.", "stat_label": "Deal size", "stat_value": "$33B"},
+        ):
+            result = fn.enrich_news_items(items)
+        self.assertEqual(result[0]["stat_label"], "Deal size")
+        self.assertEqual(result[0]["stat_value"], "$33B")
+
+    def test_no_stat_from_polish_leaves_item_without_stat_fields(self):
+        items = [self._item("A real description.")]
+        with patch.dict("os.environ", {"ANTHROPIC_API_KEY": "fake-key"}), patch.object(
+            fn, "_polish_summary",
+            return_value={"summary": "Polished.", "stat_label": None, "stat_value": None},
+        ):
+            result = fn.enrich_news_items(items)
+        self.assertNotIn("stat_label", result[0])
+        self.assertNotIn("stat_value", result[0])
 
     def test_thin_fallback_summary_is_not_polished(self):
         items = [self._item("Reported by Src.")]

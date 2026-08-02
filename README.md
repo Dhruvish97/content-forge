@@ -30,12 +30,17 @@ tracking recent output so it won't repeat headlines or topics.
   each publisher's general "top stories" firehose — the latter mixes in
   reviews, buying guides, and first-person advice columns alongside real
   news. Within each sector, stories published in the last 24h are clustered
-  by headline overlap and the story corroborated by the most independent
-  outlets wins — a free proxy for "what's actually popular today" since RSS
-  itself has no engagement metrics. A sector with only one covering outlet
-  (or no cross-outlet overlap that day) falls back to picking the most
-  recent story, same as before. Optionally polishes the winning summary into
-  a fuller, multi-sentence caption via Claude Haiku (see
+  by headline overlap; a story with a concrete, headline-worthy number (a
+  deal size, valuation, market move, or funding amount — not a product
+  price) is always preferred over a softer feature/opinion piece, and ties
+  are then broken by cross-outlet corroboration, then recency — a free
+  proxy for "what's actually popular and substantive today" since RSS
+  carries no engagement metrics. A sector with nothing corroborated or
+  numeric that day falls back to picking the most recent story, so a run
+  never comes back empty. Optionally polishes the winning summary into
+  a fuller, multi-sentence caption via Claude Haiku, extracting a
+  stat_label/stat_value pair from the same call when the story has a
+  standout figure worth calling out on the image (see
   [News Summary Enrichment](#news-summary-enrichment)) — this is the one
   place an LLM is used in the pipeline; everything else is plain Python +
   Pillow.
@@ -144,10 +149,14 @@ manually anytime via the Actions tab → "Run workflow".
 from each publisher's RSS feed (a genuine step up from the placeholder text
 a search-aggregator like Google News gives you). Optionally, if
 `ANTHROPIC_API_KEY` is set, it sends that description to **Claude Haiku
-4.5** to expand it into a fuller 2-4 sentence caption — explicitly
+4.5** to expand it into a fuller 2-3 sentence caption — explicitly
 instructed to stay grounded in the given facts rather than inventing new
-ones. At the volume this runs (up to 2 calls/day), cost is roughly
-**$0.20–0.35/month**.
+ones, and to stay under 320 characters so it fits the fixed-size rendered
+image. The same call also pulls out a `stat_label`/`stat_value` pair (e.g.
+"Anthropic valuation" / "$380B") when the story has one standout number
+worth calling out as a big stat box on the image — this is what gives
+auto-fetched posts the same hero-number look as hand-written ones. At the
+volume this runs (up to 2 calls/day), cost is roughly **$0.20–0.35/month**.
 
 This step is entirely optional and fails safe: no key set (or the API call
 fails for any reason) → falls back to the real RSS description as-is, or
