@@ -6,5 +6,5 @@ __pycache__/
 posts/*.png
 posts/*.jpg
 posts/*_caption.txt
-posts/publish_log.json
 !posts/content_log.json
+!posts/publish_log.json

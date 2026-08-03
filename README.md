@@ -46,7 +46,13 @@ tracking recent output so it won't repeat headlines or topics.
   Pillow.
 - **Automated daily scheduling** — a GitHub Actions workflow
   (`.github/workflows/daily-posts.yml`) fetches, validates, and generates
-  posts daily, entirely in the cloud.
+  posts daily, entirely in the cloud. GitHub's `schedule` trigger is
+  explicitly best-effort (it can be delayed or dropped under platform
+  load), so the workflow runs on two schedules a few hours apart as a
+  same-day retry; `check_daily_status.py` checks committed state
+  (`content/{date}.json`, `posts/publish_log.json`) so the second run is a
+  safe no-op if the first already succeeded, or a publish-only retry if
+  content was generated but publishing didn't finish.
 - **Instagram auto-posting** — `post_to_instagram.py` publishes the day's
   posts live to your Instagram Business/Creator account via the Graph API,
   fully wired into the daily workflow (see [Instagram Auto-Posting
@@ -135,13 +141,31 @@ Actions workflow does).
 
 **Option C — fully automated:** the GitHub Actions workflow in
 `.github/workflows/daily-posts.yml` runs `fetch_news.py --force
---auto-educational` then `run_today.py` daily at 8:00 AM America/Chicago,
-commits the fetched `content/*.json` and updated `content_log.json` back to
-the repo, **publishes the 3 posts live to Instagram** (see [Instagram
-Auto-Posting Setup](#instagram-auto-posting-setup) — requires one-time
-manual setup first), and uploads the generated PNGs/captions/publish log as
-a downloadable Actions artifact regardless of publish outcome. Trigger it
+--auto-educational` then `run_today.py` daily at 8:13 AM America/Chicago
+(and again at 12:13 PM as a same-day retry — see below), commits the
+fetched `content/*.json` and updated `content_log.json` back to the repo,
+**publishes the 3 posts live to Instagram** (see [Instagram Auto-Posting
+Setup](#instagram-auto-posting-setup) — requires one-time manual setup
+first), and uploads the generated PNGs/captions/publish log as a
+downloadable Actions artifact regardless of publish outcome. Trigger it
 manually anytime via the Actions tab → "Run workflow".
+
+GitHub's `schedule` trigger is explicitly best-effort — [GitHub's own docs](
+https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflows-run/events-that-trigger-workflows#schedule)
+warn it "can be delayed during periods of high loads of GitHub Actions
+workflow runs," and in practice a scheduled run can be dropped entirely for
+a day, not just delayed. Rather than trust a single daily firing, the
+workflow schedules two runs a few hours apart (avoiding the top of the hour,
+which sees the most contention). `check_daily_status.py` inspects
+`content/{date}.json` and `posts/publish_log.json` (both committed to the
+repo) at the start of each run:
+
+- If today's posts are already fully published, the run exits immediately
+  after that check — a fast no-op, not a duplicate post.
+- If content was generated but publishing didn't complete, it skips
+  re-fetching (reusing the committed content) and retries just the publish
+  step.
+- Otherwise it runs the full pipeline as normal.
 
 ## News Summary Enrichment
 
@@ -212,7 +236,7 @@ doesn't require `IG_ACCESS_TOKEN`/`IG_USER_ID`.
 
 ## Layout
 
-- `generate_posts.py` — image rendering (4 interchangeable news layouts +
+- `generate_posts.py` — image rendering (8 interchangeable news layouts +
   educational layout) + dedup logic
 - `run_today.py` — validates and loads `content/{date}.json`, generates the
   day's posts
@@ -221,8 +245,11 @@ doesn't require `IG_ACCESS_TOKEN`/`IG_USER_ID`.
   Enrichment](#news-summary-enrichment))
 - `post_to_instagram.py` — publishes the day's posts to Instagram via the
   Graph API (see [Instagram Auto-Posting Setup](#instagram-auto-posting-setup))
+- `check_daily_status.py` — tells the daily workflow whether today's content/
+  publish already happened, so its same-day retry schedule doesn't duplicate work
 - `.github/workflows/daily-posts.yml` — scheduled automation (fetch →
-  validate → generate → commit → publish to Instagram → upload artifact)
+  validate → generate → commit → publish to Instagram → upload artifact),
+  on two same-day schedules as a retry against dropped/delayed runs
 - `content/` — one JSON file per day, the input to each run
 - `posts/` — generated PNGs + captions (gitignored), `publish_log.json`
   (gitignored — per-run Instagram publish results), and `content_log.json`

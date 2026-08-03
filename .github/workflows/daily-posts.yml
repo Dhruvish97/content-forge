@@ -1,8 +1,16 @@
 name: Daily Posts
 
+# GitHub Actions' `schedule` trigger is explicitly best-effort — it can be
+# delayed or silently dropped during periods of high platform load (GitHub's
+# own docs call this out, and it's worse for cron times on the hour). Two
+# schedules a few hours apart give a same-day retry if the first is dropped;
+# check_daily_status.py makes the second run a safe no-op (or a publish-only
+# retry) instead of a duplicate post when the first one did go through.
 on:
   schedule:
-    - cron: "0 8 * * *"
+    - cron: "13 8 * * *"
+      timezone: America/Chicago
+    - cron: "13 12 * * *"
       timezone: America/Chicago
   workflow_dispatch: {}
 
@@ -21,14 +29,22 @@ jobs:
 
       - run: pip install -r requirements.txt
 
+      - name: Check today's status
+        id: status
+        run: python3 check_daily_status.py >> "$GITHUB_OUTPUT"
+
       - name: Fetch news
+        if: steps.status.outputs.already_published != 'true' && steps.status.outputs.content_ready != 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python3 fetch_news.py --force --auto-educational
 
-      - run: python3 run_today.py
+      - name: Generate posts
+        if: steps.status.outputs.already_published != 'true'
+        run: python3 run_today.py
 
       - name: Commit content + dedup log
+        if: steps.status.outputs.already_published != 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -37,11 +53,22 @@ jobs:
           git push
 
       - name: Publish to Instagram
+        if: steps.status.outputs.already_published != 'true'
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 post_to_instagram.py
+
+      - name: Commit publish log
+        if: steps.status.outputs.already_published != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add posts/publish_log.json
+          git diff --cached --quiet || git commit -m "Record daily publish log ($(date +%Y-%m-%d))"
+          git pull --rebase
+          git push
 
       - uses: actions/upload-artifact@v4
         if: always()
