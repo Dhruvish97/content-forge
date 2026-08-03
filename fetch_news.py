@@ -26,6 +26,7 @@ from generate_posts import (
     _is_high_importance,
     _keywords,
     _jaccard,
+    _load_content_log,
 )
 
 CONTENT_DIR = Path(__file__).parent / "content"
@@ -381,14 +382,31 @@ def fetch_candidate_news(n=2, hours=24):
 
 
 def pick_educational():
-    """Return the first bank entry that clears the existing dedup checks."""
+    """Return the first bank entry that clears the existing dedup checks.
+
+    If every entry is currently excluded (the bank is exhausted within the
+    dedup window), fall back to whichever entry was used longest ago rather
+    than always defaulting to EDUCATIONAL_BANK[0] — that used to silently
+    force a same-day or next-day repeat of the very first bank entry
+    whenever the bank ran dry, defeating the dedup check it was supposed
+    to have already passed.
+    """
     for edu in EDUCATIONAL_BANK:
         if check_duplicates([], edu):
             continue
         if check_edu_content_similarity(edu):
             continue
         return edu
-    return EDUCATIONAL_BANK[0]
+
+    last_used = {}
+    for date_str, entries in _load_content_log().items():
+        for entry in entries:
+            title = entry.get("edu_title")
+            if title:
+                title = title.lower().strip()
+                if title not in last_used or date_str > last_used[title]:
+                    last_used[title] = date_str
+    return min(EDUCATIONAL_BANK, key=lambda edu: last_used.get(edu["title"].lower().strip(), ""))
 
 
 # A stat line the model may append to its response, e.g. "STAT: Anthropic

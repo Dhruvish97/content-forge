@@ -420,6 +420,25 @@ class TestPickEducational(ContentLogTestCase):
         picked = fn.pick_educational()
         self.assertNotEqual(picked["title"], first_title)
 
+    def test_falls_back_to_least_recently_used_when_bank_exhausted(self):
+        # Regression: when every bank entry is currently excluded, the old
+        # code silently returned EDUCATIONAL_BANK[0] regardless of its own
+        # dedup status — forcing a repeat of whichever topic happens to be
+        # first, ignoring the dedup check it was supposed to have passed.
+        fake_bank = [
+            {"title": "Topic A", "category": "LEARN", "points": ["unique point a"]},
+            {"title": "Topic B", "category": "LEARN", "points": ["unique point b"]},
+            {"title": "Topic C", "category": "LEARN", "points": ["unique point c"]},
+        ]
+        self._write_log({
+            self._date(1): {"headlines": [], "categories": [], "edu_title": "Topic A"},
+            self._date(10): {"headlines": [], "categories": [], "edu_title": "Topic B"},
+            self._date(5): {"headlines": [], "categories": [], "edu_title": "Topic C"},
+        })
+        with patch.object(fn, "EDUCATIONAL_BANK", fake_bank):
+            picked = fn.pick_educational()
+        self.assertEqual(picked["title"], "Topic B")
+
 
 if __name__ == "__main__":
     unittest.main()

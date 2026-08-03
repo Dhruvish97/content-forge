@@ -1057,13 +1057,26 @@ SAMPLE_EDUCATIONAL = {
 # === CONTENT DEDUPLICATION ===
 
 def _load_content_log():
-    """Load content log from disk, or return empty dict."""
-    if CONTENT_LOG.exists():
-        try:
-            return json.loads(CONTENT_LOG.read_text())
-        except (json.JSONDecodeError, OSError):
-            return {}
-    return {}
+    """Load content log from disk as {date: [entry, ...]}.
+
+    Each date maps to a *list* of run-entries, not a single dict — the
+    pipeline can run more than once in a day (manual dispatches, the
+    same-day retry schedule, re-runs while debugging), and if a later
+    run's entry overwrote an earlier one, that earlier run's headline/edu
+    title silently vanished from dedup history even though it was already
+    published. Old logs (single dict per date) are upgraded transparently
+    on read so existing history isn't lost.
+    """
+    if not CONTENT_LOG.exists():
+        return {}
+    try:
+        raw = json.loads(CONTENT_LOG.read_text())
+    except (json.JSONDecodeError, OSError):
+        return {}
+    return {
+        date_str: (entries if isinstance(entries, list) else [entries])
+        for date_str, entries in raw.items()
+    }
 
 
 def _save_content_log(log):
@@ -1076,15 +1089,16 @@ def _recent_used_content(log):
     news_cutoff = datetime.now() - timedelta(days=DEDUP_DAYS)
     edu_cutoff = datetime.now() - timedelta(days=EDU_DEDUP_DAYS)
     used = set()
-    for date_str, entry in log.items():
+    for date_str, entries in log.items():
         try:
             entry_date = datetime.strptime(date_str, "%Y-%m-%d")
         except ValueError:
             continue
-        if entry_date >= news_cutoff:
-            used.update(h.lower().strip() for h in entry.get("headlines", []))
-        if entry_date >= edu_cutoff and entry.get("edu_title"):
-            used.add(entry["edu_title"].lower().strip())
+        for entry in entries:
+            if entry_date >= news_cutoff:
+                used.update(h.lower().strip() for h in entry.get("headlines", []))
+            if entry_date >= edu_cutoff and entry.get("edu_title"):
+                used.add(entry["edu_title"].lower().strip())
     return used
 
 
@@ -1105,18 +1119,19 @@ def _topic_day_counts(log):
     """
     cutoff = datetime.now() - timedelta(days=DEDUP_DAYS)
     counts: dict[str, int] = {}
-    for date_str, entry in log.items():
+    for date_str, entries in log.items():
         try:
             entry_date = datetime.strptime(date_str, "%Y-%m-%d")
         except ValueError:
             continue
         if entry_date >= cutoff:
             seen_today = set()
-            for cat in entry.get("categories", []):
-                key = _normalise(cat)
-                if key not in seen_today:
-                    counts[key] = counts.get(key, 0) + 1
-                    seen_today.add(key)
+            for entry in entries:
+                for cat in entry.get("categories", []):
+                    key = _normalise(cat)
+                    if key not in seen_today:
+                        counts[key] = counts.get(key, 0) + 1
+                        seen_today.add(key)
     return counts
 
 
@@ -1179,13 +1194,14 @@ def check_edu_content_similarity(edu_item):
     log: dict = _load_content_log()
     cutoff = datetime.now() - timedelta(days=DEDUP_DAYS)
     past_points = []
-    for date_str, entry in log.items():
+    for date_str, entries in log.items():
         try:
             entry_date = datetime.strptime(date_str, "%Y-%m-%d")
         except ValueError:
             continue
         if entry_date >= cutoff:
-            past_points.extend(entry.get("edu_points", []))
+            for entry in entries:
+                past_points.extend(entry.get("edu_points", []))
 
     conflicts = []
     for new_point in edu_item.get("points", []):
@@ -1198,7 +1214,13 @@ def check_edu_content_similarity(edu_item):
 
 
 def log_generated_content(news_items, edu_item):
-    """Record today's content so future runs can detect repeats."""
+    """Record today's content so future runs can detect repeats.
+
+    Appends to today's list of entries rather than replacing it — the
+    pipeline can run more than once in a day, and overwriting used to
+    erase any earlier run's headline/edu title from dedup history even
+    though it had already been published (see _load_content_log).
+    """
     existing = _load_content_log()
     date_str = datetime.now().strftime("%Y-%m-%d")
     today_entry = {
@@ -1210,11 +1232,11 @@ def log_generated_content(news_items, edu_item):
     }
     # Prune using the longest window so edu title dedup (14 days) still works
     cutoff = datetime.now() - timedelta(days=max(DEDUP_DAYS, EDU_DEDUP_DAYS))
-    pruned: dict[str, object] = {
+    pruned: dict[str, list] = {
         k: v for k, v in existing.items()
         if datetime.strptime(k, "%Y-%m-%d") >= cutoff
     }
-    pruned[date_str] = today_entry
+    pruned.setdefault(date_str, []).append(today_entry)
     _save_content_log(pruned)
 
 

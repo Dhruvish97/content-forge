@@ -153,6 +153,49 @@ class TestLogPruning(ContentLogTestCase):
         self.assertIn(datetime.now().strftime("%Y-%m-%d"), log)
 
 
+class TestLogAccumulatesWithinADay(ContentLogTestCase):
+    """Regression test: a real duplicate slipped past dedup because a second
+    run on the same day overwrote the first run's log entry, erasing its
+    headline/edu title from history even though it had already been
+    published. log_generated_content() must append, not replace."""
+
+    def test_second_run_same_day_does_not_erase_first(self):
+        gp.log_generated_content(
+            [{"headline": "Morning Story", "category": "TECH"}],
+            {"title": "Morning Edu", "category": "LEARN", "points": ["morning point"]},
+        )
+        gp.log_generated_content(
+            [{"headline": "Afternoon Story", "category": "MARKETS"}],
+            {"title": "Afternoon Edu", "category": "LEARN", "points": ["afternoon point"]},
+        )
+        used = gp._recent_used_content(gp._load_content_log())
+        self.assertIn("morning story", used)
+        self.assertIn("afternoon story", used)
+        self.assertIn("morning edu", used)
+        self.assertIn("afternoon edu", used)
+
+    def test_first_run_title_still_flagged_as_duplicate_after_second_run(self):
+        gp.log_generated_content(
+            [{"headline": "Morning Story", "category": "TECH"}],
+            {"title": "Morning Edu", "category": "LEARN", "points": []},
+        )
+        gp.log_generated_content(
+            [{"headline": "Afternoon Story", "category": "MARKETS"}],
+            {"title": "Afternoon Edu", "category": "LEARN", "points": []},
+        )
+        dupes = gp.check_duplicates([], {"title": "Morning Edu"})
+        self.assertEqual(dupes, ["Morning Edu"])
+
+    def test_old_dict_per_date_log_upgraded_to_list_on_load(self):
+        # Logs written before this fix stored a single dict per date — must
+        # still be readable, not silently dropped or misread.
+        self._write_log({
+            self._date(1): {"headlines": ["Old Format Story"], "categories": ["TECH"]}
+        })
+        used = gp._recent_used_content(gp._load_content_log())
+        self.assertIn("old format story", used)
+
+
 class TestFontLoadingSmoke(unittest.TestCase):
     """Proves the bundled fonts actually resolve and render, not just in theory."""
 

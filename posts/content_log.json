@@ -1,40 +1,44 @@
 {
-  "2026-08-02": {
-    "headlines": [
-      "Inside the London hacker house taking a stand against founder burnout",
-      "Judge denies xAI\u2019s request to block Minnesota ban on \u2018nudify\u2019 apps"
-    ],
-    "categories": [
-      "TECH",
-      "AI"
-    ],
-    "edu_title": "What Is Diversification, Really?",
-    "edu_category": "INVESTING 101",
-    "edu_points": [
-      "Diversification means spreading money across many assets, not just many stocks",
-      "It won't stop losses, but it stops one bad bet from wiping you out",
-      "Owning 10 tech stocks isn't diversified \u2014 that's still one sector's risk",
-      "True diversification spans asset classes: stocks, bonds, cash, real estate",
-      "The goal isn't more returns \u2014 it's smoother, more survivable ones"
-    ]
-  },
-  "2026-08-03": {
-    "headlines": [
-      "A Marc Benioff-backed startup thinks AI can solve the AI deployment problem",
-      "Sam Altman and AI\u2019s decel debate"
-    ],
-    "categories": [
-      "TECH",
-      "AI"
-    ],
-    "edu_title": "How Interest Rates Actually Move Your Money",
-    "edu_category": "FINANCIAL LITERACY",
-    "edu_points": [
-      "The Fed sets a target rate that ripples into loans, mortgages, and savings",
-      "Higher rates make borrowing pricier \u2014 car loans and mortgages cost more",
-      "Higher rates also make saving pay better \u2014 bank yields tend to rise too",
-      "Stocks often wobble on rate news because future profits get discounted more",
-      "You don't need to predict rates \u2014 just understand why headlines move markets"
-    ]
-  }
+  "2026-08-02": [
+    {
+      "headlines": [
+        "Inside the London hacker house taking a stand against founder burnout",
+        "Judge denies xAI\u2019s request to block Minnesota ban on \u2018nudify\u2019 apps"
+      ],
+      "categories": [
+        "TECH",
+        "AI"
+      ],
+      "edu_title": "What Is Diversification, Really?",
+      "edu_category": "INVESTING 101",
+      "edu_points": [
+        "Diversification means spreading money across many assets, not just many stocks",
+        "It won't stop losses, but it stops one bad bet from wiping you out",
+        "Owning 10 tech stocks isn't diversified \u2014 that's still one sector's risk",
+        "True diversification spans asset classes: stocks, bonds, cash, real estate",
+        "The goal isn't more returns \u2014 it's smoother, more survivable ones"
+      ]
+    }
+  ],
+  "2026-08-03": [
+    {
+      "headlines": [
+        "A Marc Benioff-backed startup thinks AI can solve the AI deployment problem",
+        "Sam Altman and AI\u2019s decel debate"
+      ],
+      "categories": [
+        "TECH",
+        "AI"
+      ],
+      "edu_title": "How Interest Rates Actually Move Your Money",
+      "edu_category": "FINANCIAL LITERACY",
+      "edu_points": [
+        "The Fed sets a target rate that ripples into loans, mortgages, and savings",
+        "Higher rates make borrowing pricier \u2014 car loans and mortgages cost more",
+        "Higher rates also make saving pay better \u2014 bank yields tend to rise too",
+        "Stocks often wobble on rate news because future profits get discounted more",
+        "You don't need to predict rates \u2014 just understand why headlines move markets"
+      ]
+    }
+  ]
 }
