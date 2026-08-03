@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "A Marc Benioff-backed startup thinks AI can solve the AI deployment problem",
+      "summary": "June is tackling deployment friction in enterprise AI with $20M in pre-seed backing from Marc Benioff and others. The stealth-exit startup aims to simplify how companies actually implement AI systems into their workflows.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Pre-seed funding",
+      "stat_value": "$20M"
+    },
+    {
+      "headline": "Sam Altman and AI\u2019s decel debate",
+      "summary": "Sam Altman is pushing the AI industry to pump the brakes on development speed. On the latest Equity podcast, the conversation centers on his call for a measured approach to advancing artificial intelligence. The debate highlights growing tensions between innovation velocity and responsible deployment in tech's hottest sector.",
+      "category": "AI",
+      "source": "TechCrunch"
+    }
+  ],
+  "educational": {
+    "title": "How Interest Rates Actually Move Your Money",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "The Fed sets a target rate that ripples into loans, mortgages, and savings",
+      "Higher rates make borrowing pricier \u2014 car loans and mortgages cost more",
+      "Higher rates also make saving pay better \u2014 bank yields tend to rise too",
+      "Stocks often wobble on rate news because future profits get discounted more",
+      "You don't need to predict rates \u2014 just understand why headlines move markets"
+    ]
+  }
+}
