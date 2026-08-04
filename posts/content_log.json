@@ -40,5 +40,26 @@
         "You don't need to predict rates \u2014 just understand why headlines move markets"
       ]
     }
+  ],
+  "2026-08-04": [
+    {
+      "headlines": [
+        "Host a Side Event during TechCrunch Founder Summit Week in Boston",
+        "After killer quarter, Palantir CEO Alex Karp calls AI industry \u2018Marxist\u2019"
+      ],
+      "categories": [
+        "TECH",
+        "AI"
+      ],
+      "edu_title": "What Actually Happens When You Buy a Stock",
+      "edu_category": "INVESTING 101",
+      "edu_points": [
+        "You're buying a tiny slice of real ownership in a company, not a lottery ticket",
+        "Your broker matches your order with a seller through an exchange in milliseconds",
+        "Stock price moves on collective belief about future profits, not just today's news",
+        "You make money two ways: the price rising, or dividends paid out over time",
+        "Owning one share still makes you a part-owner, with voting rights and all"
+      ]
+    }
   ]
 }

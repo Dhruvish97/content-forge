@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "Host a Side Event during TechCrunch Founder Summit Week in Boston",
+      "summary": "Tap into 1,100+ founders, investors, and tech leaders converging on Boston for TechCrunch Founder Summit 2026 (June 9) by hosting your own Side Event during Founder Summit Week (June 4-10). Perfect timing to amplify your brand, forge partnerships, or scout talent in one of tech's biggest gatherings.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Attendees",
+      "stat_value": "1,100+"
+    },
+    {
+      "headline": "After killer quarter, Palantir CEO Alex Karp calls AI industry \u2018Marxist\u2019",
+      "summary": "Palantir just posted $1B in quarterly profit, and CEO Alex Karp is doubling down on a bold claim: frontier AI labs can't be trusted with enterprise data. His message to companies considering these tools\u2014proceed with extreme caution.",
+      "category": "AI",
+      "source": "TechCrunch",
+      "stat_label": "Quarterly profit",
+      "stat_value": "$1B"
+    }
+  ],
+  "educational": {
+    "title": "What Actually Happens When You Buy a Stock",
+    "category": "INVESTING 101",
+    "points": [
+      "You're buying a tiny slice of real ownership in a company, not a lottery ticket",
+      "Your broker matches your order with a seller through an exchange in milliseconds",
+      "Stock price moves on collective belief about future profits, not just today's news",
+      "You make money two ways: the price rising, or dividends paid out over time",
+      "Owning one share still makes you a part-owner, with voting rights and all"
+    ]
+  }
+}
