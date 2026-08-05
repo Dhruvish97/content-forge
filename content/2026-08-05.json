@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "Bank of America spends $250 million a year on GLP-1 drugs for its employees, CEO says",
+      "summary": "Bank of America's healthcare bill is swelling: the bank spends $250M annually on GLP-1 drugs like Ozempic and Wegovy for its workforce, reflecting broader employer struggles with skyrocketing demand for the costly obesity and diabetes treatments.",
+      "category": "MARKETS",
+      "source": "CNBC",
+      "stat_label": "BofA's annual GLP-1 spend",
+      "stat_value": "$250M"
+    },
+    {
+      "headline": "SpaceX dives 9% after AI spending surge rattles investors",
+      "summary": "SpaceX stock tumbled 9% as investors weighed Elon Musk's aggressive AI spending plans against his accelerated revenue targets. Musk moved up the company's $1 trillion annual revenue goal to 2030, a year earlier than previously projected, signaling confidence in growth but raising questions about near-term profitability.",
+      "category": "EARNINGS",
+      "source": "CNBC",
+      "stat_label": "Revenue target",
+      "stat_value": "$1 trillion by 2030"
+    }
+  ],
+  "educational": {
+    "title": "Machine Learning vs. AI vs. LLMs \u2014 What's the Difference?",
+    "category": "TECH 101",
+    "points": [
+      "AI is the broad goal: machines performing tasks that normally need human intelligence",
+      "Machine learning is one method \u2014 systems that improve from data instead of fixed rules",
+      "Deep learning is a subset of ML using layered neural networks",
+      "LLMs (like the ones powering chatbots) are deep learning models trained on huge text data",
+      "Not all AI is an LLM, and not all machine learning involves neural networks"
+    ]
+  }
+}

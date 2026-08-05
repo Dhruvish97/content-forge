@@ -61,5 +61,26 @@
         "Owning one share still makes you a part-owner, with voting rights and all"
       ]
     }
+  ],
+  "2026-08-05": [
+    {
+      "headlines": [
+        "Bank of America spends $250 million a year on GLP-1 drugs for its employees, CEO says",
+        "SpaceX dives 9% after AI spending surge rattles investors"
+      ],
+      "categories": [
+        "MARKETS",
+        "EARNINGS"
+      ],
+      "edu_title": "Machine Learning vs. AI vs. LLMs \u2014 What's the Difference?",
+      "edu_category": "TECH 101",
+      "edu_points": [
+        "AI is the broad goal: machines performing tasks that normally need human intelligence",
+        "Machine learning is one method \u2014 systems that improve from data instead of fixed rules",
+        "Deep learning is a subset of ML using layered neural networks",
+        "LLMs (like the ones powering chatbots) are deep learning models trained on huge text data",
+        "Not all AI is an LLM, and not all machine learning involves neural networks"
+      ]
+    }
   ]
 }
