@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "Traders on Kalshi now think it's likely that the S&P 500 will hit 8,000 in 2026",
+      "summary": "Kalshi traders are pricing in a solid chance the S&P 500 reaches 8,000 next year, buoyed by this week's 5%+ rally that pushed the index to fresh records. The prediction market signal reflects growing confidence in continued upside momentum.",
+      "category": "MARKETS",
+      "source": "CNBC"
+    },
+    {
+      "headline": "Warner Bros. Discovery reports 10% jump in streaming revenue ahead of proposed Paramount combination",
+      "summary": "Warner Bros. Discovery's streaming business hit $3B in Q2 revenue, up 10% year-over-year\u2014a key metric as the company pursues its proposed combination with Paramount. The growth underscores the competitive streaming landscape and WBD's push to scale its direct-to-consumer offerings.",
+      "category": "EARNINGS",
+      "source": "CNBC",
+      "stat_label": "Q2 Streaming Revenue",
+      "stat_value": "$3B"
+    }
+  ],
+  "educational": {
+    "title": "What Is Bitcoin's 'Halving' and Why Does It Matter?",
+    "category": "CRYPTO 101",
+    "points": [
+      "Roughly every 4 years, Bitcoin's mining reward is cut in half by design",
+      "This slows how fast new bitcoin enters circulation, capping supply growth",
+      "It's baked into the code \u2014 no company or person decides when it happens",
+      "Historically, halvings have preceded major price cycles, though it's not guaranteed",
+      "The last coin will ever be mined around the year 2140 due to this schedule"
+    ]
+  }
+}
