@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "United Wholesale Mortgage plunges 35% after suspending dividend and raising capital",
+      "summary": "United Wholesale Mortgage is suspending its dividend and raising capital to bolster liquidity and strengthen its competitive position, according to CEO Mat Ishbia. The move sparked a sharp market reaction as investors reassess the company's financial strategy.",
+      "category": "MARKETS",
+      "source": "CNBC",
+      "stat_label": "Stock decline",
+      "stat_value": "-35%"
+    },
+    {
+      "headline": "Airbnb stock soars 9% on earnings and revenue beat, strong guidance for third quarter",
+      "summary": "Airbnb delivered a blowout quarter with revenue and earnings topping expectations, fueled by robust demand across all regions. The beat powered strong forward guidance for Q3, sending shares up 9% and signaling the travel-booking giant's momentum remains intact.",
+      "category": "EARNINGS",
+      "source": "CNBC",
+      "stat_label": "Stock gain",
+      "stat_value": "+9%"
+    }
+  ],
+  "educational": {
+    "title": "The Emergency Fund Rule Nobody Follows (But Should)",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "An emergency fund is 3-6 months of essential expenses, kept in cash, not invested",
+      "It's not for vacations \u2014 it's for job loss, medical bills, or a broken car",
+      "Without one, a single bad month can force you into high-interest debt",
+      "Keep it boring: a high-yield savings account, not the stock market",
+      "Build it before investing aggressively \u2014 it's the foundation everything else sits on"
+    ]
+  }
+}

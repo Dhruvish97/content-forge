@@ -103,5 +103,26 @@
         "The last coin will ever be mined around the year 2140 due to this schedule"
       ]
     }
+  ],
+  "2026-08-07": [
+    {
+      "headlines": [
+        "United Wholesale Mortgage plunges 35% after suspending dividend and raising capital",
+        "Airbnb stock soars 9% on earnings and revenue beat, strong guidance for third quarter"
+      ],
+      "categories": [
+        "MARKETS",
+        "EARNINGS"
+      ],
+      "edu_title": "The Emergency Fund Rule Nobody Follows (But Should)",
+      "edu_category": "FINANCIAL LITERACY",
+      "edu_points": [
+        "An emergency fund is 3-6 months of essential expenses, kept in cash, not invested",
+        "It's not for vacations \u2014 it's for job loss, medical bills, or a broken car",
+        "Without one, a single bad month can force you into high-interest debt",
+        "Keep it boring: a high-yield savings account, not the stock market",
+        "Build it before investing aggressively \u2014 it's the foundation everything else sits on"
+      ]
+    }
   ]
 }
