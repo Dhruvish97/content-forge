@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "US court backs Bybit\u2019s bid to trace funds from $1.5B North Korea hack",
+      "summary": "A US court has greenlit expedited discovery in Bybit's case to trace funds from a $1.5B North Korean hack, letting the exchange identify account holders and track balances across platforms with US operations. This accelerated legal route could help recover stolen crypto and set precedent for exchange asset recovery in cross-border theft cases.",
+      "category": "CRYPTO",
+      "source": "Cointelegraph",
+      "stat_label": "North Korea hack",
+      "stat_value": "$1.5B"
+    },
+    {
+      "headline": "New XRP Ledger amendments target $530 million in tokenized Wall Street assets",
+      "summary": "Reported by CoinDesk.",
+      "category": "CRYPTO",
+      "source": "CoinDesk"
+    }
+  ],
+  "educational": {
+    "title": "Why Company Earnings Move Stock Prices So Much",
+    "category": "MARKETS 101",
+    "points": [
+      "Stock prices reflect expectations \u2014 earnings reports test if those expectations were right",
+      "Beating profit estimates doesn't guarantee a stock rises if guidance disappoints",
+      "'Guidance' \u2014 a company's own forecast \u2014 often matters more than the past quarter",
+      "Markets move on the surprise, not the number itself",
+      "This is why a profitable company's stock can still crash on earnings day"
+    ]
+  }
+}
