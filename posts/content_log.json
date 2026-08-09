@@ -145,5 +145,26 @@
         "This is why a profitable company's stock can still crash on earnings day"
       ]
     }
+  ],
+  "2026-08-09": [
+    {
+      "headlines": [
+        "This\u00a0former\u00a0notorious red-light district\u00a0is now\u00a0one of the world\u2019s top AI hubs",
+        "Planned Amazon data center could become the biggest climate polluter in the U.S."
+      ],
+      "categories": [
+        "TECH",
+        "AI"
+      ],
+      "edu_title": "What a Recession Actually Means (And What It Doesn't)",
+      "edu_category": "FINANCIAL LITERACY",
+      "edu_points": [
+        "A recession is broadly defined as a significant decline in economic activity",
+        "It's not the same as a stock market crash \u2014 they can happen independently",
+        "Recessions typically bring rising unemployment and falling consumer spending",
+        "They're a normal part of economic cycles, not a rare catastrophe",
+        "Historically, markets have recovered from every recession, though timing varies"
+      ]
+    }
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "news": [
+    {
+      "headline": "This\u00a0former\u00a0notorious red-light district\u00a0is now\u00a0one of the world\u2019s top AI hubs",
+      "summary": "King's Cross has undergone a dramatic transformation from London's notorious red-light district into a thriving AI and tech innovation hub. The neighborhood's reinvention reflects broader shifts in urban development and the growing concentration of artificial intelligence talent in global cities.",
+      "category": "TECH",
+      "source": "TechCrunch"
+    },
+    {
+      "headline": "Planned Amazon data center could become the biggest climate polluter in the U.S.",
+      "summary": "Amazon's planned Texas data center includes an on-site power plant that could become the largest climate polluter in the U.S.\u2014a stark reminder of AI infrastructure's environmental footprint as big tech scales compute capacity to fuel generative AI demand.",
+      "category": "AI",
+      "source": "TechCrunch"
+    }
+  ],
+  "educational": {
+    "title": "What a Recession Actually Means (And What It Doesn't)",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "A recession is broadly defined as a significant decline in economic activity",
+      "It's not the same as a stock market crash \u2014 they can happen independently",
+      "Recessions typically bring rising unemployment and falling consumer spending",
+      "They're a normal part of economic cycles, not a rare catastrophe",
+      "Historically, markets have recovered from every recession, though timing varies"
+    ]
+  }
+}
