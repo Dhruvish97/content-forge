@@ -166,5 +166,26 @@
         "Historically, markets have recovered from every recession, though timing varies"
       ]
     }
+  ],
+  "2026-08-10": [
+    {
+      "headlines": [
+        "Discovered Materials is playing AI whack-a-mole to hunt cooler chips",
+        "Strategy Sells $109M in Bitcoin as Dollar Reserve Tops $4.6B"
+      ],
+      "categories": [
+        "AI",
+        "CRYPTO"
+      ],
+      "edu_title": "Index Funds vs. Picking Individual Stocks",
+      "edu_category": "INVESTING 101",
+      "edu_points": [
+        "An index fund buys a whole market segment at once \u2014 instant diversification",
+        "Most professional stock-pickers underperform simple index funds over time",
+        "Individual stocks can outperform, but concentrate your risk in one company",
+        "Index investing trades excitement for consistency and much lower fees",
+        "A common approach: index funds as the base, individual picks as a smaller side bet"
+      ]
+    }
   ]
 }

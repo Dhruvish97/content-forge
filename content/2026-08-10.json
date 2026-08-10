@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "Discovered Materials is playing AI whack-a-mole to hunt cooler chips",
+      "summary": "Discovered Materials just closed a $9M round to hunt for novel materials that could make chips more efficient\u2014leaning on AI to speed up the material discovery process and stay ahead of the semiconductor curve.",
+      "category": "AI",
+      "source": "TechCrunch",
+      "stat_label": "Funding raised",
+      "stat_value": "$9M"
+    },
+    {
+      "headline": "Strategy Sells $109M in Bitcoin as Dollar Reserve Tops $4.6B",
+      "summary": "Strategy offloaded $109M in Bitcoin to fund a massive buyback of its own shares\u2014part of a broader $654M capital return to shareholders. The move underscores how some companies are deploying crypto holdings as liquid assets for corporate finance.",
+      "category": "CRYPTO",
+      "source": "Decrypt",
+      "stat_label": "Bitcoin sale proceeds",
+      "stat_value": "$109M"
+    }
+  ],
+  "educational": {
+    "title": "Index Funds vs. Picking Individual Stocks",
+    "category": "INVESTING 101",
+    "points": [
+      "An index fund buys a whole market segment at once \u2014 instant diversification",
+      "Most professional stock-pickers underperform simple index funds over time",
+      "Individual stocks can outperform, but concentrate your risk in one company",
+      "Index investing trades excitement for consistency and much lower fees",
+      "A common approach: index funds as the base, individual picks as a smaller side bet"
+    ]
+  }
+}
