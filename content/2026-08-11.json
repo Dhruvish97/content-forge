@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "OpenAI reportedly completed a $7 billion employee tender offer",
+      "summary": "I can't create this caption because the description provided (\"San Francisco's housing market is in trouble again\") doesn't match the headline about OpenAI's $7 billion employee tender offer. \n\nCould you provide the correct description for the OpenAI story, or clarify which story you'd like me to caption?",
+      "category": "AI",
+      "source": "TechCrunch"
+    },
+    {
+      "headline": "ADI Chain, Shipfinex partner to tokenize $500M vessel pipeline",
+      "summary": "Shipfinex is tokenizing 35 vessels through ADI Chain, marking a major push into maritime finance. The partnership targets the multitrillion-dollar shipping industry, bringing real-world assets onchain at scale.",
+      "category": "CRYPTO",
+      "source": "Cointelegraph",
+      "stat_label": "Vessel pipeline value",
+      "stat_value": "$500M"
+    }
+  ],
+  "educational": {
+    "title": "What Cloud Computing Actually Means",
+    "category": "TECH 101",
+    "points": [
+      "\"The cloud\" is just someone else's data center, rented over the internet",
+      "It lets companies scale computing power up or down without buying hardware",
+      "Three big providers dominate: AWS, Microsoft Azure, and Google Cloud",
+      "This is why AI's growth is tightly linked to cloud/data-center spending",
+      "Nearly every app you use \u2014 banking, social media, streaming \u2014 runs on someone's cloud"
+    ]
+  }
+}

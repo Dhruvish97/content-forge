@@ -187,5 +187,26 @@
         "A common approach: index funds as the base, individual picks as a smaller side bet"
       ]
     }
+  ],
+  "2026-08-11": [
+    {
+      "headlines": [
+        "OpenAI reportedly completed a $7 billion employee tender offer",
+        "ADI Chain, Shipfinex partner to tokenize $500M vessel pipeline"
+      ],
+      "categories": [
+        "AI",
+        "CRYPTO"
+      ],
+      "edu_title": "What Cloud Computing Actually Means",
+      "edu_category": "TECH 101",
+      "edu_points": [
+        "\"The cloud\" is just someone else's data center, rented over the internet",
+        "It lets companies scale computing power up or down without buying hardware",
+        "Three big providers dominate: AWS, Microsoft Azure, and Google Cloud",
+        "This is why AI's growth is tightly linked to cloud/data-center spending",
+        "Nearly every app you use \u2014 banking, social media, streaming \u2014 runs on someone's cloud"
+      ]
+    }
   ]
 }
