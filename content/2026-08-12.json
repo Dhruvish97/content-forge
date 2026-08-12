@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "Accel closes oversubscribed $550M India fund within weeks, 19 months after its last",
+      "summary": "Accel snapped up $550M for its new India fund in record time, despite still deploying capital from a prior $650M vehicle. The oversubscribed close signals sustained investor appetite for India-focused tech bets, even as the firm manages a substantial dry powder position from its previous fund.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "New fund size",
+      "stat_value": "$550M"
+    },
+    {
+      "headline": "Why Jensen Huang\u2019s $500 billion AI financing plan faces a big risk from China",
+      "summary": "Nvidia's Jensen Huang is proposing GPUs as collateral to unlock $500B in funding\u2014but the strategy hinges on a critical unknown: how quickly will the chips lose value as technology advances? The depreciation risk could make lenders wary of backing the ambitious plan.",
+      "category": "MARKETS",
+      "source": "CNBC",
+      "stat_label": "Proposed financing",
+      "stat_value": "$500B"
+    }
+  ],
+  "educational": {
+    "title": "Bull Market vs. Bear Market \u2014 What the Terms Actually Mean",
+    "category": "MARKETS 101",
+    "points": [
+      "A bull market is a sustained rise in prices; a bear market is a sustained fall",
+      "The common threshold: a 20%+ drop from a recent high defines a bear market",
+      "Bull markets historically last far longer than bear markets on average",
+      "Investor psychology often overshoots in both directions \u2014 greed, then fear",
+      "Long-term investors are taught to expect both phases, not just the good one"
+    ]
+  }
+}
