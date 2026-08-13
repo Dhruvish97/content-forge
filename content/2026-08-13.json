@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "OpenAI-backed Thrive Holdings raises $2B to bring AI to the enterprise",
+      "summary": "Thrive Holdings, backed by OpenAI, just closed a $2 billion funding round to scale AI tools for enterprises. The funding values the company at $12 billion and includes major checks from SoftBank, D1 Capital Partners, and Altimeter Capital.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Series funding round",
+      "stat_value": "$2B"
+    },
+    {
+      "headline": "How a $250 million acquisition collapsed into allegations of fraud and forged signatures",
+      "summary": "An acquisition worth $250M imploded after fraud allegations and forged signatures emerged, leaving investors still waiting for their payouts. VideoVerse co-founder Vinayak Shrivastav now faces multiple legal cases tied to the collapsed deal\u2014a cautionary tale about due diligence in high-stakes tech M&A.",
+      "category": "AI",
+      "source": "TechCrunch",
+      "stat_label": "Collapsed acquisition",
+      "stat_value": "$250M"
+    }
+  ],
+  "educational": {
+    "title": "How a Stock Split Actually Works",
+    "category": "INVESTING 101",
+    "points": [
+      "A stock split divides each share into multiple shares \u2014 e.g. 1 becomes 4",
+      "Your total investment value doesn't change, just the share count and price",
+      "Companies split shares to make each one look more affordable to new buyers",
+      "It's a cosmetic change, not a sign the company suddenly became more valuable",
+      "Reverse splits do the opposite \u2014 often a red flag, not a good one"
+    ]
+  }
+}
