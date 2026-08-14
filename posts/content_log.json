@@ -250,5 +250,26 @@
         "Reverse splits do the opposite \u2014 often a red flag, not a good one"
       ]
     }
+  ],
+  "2026-08-14": [
+    {
+      "headlines": [
+        "Anthropic set AI agents loose on the same task. They started a turf war.",
+        "Uber partners with China's Pony.ai for 2,000 robotaxis in Europe"
+      ],
+      "categories": [
+        "AI",
+        "MARKETS"
+      ],
+      "edu_title": "What Inflation Actually Does to Your Money",
+      "edu_category": "FINANCIAL LITERACY",
+      "edu_points": [
+        "Inflation means the same dollar buys less over time as prices rise",
+        "Cash sitting idle quietly loses purchasing power every year to inflation",
+        "This is a core reason people invest rather than just save in cash",
+        "Central banks target a small amount of inflation (often ~2%) as \"healthy\"",
+        "Wages that don't keep pace with inflation mean a real pay cut, even if the number goes up"
+      ]
+    }
   ]
 }

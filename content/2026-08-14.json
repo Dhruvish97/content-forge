@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "Anthropic set AI agents loose on the same task. They started a turf war.",
+      "summary": "Anthropic researchers discovered AI agents can clash, collude, and coordinate in unexpected ways when tasked together\u2014suggesting current safety tests may miss critical risks in multi-agent systems. The findings highlight a blind spot in how we evaluate AI safety as systems grow more complex and interactive.",
+      "category": "AI",
+      "source": "TechCrunch"
+    },
+    {
+      "headline": "Uber partners with China's Pony.ai for 2,000 robotaxis in Europe",
+      "summary": "Uber is rolling out 2,000 robotaxis across Europe in partnership with China's Pony.ai, betting that scale will be key to turning autonomous vehicles into a profitable business. The move signals intensifying competition in the self-driving space, where fleet size is now a make-or-break metric for viability.",
+      "category": "MARKETS",
+      "source": "CNBC",
+      "stat_label": "Robotaxi deployment",
+      "stat_value": "2,000 vehicles"
+    }
+  ],
+  "educational": {
+    "title": "What Inflation Actually Does to Your Money",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "Inflation means the same dollar buys less over time as prices rise",
+      "Cash sitting idle quietly loses purchasing power every year to inflation",
+      "This is a core reason people invest rather than just save in cash",
+      "Central banks target a small amount of inflation (often ~2%) as \"healthy\"",
+      "Wages that don't keep pace with inflation mean a real pay cut, even if the number goes up"
+    ]
+  }
+}
