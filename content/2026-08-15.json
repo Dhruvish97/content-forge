@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "Berkshire Hathaway boosts Alphabet to a top three holding, ups Delta and housing bets",
+      "summary": "Berkshire Hathaway revealed it's doubling down on big tech: Alphabet is now a top-three holding worth $37.9B, cementing Google's parent as a cornerstone of Warren Buffett's portfolio alongside Apple and American Express.",
+      "category": "MARKETS",
+      "source": "CNBC",
+      "stat_label": "Alphabet holding value",
+      "stat_value": "$37.9B"
+    },
+    {
+      "headline": "Cerebras stock plunges 14% after second earnings report following IPO",
+      "summary": "Cerebras beat Q2 revenue expectations and upped full-year guidance, yet shares dropped 14%\u2014a reminder that even solid earnings can't always overcome market sentiment or broader headwinds.",
+      "category": "EARNINGS",
+      "source": "CNBC"
+    }
+  ],
+  "educational": {
+    "title": "How Venture Capital Actually Funds Startups",
+    "category": "TECH 101",
+    "points": [
+      "VCs invest other people's money (a \"fund\") in exchange for equity, not loans",
+      "Most funded startups fail \u2014 VC math relies on a few huge wins covering the rest",
+      "Funding rounds (seed, Series A, B...) mark stages of growth and rising valuation",
+      "Taking VC money means giving up some ownership and control in exchange for capital",
+      "Not every business should raise VC \u2014 it's built for high-growth, high-risk bets"
+    ]
+  }
+}
