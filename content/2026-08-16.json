@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "Anthropic revenue reportedly jumps to more than $11.5 billion in second quarter",
+      "summary": "Anthropic's Claude is firing on all cylinders: the AI chatbot maker reportedly hit $11.5B in Q2 revenue, signaling explosive growth ahead of a potential IPO that could reshape the generative AI landscape.",
+      "category": "EARNINGS",
+      "source": "CNBC",
+      "stat_label": "Q2 Revenue",
+      "stat_value": "$11.5B"
+    },
+    {
+      "headline": "Tokenized stock holders more than double as monthly volume surges",
+      "summary": "Tokenized stock adoption is accelerating fast: holder count more than doubled to 1.31M last month while monthly transfer volume exploded 179% to $23.13B. The shift signals growing appetite for blockchain-based equity trading, even as distributed value inched up 5.9% to $2.38B.",
+      "category": "CRYPTO",
+      "source": "Cointelegraph",
+      "stat_label": "Monthly volume surge",
+      "stat_value": "+179%"
+    }
+  ],
+  "educational": {
+    "title": "What Is Diversification, Really?",
+    "category": "INVESTING 101",
+    "points": [
+      "Diversification means spreading money across many assets, not just many stocks",
+      "It won't stop losses, but it stops one bad bet from wiping you out",
+      "Owning 10 tech stocks isn't diversified \u2014 that's still one sector's risk",
+      "True diversification spans asset classes: stocks, bonds, cash, real estate",
+      "The goal isn't more returns \u2014 it's smoother, more survivable ones"
+    ]
+  }
+}
