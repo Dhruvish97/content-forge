@@ -1,25 +1,4 @@
 {
-  "2026-08-03": [
-    {
-      "headlines": [
-        "A Marc Benioff-backed startup thinks AI can solve the AI deployment problem",
-        "Sam Altman and AI\u2019s decel debate"
-      ],
-      "categories": [
-        "TECH",
-        "AI"
-      ],
-      "edu_title": "How Interest Rates Actually Move Your Money",
-      "edu_category": "FINANCIAL LITERACY",
-      "edu_points": [
-        "The Fed sets a target rate that ripples into loans, mortgages, and savings",
-        "Higher rates make borrowing pricier \u2014 car loans and mortgages cost more",
-        "Higher rates also make saving pay better \u2014 bank yields tend to rise too",
-        "Stocks often wobble on rate news because future profits get discounted more",
-        "You don't need to predict rates \u2014 just understand why headlines move markets"
-      ]
-    }
-  ],
   "2026-08-04": [
     {
       "headlines": [
@@ -290,6 +269,27 @@
         "Owning 10 tech stocks isn't diversified \u2014 that's still one sector's risk",
         "True diversification spans asset classes: stocks, bonds, cash, real estate",
         "The goal isn't more returns \u2014 it's smoother, more survivable ones"
+      ]
+    }
+  ],
+  "2026-08-17": [
+    {
+      "headlines": [
+        "Anthropic CEO says AI backlash is \u2018fundamentally a crisis of trust\u2019",
+        "Japanese automakers vulnerable to one-two punch of Iran war, yen rally"
+      ],
+      "categories": [
+        "AI",
+        "EARNINGS"
+      ],
+      "edu_title": "How Interest Rates Actually Move Your Money",
+      "edu_category": "FINANCIAL LITERACY",
+      "edu_points": [
+        "The Fed sets a target rate that ripples into loans, mortgages, and savings",
+        "Higher rates make borrowing pricier \u2014 car loans and mortgages cost more",
+        "Higher rates also make saving pay better \u2014 bank yields tend to rise too",
+        "Stocks often wobble on rate news because future profits get discounted more",
+        "You don't need to predict rates \u2014 just understand why headlines move markets"
       ]
     }
   ]

@@ -1,0 +1,27 @@
+{
+  "news": [
+    {
+      "headline": "Anthropic CEO says AI backlash is \u2018fundamentally a crisis of trust\u2019",
+      "summary": "Anthropic's CEO Dario Amodei rejects claims he's been too negative about AI's risks, framing the real issue as a breakdown in public trust rather than the technology itself. He argues the backlash stems from uncertainty about how AI will be deployed and governed, not from inherent pessimism about the field.",
+      "category": "AI",
+      "source": "TechCrunch"
+    },
+    {
+      "headline": "Japanese automakers vulnerable to one-two punch of Iran war, yen rally",
+      "summary": "I'd be happy to help, but I don't see the full news description in your message\u2014only the headline, category, and source. \n\nCould you please provide the complete description (the body text with the actual news details)? Once you share that, I'll expand it into a punchy Instagram caption following all your guidelines.",
+      "category": "EARNINGS",
+      "source": "CNBC"
+    }
+  ],
+  "educational": {
+    "title": "How Interest Rates Actually Move Your Money",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "The Fed sets a target rate that ripples into loans, mortgages, and savings",
+      "Higher rates make borrowing pricier \u2014 car loans and mortgages cost more",
+      "Higher rates also make saving pay better \u2014 bank yields tend to rise too",
+      "Stocks often wobble on rate news because future profits get discounted more",
+      "You don't need to predict rates \u2014 just understand why headlines move markets"
+    ]
+  }
+}
