@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "Reach Capital raises $265M Fund V to back AI founders building to \u2018expand human potential\u2019",
+      "summary": "Reach Capital closed its fifth fund at $265M, oversubscribed and focused on backing AI founders committed to expanding human potential. The firm continues its thesis of investing in founders using artificial intelligence to solve meaningful problems.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Fund size",
+      "stat_value": "$265M"
+    },
+    {
+      "headline": "Prediction market traders see roughly 1-in-4 odds Paramount\u2019s bid to buy Warner Bros. Discovery fails",
+      "summary": "Prediction market traders are pricing in about 25% odds that Paramount's proposed acquisition of Warner Bros. Discovery falls through\u2014up from before the recent 12-state lawsuit but down from when the deal stalled in late July. The shifting probabilities reflect uncertainty around regulatory headwinds versus continued momentum toward closing.",
+      "category": "MARKETS",
+      "source": "CNBC",
+      "stat_label": "Deal failure probability",
+      "stat_value": "~25%"
+    }
+  ],
+  "educational": {
+    "title": "What Actually Happens When You Buy a Stock",
+    "category": "INVESTING 101",
+    "points": [
+      "You're buying a tiny slice of real ownership in a company, not a lottery ticket",
+      "Your broker matches your order with a seller through an exchange in milliseconds",
+      "Stock price moves on collective belief about future profits, not just today's news",
+      "You make money two ways: the price rising, or dividends paid out over time",
+      "Owning one share still makes you a part-owner, with voting rights and all"
+    ]
+  }
+}
