@@ -1,0 +1,27 @@
+{
+  "news": [
+    {
+      "headline": "DOJ\u2019s probe into Andreessen Horowitz over board seats baffles VCs",
+      "summary": "Large VC firms routinely face competing interests across their portfolios\u2014when portfolio companies pivot or enter overlapping markets, some level of conflict becomes inherent to the business model. The DOJ's probe into Andreessen Horowitz over board seat practices has puzzled the VC community, which views such situations as an expected cost of managing sprawling investment ecosystems.",
+      "category": "TECH",
+      "source": "TechCrunch"
+    },
+    {
+      "headline": "Warp\u2019s new system is an out-of-the-box software factory for AI development",
+      "summary": "Warp just dropped Factories, an infrastructure system that simplifies building AI software factories from scratch. The idea: make setting up production-grade AI development environments plug-and-play instead of a months-long engineering slog.",
+      "category": "AI",
+      "source": "TechCrunch"
+    }
+  ],
+  "educational": {
+    "title": "Machine Learning vs. AI vs. LLMs \u2014 What's the Difference?",
+    "category": "TECH 101",
+    "points": [
+      "AI is the broad goal: machines performing tasks that normally need human intelligence",
+      "Machine learning is one method \u2014 systems that improve from data instead of fixed rules",
+      "Deep learning is a subset of ML using layered neural networks",
+      "LLMs (like the ones powering chatbots) are deep learning models trained on huge text data",
+      "Not all AI is an LLM, and not all machine learning involves neural networks"
+    ]
+  }
+}
