@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "Travis Kalanick kicks off another round of VC bashing: \u20181% are helpful\u2019",
+      "summary": "Travis Kalanick just raised $1.7B for robotics startup Atoms\u2014and used the moment to critique his own industry. The Uber founder says only 1% of VCs are actually helpful, suggesting most add little value beyond capital.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Atoms funding",
+      "stat_value": "$1.7B"
+    },
+    {
+      "headline": "Fed officials saw need for rate hike if inflation doesn't cool, minutes show",
+      "summary": "Fed officials signaled readiness to hike rates if inflation fails to moderate, according to minutes from their late July meeting. The discussion underscores persistent concern about price pressures even as the central bank weighs economic slowdown risks.",
+      "category": "MARKETS",
+      "source": "CNBC"
+    }
+  ],
+  "educational": {
+    "title": "What Is Bitcoin's 'Halving' and Why Does It Matter?",
+    "category": "CRYPTO 101",
+    "points": [
+      "Roughly every 4 years, Bitcoin's mining reward is cut in half by design",
+      "This slows how fast new bitcoin enters circulation, capping supply growth",
+      "It's baked into the code \u2014 no company or person decides when it happens",
+      "Historically, halvings have preceded major price cycles, though it's not guaranteed",
+      "The last coin will ever be mined around the year 2140 due to this schedule"
+    ]
+  }
+}
