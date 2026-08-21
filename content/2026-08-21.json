@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "AI data startup Micro1 reaches $500M gross run rate amid AI training boom",
+      "summary": "Micro1 is hitting $500M in annual revenue as AI companies race to secure high-quality training data. The startup's explosive growth reflects broader demand from enterprises building and refining large language models\u2014a trend benefiting the entire data provisioning sector.",
+      "category": "AI",
+      "source": "TechCrunch",
+      "stat_label": "Annual revenue run rate",
+      "stat_value": "$500M"
+    },
+    {
+      "headline": "MANTRA token sinks 18% to record low amid blockchain halt",
+      "summary": "MANTRA token hit a record low as its blockchain stalled, prompting major exchanges to freeze deposits and withdrawals. The token has since recovered slightly to $0.0044, but uncertainty around the chain's status continues to weigh on investor confidence.",
+      "category": "CRYPTO",
+      "source": "Cointelegraph",
+      "stat_label": "Token decline",
+      "stat_value": "-18%"
+    }
+  ],
+  "educational": {
+    "title": "The Emergency Fund Rule Nobody Follows (But Should)",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "An emergency fund is 3-6 months of essential expenses, kept in cash, not invested",
+      "It's not for vacations \u2014 it's for job loss, medical bills, or a broken car",
+      "Without one, a single bad month can force you into high-interest debt",
+      "Keep it boring: a high-yield savings account, not the stock market",
+      "Build it before investing aggressively \u2014 it's the foundation everything else sits on"
+    ]
+  }
+}
