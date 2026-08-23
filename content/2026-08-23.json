@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "Rising yields rattled the market, but we\u2019re sticking with our favorite AI and retail stocks",
+      "summary": "Bond yields climbed, spooking equities across the board. But our conviction in high-growth AI and resilient retail plays remains unchanged\u2014the fundamentals still point to outperformance.",
+      "category": "EARNINGS",
+      "source": "CNBC"
+    },
+    {
+      "headline": "Microsoft Fixes 'Perfect 10' Exploit That Could Have Let Hackers Run Code Remotely",
+      "summary": "Microsoft closed a critical Entra ID vulnerability that could have enabled remote code execution, scoring the highest severity rating possible. The company patched the flaw before disclosure and detected no signs of active exploitation in the wild.",
+      "category": "CRYPTO",
+      "source": "Decrypt",
+      "stat_label": "Severity Score",
+      "stat_value": "10/10"
+    }
+  ],
+  "educational": {
+    "title": "What a Recession Actually Means (And What It Doesn't)",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "A recession is broadly defined as a significant decline in economic activity",
+      "It's not the same as a stock market crash \u2014 they can happen independently",
+      "Recessions typically bring rising unemployment and falling consumer spending",
+      "They're a normal part of economic cycles, not a rare catastrophe",
+      "Historically, markets have recovered from every recession, though timing varies"
+    ]
+  }
+}
