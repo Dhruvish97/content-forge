@@ -1,0 +1,27 @@
+{
+  "news": [
+    {
+      "headline": "Who\u2019s behind the new \u2018stealth model\u2019 Ox Alpha?",
+      "summary": "A mysterious new AI model called Ox Alpha is sparking wild speculation across tech communities, though details remain scarce. The \"stealth model\" has grabbed attention in AI circles, but its creators and capabilities remain largely unknown.",
+      "category": "AI",
+      "source": "TechCrunch"
+    },
+    {
+      "headline": "Linkdaze\u2019s smart calendar is built to run a household, not just track a schedule",
+      "summary": "Linkdaze is rethinking the smart calendar with an AI meal planner and household management tools\u2014all without a paywall. The platform goes beyond scheduling to help families coordinate daily life, from meals to logistics.",
+      "category": "AI",
+      "source": "TechCrunch"
+    }
+  ],
+  "educational": {
+    "title": "Index Funds vs. Picking Individual Stocks",
+    "category": "INVESTING 101",
+    "points": [
+      "An index fund buys a whole market segment at once \u2014 instant diversification",
+      "Most professional stock-pickers underperform simple index funds over time",
+      "Individual stocks can outperform, but concentrate your risk in one company",
+      "Index investing trades excitement for consistency and much lower fees",
+      "A common approach: index funds as the base, individual picks as a smaller side bet"
+    ]
+  }
+}
