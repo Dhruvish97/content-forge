@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "Fiat Ventures combines venture and advisory divisions into new brand, raises $35M Fund II",
+      "summary": "Fiat Ventures is consolidating its venture and advisory arms under a unified brand while closing $35M for its second fund\u2014a structural shift aimed at standing out to LPs in a crowded emerging manager landscape.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Fund II size",
+      "stat_value": "$35M"
+    },
+    {
+      "headline": "Situational Awareness, star AI hedge fund that nearly imploded, now being probed by the SEC",
+      "summary": "Situational Awareness, the AI hedge fund that became Wall Street's darling before nearly collapsing, is now facing SEC scrutiny. The fund's dramatic fall from grace\u2014from market darling to federal investigation\u2014underscores the volatility and regulatory risks in the red-hot AI investment space.",
+      "category": "AI",
+      "source": "TechCrunch"
+    }
+  ],
+  "educational": {
+    "title": "What Cloud Computing Actually Means",
+    "category": "TECH 101",
+    "points": [
+      "\"The cloud\" is just someone else's data center, rented over the internet",
+      "It lets companies scale computing power up or down without buying hardware",
+      "Three big providers dominate: AWS, Microsoft Azure, and Google Cloud",
+      "This is why AI's growth is tightly linked to cloud/data-center spending",
+      "Nearly every app you use \u2014 banking, social media, streaming \u2014 runs on someone's cloud"
+    ]
+  }
+}
