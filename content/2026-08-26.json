@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "Ventures Platform goes bigger \u2014 and broader \u2014 with its second Africa fund",
+      "summary": "Pan-African venture firm Ventures Platform closed its second fund at $84M, signaling confidence in the continent's startup ecosystem. The capital will fuel investments across Africa\u2014extending well beyond Nigeria, where the firm got its start, and backing founders tackling continental challenges.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Second fund",
+      "stat_value": "$84M"
+    },
+    {
+      "headline": "China's short-drama producers flood the market with cheap bets \u2014 and let audiences pick the winners",
+      "summary": "China's short-drama producers are flooding the market with low-cost content, betting on audience preference to separate hits from misses. The model disrupts traditional entertainment but faces headwinds: mounting distribution costs and the struggle to keep viewers engaged long-term.",
+      "category": "MARKETS",
+      "source": "CNBC"
+    }
+  ],
+  "educational": {
+    "title": "Bull Market vs. Bear Market \u2014 What the Terms Actually Mean",
+    "category": "MARKETS 101",
+    "points": [
+      "A bull market is a sustained rise in prices; a bear market is a sustained fall",
+      "The common threshold: a 20%+ drop from a recent high defines a bear market",
+      "Bull markets historically last far longer than bear markets on average",
+      "Investor psychology often overshoots in both directions \u2014 greed, then fear",
+      "Long-term investors are taught to expect both phases, not just the good one"
+    ]
+  }
+}
