@@ -1,25 +1,4 @@
 {
-  "2026-08-13": [
-    {
-      "headlines": [
-        "OpenAI-backed Thrive Holdings raises $2B to bring AI to the enterprise",
-        "How a $250 million acquisition collapsed into allegations of fraud and forged signatures"
-      ],
-      "categories": [
-        "TECH",
-        "AI"
-      ],
-      "edu_title": "How a Stock Split Actually Works",
-      "edu_category": "INVESTING 101",
-      "edu_points": [
-        "A stock split divides each share into multiple shares \u2014 e.g. 1 becomes 4",
-        "Your total investment value doesn't change, just the share count and price",
-        "Companies split shares to make each one look more affordable to new buyers",
-        "It's a cosmetic change, not a sign the company suddenly became more valuable",
-        "Reverse splits do the opposite \u2014 often a red flag, not a good one"
-      ]
-    }
-  ],
   "2026-08-14": [
     {
       "headlines": [
@@ -290,6 +269,27 @@
         "Bull markets historically last far longer than bear markets on average",
         "Investor psychology often overshoots in both directions \u2014 greed, then fear",
         "Long-term investors are taught to expect both phases, not just the good one"
+      ]
+    }
+  ],
+  "2026-08-27": [
+    {
+      "headlines": [
+        "Fashion startup Atorie raises $9.5M to bring consumers luxury goods without the markup",
+        "Z.ai shares surge 8% after releasing new AI model running only on Chinese chips"
+      ],
+      "categories": [
+        "TECH",
+        "MARKETS"
+      ],
+      "edu_title": "How a Stock Split Actually Works",
+      "edu_category": "INVESTING 101",
+      "edu_points": [
+        "A stock split divides each share into multiple shares \u2014 e.g. 1 becomes 4",
+        "Your total investment value doesn't change, just the share count and price",
+        "Companies split shares to make each one look more affordable to new buyers",
+        "It's a cosmetic change, not a sign the company suddenly became more valuable",
+        "Reverse splits do the opposite \u2014 often a red flag, not a good one"
       ]
     }
   ]

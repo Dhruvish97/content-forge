@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "Fashion startup Atorie raises $9.5M to bring consumers luxury goods without the markup",
+      "summary": "Atorie is cutting out the middleman in luxury fashion. The startup lets consumers buy handbags and clothes made from identical materials and factories as high-end brands\u2014just without the designer markup.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Funding round",
+      "stat_value": "$9.5M"
+    },
+    {
+      "headline": "Z.ai shares surge 8% after releasing new AI model running only on Chinese chips",
+      "summary": "Z.ai's stock jumped 8% after unveiling an AI model built exclusively on Chinese semiconductors\u2014a move that signals progress toward reducing dependence on Western chip restrictions. The company quietly rolled out the model globally a week prior, now going public with the milestone.",
+      "category": "MARKETS",
+      "source": "CNBC",
+      "stat_label": "Stock surge",
+      "stat_value": "+8%"
+    }
+  ],
+  "educational": {
+    "title": "How a Stock Split Actually Works",
+    "category": "INVESTING 101",
+    "points": [
+      "A stock split divides each share into multiple shares \u2014 e.g. 1 becomes 4",
+      "Your total investment value doesn't change, just the share count and price",
+      "Companies split shares to make each one look more affordable to new buyers",
+      "It's a cosmetic change, not a sign the company suddenly became more valuable",
+      "Reverse splits do the opposite \u2014 often a red flag, not a good one"
+    ]
+  }
+}
