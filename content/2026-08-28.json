@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "Nvidia closes in on Hugging Face acquisition",
+      "summary": "Nvidia is acquiring Hugging Face, the open-source AI hub, in a major consolidation play that strengthens its chip dominance while repositioning the company in cloud services. The deal signals Nvidia's strategy to own the full AI stack\u2014from hardware to the platforms developers rely on.",
+      "category": "AI",
+      "source": "TechCrunch",
+      "stat_label": "Acquisition price",
+      "stat_value": "$12.9B"
+    },
+    {
+      "headline": "Fed Chairman Kevin Warsh delivers his key Jackson Hole speech Friday. Here's what to expect",
+      "summary": "Fed Chair Kevin Warsh is set to deliver the annual Jackson Hole speech Friday, a high-stakes moment where central bank leaders typically outline major policy shifts and strategic direction. Investors will be closely watching for signals on interest rate trajectory and inflation management as markets brace for potential guidance on monetary policy ahead.",
+      "category": "MARKETS",
+      "source": "CNBC"
+    }
+  ],
+  "educational": {
+    "title": "What Inflation Actually Does to Your Money",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "Inflation means the same dollar buys less over time as prices rise",
+      "Cash sitting idle quietly loses purchasing power every year to inflation",
+      "This is a core reason people invest rather than just save in cash",
+      "Central banks target a small amount of inflation (often ~2%) as \"healthy\"",
+      "Wages that don't keep pace with inflation mean a real pay cut, even if the number goes up"
+    ]
+  }
+}
