@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "September Fed decision is now a coin flip as rate hike odds increase post Warsh",
+      "summary": "Fed rate hike odds are now a true toss-up following Kevin Warsh's Jackson Hole remarks, where the Fed official signaled ongoing frustration with stubbornly elevated inflation. His comments suggest the central bank may not be done tightening despite recent market expectations for a pause.",
+      "category": "MARKETS",
+      "source": "CNBC"
+    },
+    {
+      "headline": "Marvell shares tumble 6% as outlook underwhelms despite 37% revenue growth",
+      "summary": "Marvell Technology beat Q2 revenue expectations but shares dropped 6% after the chipmaker's fiscal 2028 guidance disappointed investors. Strong top-line growth wasn't enough to offset concerns about the company's forward trajectory.",
+      "category": "EARNINGS",
+      "source": "CNBC",
+      "stat_label": "Q2 Revenue Beat",
+      "stat_value": "37% growth"
+    }
+  ],
+  "educational": {
+    "title": "How Venture Capital Actually Funds Startups",
+    "category": "TECH 101",
+    "points": [
+      "VCs invest other people's money (a \"fund\") in exchange for equity, not loans",
+      "Most funded startups fail \u2014 VC math relies on a few huge wins covering the rest",
+      "Funding rounds (seed, Series A, B...) mark stages of growth and rising valuation",
+      "Taking VC money means giving up some ownership and control in exchange for capital",
+      "Not every business should raise VC \u2014 it's built for high-growth, high-risk bets"
+    ]
+  }
+}

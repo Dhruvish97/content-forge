@@ -1,25 +1,4 @@
 {
-  "2026-08-15": [
-    {
-      "headlines": [
-        "Berkshire Hathaway boosts Alphabet to a top three holding, ups Delta and housing bets",
-        "Cerebras stock plunges 14% after second earnings report following IPO"
-      ],
-      "categories": [
-        "MARKETS",
-        "EARNINGS"
-      ],
-      "edu_title": "How Venture Capital Actually Funds Startups",
-      "edu_category": "TECH 101",
-      "edu_points": [
-        "VCs invest other people's money (a \"fund\") in exchange for equity, not loans",
-        "Most funded startups fail \u2014 VC math relies on a few huge wins covering the rest",
-        "Funding rounds (seed, Series A, B...) mark stages of growth and rising valuation",
-        "Taking VC money means giving up some ownership and control in exchange for capital",
-        "Not every business should raise VC \u2014 it's built for high-growth, high-risk bets"
-      ]
-    }
-  ],
   "2026-08-16": [
     {
       "headlines": [
@@ -290,6 +269,27 @@
         "This is a core reason people invest rather than just save in cash",
         "Central banks target a small amount of inflation (often ~2%) as \"healthy\"",
         "Wages that don't keep pace with inflation mean a real pay cut, even if the number goes up"
+      ]
+    }
+  ],
+  "2026-08-29": [
+    {
+      "headlines": [
+        "September Fed decision is now a coin flip as rate hike odds increase post Warsh",
+        "Marvell shares tumble 6% as outlook underwhelms despite 37% revenue growth"
+      ],
+      "categories": [
+        "MARKETS",
+        "EARNINGS"
+      ],
+      "edu_title": "How Venture Capital Actually Funds Startups",
+      "edu_category": "TECH 101",
+      "edu_points": [
+        "VCs invest other people's money (a \"fund\") in exchange for equity, not loans",
+        "Most funded startups fail \u2014 VC math relies on a few huge wins covering the rest",
+        "Funding rounds (seed, Series A, B...) mark stages of growth and rising valuation",
+        "Taking VC money means giving up some ownership and control in exchange for capital",
+        "Not every business should raise VC \u2014 it's built for high-growth, high-risk bets"
       ]
     }
   ]
