@@ -1,0 +1,27 @@
+{
+  "news": [
+    {
+      "headline": "Sony Music, Warner sue Anthropic, alleging a \u201cbrazen campaign\u201d of intellectual property theft",
+      "summary": "Sony Music and Warner Bros. are suing Anthropic for allegedly training its AI on copyrighted music and content without permission\u2014a \"brazen campaign\" of IP theft, according to the filing. The lawsuit underscores growing tension between entertainment giants and AI companies over training data practices, as the industry grapples with how copyright law applies to machine learning.",
+      "category": "AI",
+      "source": "TechCrunch"
+    },
+    {
+      "headline": "The 'choose your own adventure' earnings: Why retailers are handling tariff refunds so differently",
+      "summary": "Retailers are getting creative with tariff refunds\u2014some passing savings to customers through lower prices, others pocketing the gains to pad margins. The inconsistent accounting approach is making earnings comparisons tricky this quarter.",
+      "category": "EARNINGS",
+      "source": "CNBC"
+    }
+  ],
+  "educational": {
+    "title": "What Is Diversification, Really?",
+    "category": "INVESTING 101",
+    "points": [
+      "Diversification means spreading money across many assets, not just many stocks",
+      "It won't stop losses, but it stops one bad bet from wiping you out",
+      "Owning 10 tech stocks isn't diversified \u2014 that's still one sector's risk",
+      "True diversification spans asset classes: stocks, bonds, cash, real estate",
+      "The goal isn't more returns \u2014 it's smoother, more survivable ones"
+    ]
+  }
+}

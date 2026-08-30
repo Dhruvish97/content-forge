@@ -1,25 +1,4 @@
 {
-  "2026-08-16": [
-    {
-      "headlines": [
-        "Anthropic revenue reportedly jumps to more than $11.5 billion in second quarter",
-        "Tokenized stock holders more than double as monthly volume surges"
-      ],
-      "categories": [
-        "EARNINGS",
-        "CRYPTO"
-      ],
-      "edu_title": "What Is Diversification, Really?",
-      "edu_category": "INVESTING 101",
-      "edu_points": [
-        "Diversification means spreading money across many assets, not just many stocks",
-        "It won't stop losses, but it stops one bad bet from wiping you out",
-        "Owning 10 tech stocks isn't diversified \u2014 that's still one sector's risk",
-        "True diversification spans asset classes: stocks, bonds, cash, real estate",
-        "The goal isn't more returns \u2014 it's smoother, more survivable ones"
-      ]
-    }
-  ],
   "2026-08-17": [
     {
       "headlines": [
@@ -290,6 +269,27 @@
         "Funding rounds (seed, Series A, B...) mark stages of growth and rising valuation",
         "Taking VC money means giving up some ownership and control in exchange for capital",
         "Not every business should raise VC \u2014 it's built for high-growth, high-risk bets"
+      ]
+    }
+  ],
+  "2026-08-30": [
+    {
+      "headlines": [
+        "Sony Music, Warner sue Anthropic, alleging a \u201cbrazen campaign\u201d of intellectual property theft",
+        "The 'choose your own adventure' earnings: Why retailers are handling tariff refunds so differently"
+      ],
+      "categories": [
+        "AI",
+        "EARNINGS"
+      ],
+      "edu_title": "What Is Diversification, Really?",
+      "edu_category": "INVESTING 101",
+      "edu_points": [
+        "Diversification means spreading money across many assets, not just many stocks",
+        "It won't stop losses, but it stops one bad bet from wiping you out",
+        "Owning 10 tech stocks isn't diversified \u2014 that's still one sector's risk",
+        "True diversification spans asset classes: stocks, bonds, cash, real estate",
+        "The goal isn't more returns \u2014 it's smoother, more survivable ones"
       ]
     }
   ]
