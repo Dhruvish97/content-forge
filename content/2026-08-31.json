@@ -1,0 +1,27 @@
+{
+  "news": [
+    {
+      "headline": "Crypto exchange Gemini not at fault for collapse of Earn lending program, arbitrator says",
+      "summary": "Gemini cleared of misconduct in the collapse of its Earn lending program. An arbitrator ruled the crypto exchange didn't mislead users, offering a legal win for the platform amid broader scrutiny of digital asset lending practices.",
+      "category": "MARKETS",
+      "source": "CNBC"
+    },
+    {
+      "headline": "BYD shares slide as fierce China competition dents first-half earnings",
+      "summary": "BYD's stock slipped Friday despite posting higher Q2 profits and expanding overseas\u2014signaling that intense domestic competition in China's EV market is weighing on investor sentiment. The automaker's earnings beat wasn't enough to offset concerns about margin pressures at home.",
+      "category": "EARNINGS",
+      "source": "CNBC"
+    }
+  ],
+  "educational": {
+    "title": "How Interest Rates Actually Move Your Money",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "The Fed sets a target rate that ripples into loans, mortgages, and savings",
+      "Higher rates make borrowing pricier \u2014 car loans and mortgages cost more",
+      "Higher rates also make saving pay better \u2014 bank yields tend to rise too",
+      "Stocks often wobble on rate news because future profits get discounted more",
+      "You don't need to predict rates \u2014 just understand why headlines move markets"
+    ]
+  }
+}
