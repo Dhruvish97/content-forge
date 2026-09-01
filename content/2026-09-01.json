@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "a16z brings growth fund to $8.5B days after launching new $1.1B fund",
+      "summary": "a16z is doubling down on growth-stage investing, closing an $8.5B fund just days after launching a separate $1.1B fund. The dual closures signal the firm's confidence in its ability to deploy capital at scale across its portfolio companies.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Growth fund size",
+      "stat_value": "$8.5B"
+    },
+    {
+      "headline": "Sequoia-incubated Empirik launches with $21M to predict outages before they happen",
+      "summary": "Empirik, a Sequoia-backed startup, just launched with $21M to predict infrastructure outages before they happen\u2014bringing the same AI-driven approach that Cursor brought to coding. The bet: AI that anticipates IT failures could save enterprises massive downtime costs and headaches.",
+      "category": "AI",
+      "source": "TechCrunch",
+      "stat_label": "Launch funding",
+      "stat_value": "$21M"
+    }
+  ],
+  "educational": {
+    "title": "What Actually Happens When You Buy a Stock",
+    "category": "INVESTING 101",
+    "points": [
+      "You're buying a tiny slice of real ownership in a company, not a lottery ticket",
+      "Your broker matches your order with a seller through an exchange in milliseconds",
+      "Stock price moves on collective belief about future profits, not just today's news",
+      "You make money two ways: the price rising, or dividends paid out over time",
+      "Owning one share still makes you a part-owner, with voting rights and all"
+    ]
+  }
+}
