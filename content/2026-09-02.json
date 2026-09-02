@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "AfterQuery reportedly becomes Y Combinator\u2019s fastest-ever unicorn, now valued at $3.2B",
+      "summary": "AfterQuery's valuation skyrocketed from $300M to $3.2B in five months, making it Y Combinator's fastest unicorn ever. The AI model-training startup's explosive growth caps a remarkable sprint from Series A to unicorn status.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Valuation jump",
+      "stat_value": "10x in 5 months"
+    },
+    {
+      "headline": "Nepal\u2019s mountain tourism industry faces \u2018serious warning\u2019 after Himalayan flood disaster",
+      "summary": "Nepal's devastating floods are casting a shadow over its adventure tourism sector right before peak season hits. The disaster has triggered fresh concerns about the industry's resilience and recovery timeline\u2014a critical economic lifeline for the mountain nation.",
+      "category": "MARKETS",
+      "source": "CNBC"
+    }
+  ],
+  "educational": {
+    "title": "Machine Learning vs. AI vs. LLMs \u2014 What's the Difference?",
+    "category": "TECH 101",
+    "points": [
+      "AI is the broad goal: machines performing tasks that normally need human intelligence",
+      "Machine learning is one method \u2014 systems that improve from data instead of fixed rules",
+      "Deep learning is a subset of ML using layered neural networks",
+      "LLMs (like the ones powering chatbots) are deep learning models trained on huge text data",
+      "Not all AI is an LLM, and not all machine learning involves neural networks"
+    ]
+  }
+}

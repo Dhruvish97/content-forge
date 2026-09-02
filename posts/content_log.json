@@ -1,25 +1,4 @@
 {
-  "2026-08-19": [
-    {
-      "headlines": [
-        "DOJ\u2019s probe into Andreessen Horowitz over board seats baffles VCs",
-        "Warp\u2019s new system is an out-of-the-box software factory for AI development"
-      ],
-      "categories": [
-        "TECH",
-        "AI"
-      ],
-      "edu_title": "Machine Learning vs. AI vs. LLMs \u2014 What's the Difference?",
-      "edu_category": "TECH 101",
-      "edu_points": [
-        "AI is the broad goal: machines performing tasks that normally need human intelligence",
-        "Machine learning is one method \u2014 systems that improve from data instead of fixed rules",
-        "Deep learning is a subset of ML using layered neural networks",
-        "LLMs (like the ones powering chatbots) are deep learning models trained on huge text data",
-        "Not all AI is an LLM, and not all machine learning involves neural networks"
-      ]
-    }
-  ],
   "2026-08-20": [
     {
       "headlines": [
@@ -290,6 +269,27 @@
         "Stock price moves on collective belief about future profits, not just today's news",
         "You make money two ways: the price rising, or dividends paid out over time",
         "Owning one share still makes you a part-owner, with voting rights and all"
+      ]
+    }
+  ],
+  "2026-09-02": [
+    {
+      "headlines": [
+        "AfterQuery reportedly becomes Y Combinator\u2019s fastest-ever unicorn, now valued at $3.2B",
+        "Nepal\u2019s mountain tourism industry faces \u2018serious warning\u2019 after Himalayan flood disaster"
+      ],
+      "categories": [
+        "TECH",
+        "MARKETS"
+      ],
+      "edu_title": "Machine Learning vs. AI vs. LLMs \u2014 What's the Difference?",
+      "edu_category": "TECH 101",
+      "edu_points": [
+        "AI is the broad goal: machines performing tasks that normally need human intelligence",
+        "Machine learning is one method \u2014 systems that improve from data instead of fixed rules",
+        "Deep learning is a subset of ML using layered neural networks",
+        "LLMs (like the ones powering chatbots) are deep learning models trained on huge text data",
+        "Not all AI is an LLM, and not all machine learning involves neural networks"
       ]
     }
   ]
