@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "Bitcoin Pumps as Fed Signals Rate Pause, $415 Million in Shorts Get Rekt",
+      "summary": "Stocks and crypto surged in tandem after Fed Governor Christopher Waller signaled openness to pausing rate hikes, triggering a sharp squeeze that left short sellers on the losing end of a volatile move.",
+      "category": "CRYPTO",
+      "source": "Decrypt",
+      "stat_label": "Short positions liquidated",
+      "stat_value": "$415M"
+    },
+    {
+      "headline": "Sony Dismisses PS5 Buyers' $508M Tariff Refund Claim as 'Illogical'",
+      "summary": "Sony raised PS5 prices for a second time in March, just five weeks after tariffs were struck down\u2014dismissing buyers' $508M refund claims as illogical. The timing has fueled frustration among consumers who argue the price hikes were unjustified given the tariff relief.",
+      "category": "CRYPTO",
+      "source": "Decrypt",
+      "stat_label": "Refund claim dismissed",
+      "stat_value": "$508M"
+    }
+  ],
+  "educational": {
+    "title": "What Is Bitcoin's 'Halving' and Why Does It Matter?",
+    "category": "CRYPTO 101",
+    "points": [
+      "Roughly every 4 years, Bitcoin's mining reward is cut in half by design",
+      "This slows how fast new bitcoin enters circulation, capping supply growth",
+      "It's baked into the code \u2014 no company or person decides when it happens",
+      "Historically, halvings have preceded major price cycles, though it's not guaranteed",
+      "The last coin will ever be mined around the year 2140 due to this schedule"
+    ]
+  }
+}

@@ -1,25 +1,4 @@
 {
-  "2026-08-20": [
-    {
-      "headlines": [
-        "Travis Kalanick kicks off another round of VC bashing: \u20181% are helpful\u2019",
-        "Fed officials saw need for rate hike if inflation doesn't cool, minutes show"
-      ],
-      "categories": [
-        "TECH",
-        "MARKETS"
-      ],
-      "edu_title": "What Is Bitcoin's 'Halving' and Why Does It Matter?",
-      "edu_category": "CRYPTO 101",
-      "edu_points": [
-        "Roughly every 4 years, Bitcoin's mining reward is cut in half by design",
-        "This slows how fast new bitcoin enters circulation, capping supply growth",
-        "It's baked into the code \u2014 no company or person decides when it happens",
-        "Historically, halvings have preceded major price cycles, though it's not guaranteed",
-        "The last coin will ever be mined around the year 2140 due to this schedule"
-      ]
-    }
-  ],
   "2026-08-21": [
     {
       "headlines": [
@@ -290,6 +269,27 @@
         "Deep learning is a subset of ML using layered neural networks",
         "LLMs (like the ones powering chatbots) are deep learning models trained on huge text data",
         "Not all AI is an LLM, and not all machine learning involves neural networks"
+      ]
+    }
+  ],
+  "2026-09-03": [
+    {
+      "headlines": [
+        "Bitcoin Pumps as Fed Signals Rate Pause, $415 Million in Shorts Get Rekt",
+        "Sony Dismisses PS5 Buyers' $508M Tariff Refund Claim as 'Illogical'"
+      ],
+      "categories": [
+        "CRYPTO",
+        "CRYPTO"
+      ],
+      "edu_title": "What Is Bitcoin's 'Halving' and Why Does It Matter?",
+      "edu_category": "CRYPTO 101",
+      "edu_points": [
+        "Roughly every 4 years, Bitcoin's mining reward is cut in half by design",
+        "This slows how fast new bitcoin enters circulation, capping supply growth",
+        "It's baked into the code \u2014 no company or person decides when it happens",
+        "Historically, halvings have preceded major price cycles, though it's not guaranteed",
+        "The last coin will ever be mined around the year 2140 due to this schedule"
       ]
     }
   ]
