@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "Crusoe reportedly raises $3B at a  $30B valuation",
+      "summary": "Crusoe Energy, a data center developer focused on AI infrastructure, has secured a massive $13B contract with trading firm Jane Street, fueling a reported $3B funding round at a $30B valuation. The deal underscores surging demand for compute capacity as AI adoption accelerates across enterprise and financial services.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Company valuation",
+      "stat_value": "$30B"
+    },
+    {
+      "headline": "Accel reportedly in talks to lead $1B round for Thinking Machines at $40B valuation",
+      "summary": "Thinking Machines is in talks with Accel to raise $1B at a $40B valuation, according to reports. The AI startup is already running at over $100M in annual revenue, signaling strong commercial traction ahead of what could be a major funding round.",
+      "category": "AI",
+      "source": "TechCrunch",
+      "stat_label": "Reported valuation",
+      "stat_value": "$40B"
+    }
+  ],
+  "educational": {
+    "title": "The Emergency Fund Rule Nobody Follows (But Should)",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "An emergency fund is 3-6 months of essential expenses, kept in cash, not invested",
+      "It's not for vacations \u2014 it's for job loss, medical bills, or a broken car",
+      "Without one, a single bad month can force you into high-interest debt",
+      "Keep it boring: a high-yield savings account, not the stock market",
+      "Build it before investing aggressively \u2014 it's the foundation everything else sits on"
+    ]
+  }
+}
