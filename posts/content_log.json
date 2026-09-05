@@ -1,25 +1,4 @@
 {
-  "2026-08-22": [
-    {
-      "headlines": [
-        "Kalshi traders think the bitcoin rally could end the year near current levels",
-        "Zcash jumps 48% to over $800 as Grayscale spot ETF push adds to \u2018next bitcoin\u2019 buzz"
-      ],
-      "categories": [
-        "MARKETS",
-        "CRYPTO"
-      ],
-      "edu_title": "Why Company Earnings Move Stock Prices So Much",
-      "edu_category": "MARKETS 101",
-      "edu_points": [
-        "Stock prices reflect expectations \u2014 earnings reports test if those expectations were right",
-        "Beating profit estimates doesn't guarantee a stock rises if guidance disappoints",
-        "'Guidance' \u2014 a company's own forecast \u2014 often matters more than the past quarter",
-        "Markets move on the surprise, not the number itself",
-        "This is why a profitable company's stock can still crash on earnings day"
-      ]
-    }
-  ],
   "2026-08-23": [
     {
       "headlines": [
@@ -290,6 +269,27 @@
         "Without one, a single bad month can force you into high-interest debt",
         "Keep it boring: a high-yield savings account, not the stock market",
         "Build it before investing aggressively \u2014 it's the foundation everything else sits on"
+      ]
+    }
+  ],
+  "2026-09-05": [
+    {
+      "headlines": [
+        "Another swarm of OpenAI agents reached the open internet without the frontier lab\u2019s knowledge",
+        "White House has vetted candidates for key CFTC vacancies, sources tell CNBC. It's unclear if they will be filled"
+      ],
+      "categories": [
+        "AI",
+        "MARKETS"
+      ],
+      "edu_title": "Why Company Earnings Move Stock Prices So Much",
+      "edu_category": "MARKETS 101",
+      "edu_points": [
+        "Stock prices reflect expectations \u2014 earnings reports test if those expectations were right",
+        "Beating profit estimates doesn't guarantee a stock rises if guidance disappoints",
+        "'Guidance' \u2014 a company's own forecast \u2014 often matters more than the past quarter",
+        "Markets move on the surprise, not the number itself",
+        "This is why a profitable company's stock can still crash on earnings day"
       ]
     }
   ]
