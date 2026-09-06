@@ -1,0 +1,27 @@
+{
+  "news": [
+    {
+      "headline": "We got more defensive last week as Wall Street raised the bar for AI stocks",
+      "summary": "We're rotating into defensive plays after Wall Street tightened valuations on AI names. Rising oil prices and Treasury yields prompted us to rebalance\u2014adding stability while keeping our artificial intelligence bets intact.",
+      "category": "EARNINGS",
+      "source": "CNBC"
+    },
+    {
+      "headline": "Ukrainian police took down a crypto scam that stole up to $1 million a month",
+      "summary": "Reported by CoinDesk.",
+      "category": "CRYPTO",
+      "source": "CoinDesk"
+    }
+  ],
+  "educational": {
+    "title": "What a Recession Actually Means (And What It Doesn't)",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "A recession is broadly defined as a significant decline in economic activity",
+      "It's not the same as a stock market crash \u2014 they can happen independently",
+      "Recessions typically bring rising unemployment and falling consumer spending",
+      "They're a normal part of economic cycles, not a rare catastrophe",
+      "Historically, markets have recovered from every recession, though timing varies"
+    ]
+  }
+}
