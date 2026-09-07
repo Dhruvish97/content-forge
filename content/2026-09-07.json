@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "China says it will pump $54 billion into banks and insurers \u2014 but their stocks still fell",
+      "summary": "China announced a $54 billion capital injection into banks and insurers to strengthen their balance sheets, but equities still declined as markets weighed potential new obligations on financial institutions. Analysts suggest the move could pressure firms to more actively mobilize resources across capital markets.",
+      "category": "MARKETS",
+      "source": "CNBC",
+      "stat_label": "Capital injection",
+      "stat_value": "$54B"
+    },
+    {
+      "headline": "Polish prosecutors charge suspect in Zondacrypto probe, seek pretrial detention",
+      "summary": "Polish prosecutors have charged a suspect in connection with the Zondacrypto case, alleging organized crime and misappropriation of user funds. The investigation centers on roughly $2.1M in missing customer assets from the crypto platform.",
+      "category": "CRYPTO",
+      "source": "Cointelegraph",
+      "stat_label": "Alleged misappropriation",
+      "stat_value": "$2.1M"
+    }
+  ],
+  "educational": {
+    "title": "Index Funds vs. Picking Individual Stocks",
+    "category": "INVESTING 101",
+    "points": [
+      "An index fund buys a whole market segment at once \u2014 instant diversification",
+      "Most professional stock-pickers underperform simple index funds over time",
+      "Individual stocks can outperform, but concentrate your risk in one company",
+      "Index investing trades excitement for consistency and much lower fees",
+      "A common approach: index funds as the base, individual picks as a smaller side bet"
+    ]
+  }
+}
