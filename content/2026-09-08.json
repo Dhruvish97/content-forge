@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "Nuclear startup Bluecore Energy raises $50M seed round, just two months after launch",
+      "summary": "Bluecore Energy closed a $50M oversubscribed seed round merely months after its public debut and a $10M pre-seed, signaling rapid investor confidence in the nuclear startup's mission. The swift funding trajectory underscores growing appetite for advanced nuclear solutions in the clean energy space.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Seed funding raised",
+      "stat_value": "$50M"
+    },
+    {
+      "headline": "Google Cloud races to catch up in the AI deployment wars with Accenture deal",
+      "summary": "Google Cloud is doubling down on enterprise AI adoption through a new partnership with Accenture, embedding engineers to help clients overcome deployment hurdles. The move signals Google's strategy to compete with rivals by removing friction from AI implementation\u2014a key bottleneck as enterprises struggle to move from pilots to production.",
+      "category": "AI",
+      "source": "TechCrunch"
+    }
+  ],
+  "educational": {
+    "title": "What Cloud Computing Actually Means",
+    "category": "TECH 101",
+    "points": [
+      "\"The cloud\" is just someone else's data center, rented over the internet",
+      "It lets companies scale computing power up or down without buying hardware",
+      "Three big providers dominate: AWS, Microsoft Azure, and Google Cloud",
+      "This is why AI's growth is tightly linked to cloud/data-center spending",
+      "Nearly every app you use \u2014 banking, social media, streaming \u2014 runs on someone's cloud"
+    ]
+  }
+}
