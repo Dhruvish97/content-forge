@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "CloudNC raises $20M to automate manufacturing\u2019s most pressing bottlenecks",
+      "summary": "UK manufacturing software startup CloudNC just locked in $20M in fresh funding, pushing its total raised to $128M. The company automates manufacturing bottlenecks\u2014a critical pain point for the sector that's increasingly turning to software solutions to boost efficiency and cut costs.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Series B Extension",
+      "stat_value": "$20M"
+    },
+    {
+      "headline": "\u2018Gambling with our lives\u2019: Anthropic researcher quits, warns against self-improving AI",
+      "summary": "Anthropic researcher Jacob Coxon walked away from his role, warning that self-improving AI poses existential risks and urging the industry to adopt pacing agreements. His departure signals growing internal concern at major AI labs about the speed of capability advancement outpacing safety measures.",
+      "category": "AI",
+      "source": "TechCrunch"
+    }
+  ],
+  "educational": {
+    "title": "Bull Market vs. Bear Market \u2014 What the Terms Actually Mean",
+    "category": "MARKETS 101",
+    "points": [
+      "A bull market is a sustained rise in prices; a bear market is a sustained fall",
+      "The common threshold: a 20%+ drop from a recent high defines a bear market",
+      "Bull markets historically last far longer than bear markets on average",
+      "Investor psychology often overshoots in both directions \u2014 greed, then fear",
+      "Long-term investors are taught to expect both phases, not just the good one"
+    ]
+  }
+}
