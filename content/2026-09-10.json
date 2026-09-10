@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "Kalshi launches \u2018perps\u2019 for gold and silver following CFTC approval, expanding futures offerings",
+      "summary": "Prediction market platform Kalshi just got CFTC approval to launch perpetual futures contracts on gold and silver, expanding beyond its core prediction market offerings. The move reflects growing demand for alternative assets and Kalshi's push to diversify its tradable product lineup.",
+      "category": "MARKETS",
+      "source": "CNBC"
+    },
+    {
+      "headline": "World\u2019s largest contract chipmaker TSMC sees August revenue surge over 53% to record high",
+      "summary": "TSMC's August revenue hit a record high, driven by robust demand for AI chips and advanced semiconductors. The world's largest contract chipmaker posted a 53% year-over-year surge, underscoring its pivotal role in the AI boom and tight semiconductor supply dynamics.",
+      "category": "EARNINGS",
+      "source": "CNBC",
+      "stat_label": "August revenue growth",
+      "stat_value": "+53% YoY"
+    }
+  ],
+  "educational": {
+    "title": "How a Stock Split Actually Works",
+    "category": "INVESTING 101",
+    "points": [
+      "A stock split divides each share into multiple shares \u2014 e.g. 1 becomes 4",
+      "Your total investment value doesn't change, just the share count and price",
+      "Companies split shares to make each one look more affordable to new buyers",
+      "It's a cosmetic change, not a sign the company suddenly became more valuable",
+      "Reverse splits do the opposite \u2014 often a red flag, not a good one"
+    ]
+  }
+}
