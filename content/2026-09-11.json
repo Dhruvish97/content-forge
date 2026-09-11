@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "Thrive Capital led VCs into pro sports ownership; Collaborative Fund just upped that play",
+      "summary": "Collaborative Fund is betting on sports ownership as a startup showcase, acquiring a stake in D.C. United and its stadium. The move signals growing VC appetite for pro sports as both investment and brand-building platform\u2014following Thrive Capital's earlier pivot into team ownership.",
+      "category": "TECH",
+      "source": "TechCrunch"
+    },
+    {
+      "headline": "Oracle posts 30% revenue growth fueled by AI cloud demand as debts hits $125 billion",
+      "summary": "Oracle's cloud infrastructure business is firing on all cylinders, with revenue up 121% year-over-year as customers rush to tap AI-powered cloud services. The database giant's broader portfolio also accelerated, posting 30% total revenue growth\u2014a sign that AI momentum is lifting the entire company.",
+      "category": "EARNINGS",
+      "source": "CNBC",
+      "stat_label": "Cloud infrastructure growth",
+      "stat_value": "+121%"
+    }
+  ],
+  "educational": {
+    "title": "What Inflation Actually Does to Your Money",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "Inflation means the same dollar buys less over time as prices rise",
+      "Cash sitting idle quietly loses purchasing power every year to inflation",
+      "This is a core reason people invest rather than just save in cash",
+      "Central banks target a small amount of inflation (often ~2%) as \"healthy\"",
+      "Wages that don't keep pace with inflation mean a real pay cut, even if the number goes up"
+    ]
+  }
+}
