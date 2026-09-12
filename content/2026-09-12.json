@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "Mecka AI nears $500M valuation in Sequoia-led deal amid rush for robot training data",
+      "summary": "Mecka AI is closing in on a $500M valuation in a Sequoia-led funding round, capitalizing on surging demand for robot training data. The deal comes months after the two-year-old startup's Series A announcement, positioning it at the forefront of the AI infrastructure race.",
+      "category": "AI",
+      "source": "TechCrunch",
+      "stat_label": "Mecka AI valuation",
+      "stat_value": "$500M"
+    },
+    {
+      "headline": "Inflation is outpacing wage growth again, squeezing Americans\u2019 paychecks",
+      "summary": "Inflation outpaced wage growth in August\u2014prices climbed 3.4% year-over-year while wages grew just 3.1%, leaving workers' purchasing power in the red. The gap signals persistent pressure on household finances despite cooling price pressures from earlier peaks.",
+      "category": "MARKETS",
+      "source": "CNBC",
+      "stat_label": "Real wage gap",
+      "stat_value": "-0.3%"
+    }
+  ],
+  "educational": {
+    "title": "How Venture Capital Actually Funds Startups",
+    "category": "TECH 101",
+    "points": [
+      "VCs invest other people's money (a \"fund\") in exchange for equity, not loans",
+      "Most funded startups fail \u2014 VC math relies on a few huge wins covering the rest",
+      "Funding rounds (seed, Series A, B...) mark stages of growth and rising valuation",
+      "Taking VC money means giving up some ownership and control in exchange for capital",
+      "Not every business should raise VC \u2014 it's built for high-growth, high-risk bets"
+    ]
+  }
+}
