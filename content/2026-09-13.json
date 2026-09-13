@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "AI Agents Spending Money Online? New Research Says Not Really",
+      "summary": "TRM Labs analyzed $52.7M in transactions across 198.9M settlements on the x402 protocol and found that most activity isn't actually driven by AI agents\u2014despite the hype around autonomous systems spending money online.",
+      "category": "CRYPTO",
+      "source": "Decrypt",
+      "stat_label": "Transaction volume analyzed",
+      "stat_value": "$52.7M"
+    },
+    {
+      "headline": "Circle's $400M Tazapay deal buys emerging market links that take \u2018years to build\u2019",
+      "summary": "Reported by CoinDesk.",
+      "category": "CRYPTO",
+      "source": "CoinDesk"
+    }
+  ],
+  "educational": {
+    "title": "What Is Diversification, Really?",
+    "category": "INVESTING 101",
+    "points": [
+      "Diversification means spreading money across many assets, not just many stocks",
+      "It won't stop losses, but it stops one bad bet from wiping you out",
+      "Owning 10 tech stocks isn't diversified \u2014 that's still one sector's risk",
+      "True diversification spans asset classes: stocks, bonds, cash, real estate",
+      "The goal isn't more returns \u2014 it's smoother, more survivable ones"
+    ]
+  }
+}
