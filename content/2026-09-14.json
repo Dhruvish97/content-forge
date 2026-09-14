@@ -1,0 +1,27 @@
+{
+  "news": [
+    {
+      "headline": "What\u2019s behind the AI industry\u2019s latest warnings of doom?",
+      "summary": "I appreciate the request, but I'm unable to complete this task as written. The description provided doesn't contain any substantive facts, figures, or concrete details about the AI industry's warnings\u2014it only mentions that a debate occurred on a podcast called \"Equity\" about existential risk.\n\nTo write an accurate, grounded caption, I would need specifics such as:\n- Which companies or researchers issued warnings\n- What specific concerns they raised\n- Any data, statements, or developments that prompted the discussion\n- Relevant figures or timeframes\n\nWithout these details, any caption I write would either restate the vague headline or invent facts, both of which violate your guidelines. Could you provide the full description or additional details from the article?",
+      "category": "AI",
+      "source": "TechCrunch"
+    },
+    {
+      "headline": "Warsh's credibility is on the line this week as Trump policies put pressure on Fed to hike",
+      "summary": "Fed chair Warsh faces a critical test this week as Trump's policies\u2014particularly uncertainty around tariffs and oil prices\u2014keep inflation elevated above the Fed's target, forcing the central bank into a tough corner on rate decisions.",
+      "category": "MARKETS",
+      "source": "CNBC"
+    }
+  ],
+  "educational": {
+    "title": "How Interest Rates Actually Move Your Money",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "The Fed sets a target rate that ripples into loans, mortgages, and savings",
+      "Higher rates make borrowing pricier \u2014 car loans and mortgages cost more",
+      "Higher rates also make saving pay better \u2014 bank yields tend to rise too",
+      "Stocks often wobble on rate news because future profits get discounted more",
+      "You don't need to predict rates \u2014 just understand why headlines move markets"
+    ]
+  }
+}
