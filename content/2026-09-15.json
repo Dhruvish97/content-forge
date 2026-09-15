@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "Evvy raises $40M as it seeks to further women\u2019s health research with vaginal microbiome data",
+      "summary": "Evvy, a women's health startup focused on vaginal microbiome research, just closed a $40M Series B to expand its data platform and accelerate clinical studies. The round, led by Catalio Capital Management, signals growing investor interest in closing the gap in women-specific health research.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Series B funding",
+      "stat_value": "$40M"
+    },
+    {
+      "headline": "US Seeks Forfeiture of $61 Million in Crypto Linked to Alleged Iranian Oil Scheme",
+      "summary": "US authorities are moving to seize $61 million in cryptocurrency allegedly tied to an Iranian oil scheme. Prosecutors say two Chinese companies used Binance accounts to launder proceeds that benefited Iran's government and military operations.",
+      "category": "CRYPTO",
+      "source": "Decrypt",
+      "stat_label": "Forfeiture amount",
+      "stat_value": "$61M"
+    }
+  ],
+  "educational": {
+    "title": "What Actually Happens When You Buy a Stock",
+    "category": "INVESTING 101",
+    "points": [
+      "You're buying a tiny slice of real ownership in a company, not a lottery ticket",
+      "Your broker matches your order with a seller through an exchange in milliseconds",
+      "Stock price moves on collective belief about future profits, not just today's news",
+      "You make money two ways: the price rising, or dividends paid out over time",
+      "Owning one share still makes you a part-owner, with voting rights and all"
+    ]
+  }
+}
