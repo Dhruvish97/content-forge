@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "3 days left to exhibit: Get your brand in front of VCs and\u00a0high-value\u00a0leads at TechCrunch Disrupt 2026",
+      "summary": "Three days to lock in your exhibit spot at TechCrunch Disrupt 2026\u2014pitch directly to 10,000+ founders, investors, and operators on October 13\u201315. Deadline is September 18.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Expected attendees",
+      "stat_value": "10,000+"
+    },
+    {
+      "headline": "Former Infosys chief\u2019s AI startup nabs another $53M",
+      "summary": "Former Infosys chief's AI startup has secured multiple seven-figure enterprise deals just months after launch, now raising an additional $53M to scale operations. The Palo Alto-based firm is moving fast to capitalize on enterprise demand for AI solutions, signaling strong early traction in a competitive market.",
+      "category": "AI",
+      "source": "TechCrunch",
+      "stat_label": "Series funding round",
+      "stat_value": "$53M"
+    }
+  ],
+  "educational": {
+    "title": "Machine Learning vs. AI vs. LLMs \u2014 What's the Difference?",
+    "category": "TECH 101",
+    "points": [
+      "AI is the broad goal: machines performing tasks that normally need human intelligence",
+      "Machine learning is one method \u2014 systems that improve from data instead of fixed rules",
+      "Deep learning is a subset of ML using layered neural networks",
+      "LLMs (like the ones powering chatbots) are deep learning models trained on huge text data",
+      "Not all AI is an LLM, and not all machine learning involves neural networks"
+    ]
+  }
+}
