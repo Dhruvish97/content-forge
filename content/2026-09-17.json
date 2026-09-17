@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "A Chinese AI company just connected its model to Wall Street's leading data providers",
+      "summary": "Moonshot, a Chinese AI startup, just secured partnerships with major Wall Street players\u2014including investment bank CICC and leading venture capital firms\u2014to integrate its AI model with top-tier financial data providers. The move signals deepening AI adoption across institutional finance and gives Moonshot direct access to premium market intelligence networks.",
+      "category": "MARKETS",
+      "source": "CNBC"
+    },
+    {
+      "headline": "Salesforce issues revenue target of over $63 billion for fiscal 2030, beating estimates",
+      "summary": "Salesforce set an ambitious long-term target: over $63B in revenue by fiscal 2030, surpassing analyst expectations. The company unveiled the projection at its flagship Dreamforce conference, signaling confidence in its growth trajectory and AI-driven strategy ahead.",
+      "category": "EARNINGS",
+      "source": "CNBC",
+      "stat_label": "FY2030 revenue target",
+      "stat_value": "$63B+"
+    }
+  ],
+  "educational": {
+    "title": "What Is Bitcoin's 'Halving' and Why Does It Matter?",
+    "category": "CRYPTO 101",
+    "points": [
+      "Roughly every 4 years, Bitcoin's mining reward is cut in half by design",
+      "This slows how fast new bitcoin enters circulation, capping supply growth",
+      "It's baked into the code \u2014 no company or person decides when it happens",
+      "Historically, halvings have preceded major price cycles, though it's not guaranteed",
+      "The last coin will ever be mined around the year 2140 due to this schedule"
+    ]
+  }
+}
