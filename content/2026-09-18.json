@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "The clock is ticking: Final 24 hours to exhibit at TechCrunch Disrupt 2026",
+      "summary": "Last call to exhibit at TechCrunch Disrupt 2026\u2014deadline is today. Secure your startup's spot in front of 10,000+ founders, investors, and tech leaders at the October 13\u201315 event.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Expected attendance",
+      "stat_value": "10,000+"
+    },
+    {
+      "headline": "Three words from Kevin Warsh have Wall Street wondering how far the Fed will go with rate hikes",
+      "summary": "Fed Chair Kevin Warsh's recent comments on rate hikes have Wall Street parsing every word for signals about the central bank's next moves. His explanation of this week's decision left as many questions open as it answered about how aggressive the tightening cycle will ultimately be.",
+      "category": "MARKETS",
+      "source": "CNBC"
+    }
+  ],
+  "educational": {
+    "title": "The Emergency Fund Rule Nobody Follows (But Should)",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "An emergency fund is 3-6 months of essential expenses, kept in cash, not invested",
+      "It's not for vacations \u2014 it's for job loss, medical bills, or a broken car",
+      "Without one, a single bad month can force you into high-interest debt",
+      "Keep it boring: a high-yield savings account, not the stock market",
+      "Build it before investing aggressively \u2014 it's the foundation everything else sits on"
+    ]
+  }
+}
