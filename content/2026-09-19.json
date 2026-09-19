@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "A startup that builds other startups raised $100M and is all-in on physical AI",
+      "summary": "Vantora (formerly UP.Labs) is building startups *for* industrial corporations rather than waiting for founders to approach them. The platform-as-a-startup model lets enterprises launch AI-powered ventures without starting from scratch. Fresh $100M in funding signals serious investor confidence in the factory-floor AI bet.",
+      "category": "AI",
+      "source": "TechCrunch",
+      "stat_label": "Series funding",
+      "stat_value": "$100M"
+    },
+    {
+      "headline": "VanEck criticizes Metaplanet over executive dilution despite compensation cuts",
+      "summary": "VanEck flags Metaplanet's executive pay structure as excessive relative to peers, despite a 41% reduction in the potential share pool. The fund manager argues that equity dilution remains a concern even after compensation cuts, raising questions about governance at the Bitcoin-focused firm.",
+      "category": "CRYPTO",
+      "source": "Cointelegraph",
+      "stat_label": "Executive share pool reduction",
+      "stat_value": "41%"
+    }
+  ],
+  "educational": {
+    "title": "Why Company Earnings Move Stock Prices So Much",
+    "category": "MARKETS 101",
+    "points": [
+      "Stock prices reflect expectations \u2014 earnings reports test if those expectations were right",
+      "Beating profit estimates doesn't guarantee a stock rises if guidance disappoints",
+      "'Guidance' \u2014 a company's own forecast \u2014 often matters more than the past quarter",
+      "Markets move on the surprise, not the number itself",
+      "This is why a profitable company's stock can still crash on earnings day"
+    ]
+  }
+}
