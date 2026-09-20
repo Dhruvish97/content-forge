@@ -1,25 +1,4 @@
 {
-  "2026-09-06": [
-    {
-      "headlines": [
-        "We got more defensive last week as Wall Street raised the bar for AI stocks",
-        "Ukrainian police took down a crypto scam that stole up to $1 million a month"
-      ],
-      "categories": [
-        "EARNINGS",
-        "CRYPTO"
-      ],
-      "edu_title": "What a Recession Actually Means (And What It Doesn't)",
-      "edu_category": "FINANCIAL LITERACY",
-      "edu_points": [
-        "A recession is broadly defined as a significant decline in economic activity",
-        "It's not the same as a stock market crash \u2014 they can happen independently",
-        "Recessions typically bring rising unemployment and falling consumer spending",
-        "They're a normal part of economic cycles, not a rare catastrophe",
-        "Historically, markets have recovered from every recession, though timing varies"
-      ]
-    }
-  ],
   "2026-09-07": [
     {
       "headlines": [
@@ -290,6 +269,27 @@
         "'Guidance' \u2014 a company's own forecast \u2014 often matters more than the past quarter",
         "Markets move on the surprise, not the number itself",
         "This is why a profitable company's stock can still crash on earnings day"
+      ]
+    }
+  ],
+  "2026-09-20": [
+    {
+      "headlines": [
+        "Crypto platform Gemini\u2019s stock is down 80% from its IPO. That\u2019s reviving takeover speculation",
+        "Visa Moves to Close Meme Coin Credit Card Rewards Loophole"
+      ],
+      "categories": [
+        "CRYPTO",
+        "CRYPTO"
+      ],
+      "edu_title": "What a Recession Actually Means (And What It Doesn't)",
+      "edu_category": "FINANCIAL LITERACY",
+      "edu_points": [
+        "A recession is broadly defined as a significant decline in economic activity",
+        "It's not the same as a stock market crash \u2014 they can happen independently",
+        "Recessions typically bring rising unemployment and falling consumer spending",
+        "They're a normal part of economic cycles, not a rare catastrophe",
+        "Historically, markets have recovered from every recession, though timing varies"
       ]
     }
   ]
