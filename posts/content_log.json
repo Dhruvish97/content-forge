@@ -1,25 +1,4 @@
 {
-  "2026-09-07": [
-    {
-      "headlines": [
-        "China says it will pump $54 billion into banks and insurers \u2014 but their stocks still fell",
-        "Polish prosecutors charge suspect in Zondacrypto probe, seek pretrial detention"
-      ],
-      "categories": [
-        "MARKETS",
-        "CRYPTO"
-      ],
-      "edu_title": "Index Funds vs. Picking Individual Stocks",
-      "edu_category": "INVESTING 101",
-      "edu_points": [
-        "An index fund buys a whole market segment at once \u2014 instant diversification",
-        "Most professional stock-pickers underperform simple index funds over time",
-        "Individual stocks can outperform, but concentrate your risk in one company",
-        "Index investing trades excitement for consistency and much lower fees",
-        "A common approach: index funds as the base, individual picks as a smaller side bet"
-      ]
-    }
-  ],
   "2026-09-08": [
     {
       "headlines": [
@@ -290,6 +269,27 @@
         "Recessions typically bring rising unemployment and falling consumer spending",
         "They're a normal part of economic cycles, not a rare catastrophe",
         "Historically, markets have recovered from every recession, though timing varies"
+      ]
+    }
+  ],
+  "2026-09-21": [
+    {
+      "headlines": [
+        "Meta\u2019s AI agent has been blocked from using Amazon.com",
+        "\u2018It's awful\u2019: How tariffs, soaring fuel costs and higher interest rates are squeezing American companies"
+      ],
+      "categories": [
+        "AI",
+        "MARKETS"
+      ],
+      "edu_title": "Index Funds vs. Picking Individual Stocks",
+      "edu_category": "INVESTING 101",
+      "edu_points": [
+        "An index fund buys a whole market segment at once \u2014 instant diversification",
+        "Most professional stock-pickers underperform simple index funds over time",
+        "Individual stocks can outperform, but concentrate your risk in one company",
+        "Index investing trades excitement for consistency and much lower fees",
+        "A common approach: index funds as the base, individual picks as a smaller side bet"
       ]
     }
   ]

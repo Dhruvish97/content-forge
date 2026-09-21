@@ -1,0 +1,27 @@
+{
+  "news": [
+    {
+      "headline": "Meta\u2019s AI agent has been blocked from using Amazon.com",
+      "summary": "I need the full news description to create an accurate caption. The brief text \"Muse isn't welcome as a shopper anymore\" doesn't provide enough factual detail about what happened, why Meta's AI agent was blocked, or the context around this decision.\n\nCould you share the complete description or article details? That way I can:\n- Explain what Muse is/does\n- Clarify why Amazon blocked it\n- Extract any relevant figures or metrics\n- Craft an accurate, punchy caption within 320 characters",
+      "category": "AI",
+      "source": "TechCrunch"
+    },
+    {
+      "headline": "\u2018It's awful\u2019: How tariffs, soaring fuel costs and higher interest rates are squeezing American companies",
+      "summary": "Tariffs, rising fuel costs, and higher interest rates are creating a triple squeeze on American companies across manufacturing, auto supply, retail, and logistics. Businesses already operating on thin margins are facing mounting pressure from all three fronts simultaneously.",
+      "category": "MARKETS",
+      "source": "CNBC"
+    }
+  ],
+  "educational": {
+    "title": "Index Funds vs. Picking Individual Stocks",
+    "category": "INVESTING 101",
+    "points": [
+      "An index fund buys a whole market segment at once \u2014 instant diversification",
+      "Most professional stock-pickers underperform simple index funds over time",
+      "Individual stocks can outperform, but concentrate your risk in one company",
+      "Index investing trades excitement for consistency and much lower fees",
+      "A common approach: index funds as the base, individual picks as a smaller side bet"
+    ]
+  }
+}
