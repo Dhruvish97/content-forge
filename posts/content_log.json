@@ -1,25 +1,4 @@
 {
-  "2026-09-08": [
-    {
-      "headlines": [
-        "Nuclear startup Bluecore Energy raises $50M seed round, just two months after launch",
-        "Google Cloud races to catch up in the AI deployment wars with Accenture deal"
-      ],
-      "categories": [
-        "TECH",
-        "AI"
-      ],
-      "edu_title": "What Cloud Computing Actually Means",
-      "edu_category": "TECH 101",
-      "edu_points": [
-        "\"The cloud\" is just someone else's data center, rented over the internet",
-        "It lets companies scale computing power up or down without buying hardware",
-        "Three big providers dominate: AWS, Microsoft Azure, and Google Cloud",
-        "This is why AI's growth is tightly linked to cloud/data-center spending",
-        "Nearly every app you use \u2014 banking, social media, streaming \u2014 runs on someone's cloud"
-      ]
-    }
-  ],
   "2026-09-09": [
     {
       "headlines": [
@@ -290,6 +269,27 @@
         "Individual stocks can outperform, but concentrate your risk in one company",
         "Index investing trades excitement for consistency and much lower fees",
         "A common approach: index funds as the base, individual picks as a smaller side bet"
+      ]
+    }
+  ],
+  "2026-09-22": [
+    {
+      "headlines": [
+        "Exhibit tables added: One last chance to showcase your startup at TechCrunch Disrupt 2026",
+        "Binance takes $100M stake in Circle under expanded USDC deal"
+      ],
+      "categories": [
+        "TECH",
+        "CRYPTO"
+      ],
+      "edu_title": "What Cloud Computing Actually Means",
+      "edu_category": "TECH 101",
+      "edu_points": [
+        "\"The cloud\" is just someone else's data center, rented over the internet",
+        "It lets companies scale computing power up or down without buying hardware",
+        "Three big providers dominate: AWS, Microsoft Azure, and Google Cloud",
+        "This is why AI's growth is tightly linked to cloud/data-center spending",
+        "Nearly every app you use \u2014 banking, social media, streaming \u2014 runs on someone's cloud"
       ]
     }
   ]
