@@ -1,25 +1,4 @@
 {
-  "2026-09-09": [
-    {
-      "headlines": [
-        "CloudNC raises $20M to automate manufacturing\u2019s most pressing bottlenecks",
-        "\u2018Gambling with our lives\u2019: Anthropic researcher quits, warns against self-improving AI"
-      ],
-      "categories": [
-        "TECH",
-        "AI"
-      ],
-      "edu_title": "Bull Market vs. Bear Market \u2014 What the Terms Actually Mean",
-      "edu_category": "MARKETS 101",
-      "edu_points": [
-        "A bull market is a sustained rise in prices; a bear market is a sustained fall",
-        "The common threshold: a 20%+ drop from a recent high defines a bear market",
-        "Bull markets historically last far longer than bear markets on average",
-        "Investor psychology often overshoots in both directions \u2014 greed, then fear",
-        "Long-term investors are taught to expect both phases, not just the good one"
-      ]
-    }
-  ],
   "2026-09-10": [
     {
       "headlines": [
@@ -290,6 +269,27 @@
         "Three big providers dominate: AWS, Microsoft Azure, and Google Cloud",
         "This is why AI's growth is tightly linked to cloud/data-center spending",
         "Nearly every app you use \u2014 banking, social media, streaming \u2014 runs on someone's cloud"
+      ]
+    }
+  ],
+  "2026-09-23": [
+    {
+      "headlines": [
+        "3 days left to save up to $200 and make impactful connections at TechCrunch Disrupt 2026",
+        "Ema raises $77M as AI starts eating into enterprise software and services"
+      ],
+      "categories": [
+        "TECH",
+        "AI"
+      ],
+      "edu_title": "Bull Market vs. Bear Market \u2014 What the Terms Actually Mean",
+      "edu_category": "MARKETS 101",
+      "edu_points": [
+        "A bull market is a sustained rise in prices; a bear market is a sustained fall",
+        "The common threshold: a 20%+ drop from a recent high defines a bear market",
+        "Bull markets historically last far longer than bear markets on average",
+        "Investor psychology often overshoots in both directions \u2014 greed, then fear",
+        "Long-term investors are taught to expect both phases, not just the good one"
       ]
     }
   ]

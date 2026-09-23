@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "3 days left to save up to $200 and make impactful connections at TechCrunch Disrupt 2026",
+      "summary": "Only 3 days left to lock in up to $200 off TechCrunch Disrupt 2026 passes\u2014plus 50% off a second ticket. Connect with 10,000+ tech leaders before the September 25 deadline. Register now.",
+      "category": "TECH",
+      "source": "TechCrunch"
+    },
+    {
+      "headline": "Ema raises $77M as AI starts eating into enterprise software and services",
+      "summary": "Ema just closed a funding round, bringing its total raise to $140M as AI increasingly disrupts traditional enterprise software and services. The platform serves 50+ enterprise customers including Google and Microsoft, signaling growing adoption of AI-native solutions in the corporate stack.",
+      "category": "AI",
+      "source": "TechCrunch",
+      "stat_label": "Total funding raised",
+      "stat_value": "$140M"
+    }
+  ],
+  "educational": {
+    "title": "Bull Market vs. Bear Market \u2014 What the Terms Actually Mean",
+    "category": "MARKETS 101",
+    "points": [
+      "A bull market is a sustained rise in prices; a bear market is a sustained fall",
+      "The common threshold: a 20%+ drop from a recent high defines a bear market",
+      "Bull markets historically last far longer than bear markets on average",
+      "Investor psychology often overshoots in both directions \u2014 greed, then fear",
+      "Long-term investors are taught to expect both phases, not just the good one"
+    ]
+  }
+}
