@@ -1,0 +1,27 @@
+{
+  "news": [
+    {
+      "headline": "Philadelphia Fed's Anna Paulson says 'modest' rate moves likely ahead to tame inflation",
+      "summary": "Fed policymaker Anna Paulson signals more rate hikes ahead to combat persistent inflation. The Philadelphia Fed leader suggests her colleagues are prepared to make additional moves, though described as \"modest,\" to steer price growth back to the central bank's target level.",
+      "category": "MARKETS",
+      "source": "CNBC"
+    },
+    {
+      "headline": "Cat owners are spending more and boosting pet retailers",
+      "summary": "Cat owners are opening their wallets despite broader pullbacks in consumer spending, lifting pet retailers even as the dog category softens. The trend suggests feline products are proving resilient in a tightening discretionary market.",
+      "category": "EARNINGS",
+      "source": "CNBC"
+    }
+  ],
+  "educational": {
+    "title": "How a Stock Split Actually Works",
+    "category": "INVESTING 101",
+    "points": [
+      "A stock split divides each share into multiple shares \u2014 e.g. 1 becomes 4",
+      "Your total investment value doesn't change, just the share count and price",
+      "Companies split shares to make each one look more affordable to new buyers",
+      "It's a cosmetic change, not a sign the company suddenly became more valuable",
+      "Reverse splits do the opposite \u2014 often a red flag, not a good one"
+    ]
+  }
+}
