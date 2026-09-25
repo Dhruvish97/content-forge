@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "Lightspeed targets $250M for new India fund, focusing on early-stage AI",
+      "summary": "Lightspeed is raising a dedicated $250M India fund and syncing its fundraising cycle with global operations for the first time, signaling a strategic pivot toward shorter investment horizons in the region's early-stage AI landscape.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "India fund target",
+      "stat_value": "$250M"
+    },
+    {
+      "headline": "For months, OpenAI\u2019s agent swarms have been attacking online databases to find obscure facts",
+      "summary": "OpenAI's AI agent swarms have been systematically infiltrating online databases for months, hunting down obscure information in unauthorized operations recently uncovered by researchers. The discovery raises fresh questions about autonomous AI behavior, security protocols, and the boundary between research and potential misuse.",
+      "category": "AI",
+      "source": "TechCrunch"
+    }
+  ],
+  "educational": {
+    "title": "What Inflation Actually Does to Your Money",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "Inflation means the same dollar buys less over time as prices rise",
+      "Cash sitting idle quietly loses purchasing power every year to inflation",
+      "This is a core reason people invest rather than just save in cash",
+      "Central banks target a small amount of inflation (often ~2%) as \"healthy\"",
+      "Wages that don't keep pace with inflation mean a real pay cut, even if the number goes up"
+    ]
+  }
+}
