@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "This may be the \u2018missing piece\u2019 for investors looking to boost AI exposure",
+      "summary": "Matthews Asia is positioning its portfolio strategy around exposure to the world's second-largest economy\u2014a potential missing piece for investors seeking to deepen their AI bets. The approach taps into growth opportunities beyond traditional Western tech hubs.",
+      "category": "MARKETS",
+      "source": "CNBC"
+    },
+    {
+      "headline": "Bitcoin ETFs Notch Seven-Day Winning Streak as 2026 Flows Turn Green",
+      "summary": "Bitcoin ETFs are on a seven-day winning streak, pulling in nearly $3B and flipping 2026 flows from red to green. The rally erases recent losses tied to the Clarity Act, signaling renewed institutional demand for crypto's biggest asset.",
+      "category": "CRYPTO",
+      "source": "Decrypt",
+      "stat_label": "Weekly inflows",
+      "stat_value": "$3B"
+    }
+  ],
+  "educational": {
+    "title": "How Venture Capital Actually Funds Startups",
+    "category": "TECH 101",
+    "points": [
+      "VCs invest other people's money (a \"fund\") in exchange for equity, not loans",
+      "Most funded startups fail \u2014 VC math relies on a few huge wins covering the rest",
+      "Funding rounds (seed, Series A, B...) mark stages of growth and rising valuation",
+      "Taking VC money means giving up some ownership and control in exchange for capital",
+      "Not every business should raise VC \u2014 it's built for high-growth, high-risk bets"
+    ]
+  }
+}
