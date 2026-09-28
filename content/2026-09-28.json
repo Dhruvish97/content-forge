@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "Anthropic, Gamma, and Clay share what happens when enterprises actually deploy AI at TechCrunch Disrupt 2026",
+      "summary": "Anthropic, Clay, and Gamma break down the gap between AI demos and real enterprise deployment at TechCrunch Disrupt 2026. Hear directly from builders on what actually works when AI moves from proof-of-concept to production. Register now and grab 50% off a second pass.",
+      "category": "AI",
+      "source": "TechCrunch"
+    },
+    {
+      "headline": "U.S., China to lower tariffs on $60 billion of goods. Here's what qualifies",
+      "summary": "The U.S. and China are cutting tariffs on $60 billion in goods, with American imports of toys, sports equipment, and holiday decorations among those affected. U.S. farm products also made China's tariff reduction list, signaling a modest thaw in trade tensions between the two economies.",
+      "category": "MARKETS",
+      "source": "CNBC",
+      "stat_label": "Tariff reduction scope",
+      "stat_value": "$60 billion"
+    }
+  ],
+  "educational": {
+    "title": "How Interest Rates Actually Move Your Money",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "The Fed sets a target rate that ripples into loans, mortgages, and savings",
+      "Higher rates make borrowing pricier \u2014 car loans and mortgages cost more",
+      "Higher rates also make saving pay better \u2014 bank yields tend to rise too",
+      "Stocks often wobble on rate news because future profits get discounted more",
+      "You don't need to predict rates \u2014 just understand why headlines move markets"
+    ]
+  }
+}

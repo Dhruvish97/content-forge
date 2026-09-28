@@ -1,25 +1,4 @@
 {
-  "2026-09-14": [
-    {
-      "headlines": [
-        "What\u2019s behind the AI industry\u2019s latest warnings of doom?",
-        "Warsh's credibility is on the line this week as Trump policies put pressure on Fed to hike"
-      ],
-      "categories": [
-        "AI",
-        "MARKETS"
-      ],
-      "edu_title": "How Interest Rates Actually Move Your Money",
-      "edu_category": "FINANCIAL LITERACY",
-      "edu_points": [
-        "The Fed sets a target rate that ripples into loans, mortgages, and savings",
-        "Higher rates make borrowing pricier \u2014 car loans and mortgages cost more",
-        "Higher rates also make saving pay better \u2014 bank yields tend to rise too",
-        "Stocks often wobble on rate news because future profits get discounted more",
-        "You don't need to predict rates \u2014 just understand why headlines move markets"
-      ]
-    }
-  ],
   "2026-09-15": [
     {
       "headlines": [
@@ -290,6 +269,27 @@
         "Owning 10 tech stocks isn't diversified \u2014 that's still one sector's risk",
         "True diversification spans asset classes: stocks, bonds, cash, real estate",
         "The goal isn't more returns \u2014 it's smoother, more survivable ones"
+      ]
+    }
+  ],
+  "2026-09-28": [
+    {
+      "headlines": [
+        "Anthropic, Gamma, and Clay share what happens when enterprises actually deploy AI at TechCrunch Disrupt 2026",
+        "U.S., China to lower tariffs on $60 billion of goods. Here's what qualifies"
+      ],
+      "categories": [
+        "AI",
+        "MARKETS"
+      ],
+      "edu_title": "How Interest Rates Actually Move Your Money",
+      "edu_category": "FINANCIAL LITERACY",
+      "edu_points": [
+        "The Fed sets a target rate that ripples into loans, mortgages, and savings",
+        "Higher rates make borrowing pricier \u2014 car loans and mortgages cost more",
+        "Higher rates also make saving pay better \u2014 bank yields tend to rise too",
+        "Stocks often wobble on rate news because future profits get discounted more",
+        "You don't need to predict rates \u2014 just understand why headlines move markets"
       ]
     }
   ]
