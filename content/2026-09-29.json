@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "Protego Ventures closes debut $125 million fund for Israeli defense tech",
+      "summary": "Protego Ventures, Israel's first dedicated defense tech VC, has closed its debut fund at $125 million. The firm aims to back Israeli startups tackling defense and national security challenges in an increasingly militarized region.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Debut fund size",
+      "stat_value": "$125M"
+    },
+    {
+      "headline": "Crypto ETFs Surge as Bitcoin Funds Add $2.95 Billion in 30 Days",
+      "summary": "Bitcoin ETFs are on a roll: eight consecutive days of inflows as the market bounces back from recent selling pressure. The surge reflects renewed investor appetite, with funds pulling in significant capital over the past month.",
+      "category": "CRYPTO",
+      "source": "Decrypt",
+      "stat_label": "Bitcoin ETF inflows",
+      "stat_value": "$2.95B"
+    }
+  ],
+  "educational": {
+    "title": "What Actually Happens When You Buy a Stock",
+    "category": "INVESTING 101",
+    "points": [
+      "You're buying a tiny slice of real ownership in a company, not a lottery ticket",
+      "Your broker matches your order with a seller through an exchange in milliseconds",
+      "Stock price moves on collective belief about future profits, not just today's news",
+      "You make money two ways: the price rising, or dividends paid out over time",
+      "Owning one share still makes you a part-owner, with voting rights and all"
+    ]
+  }
+}
