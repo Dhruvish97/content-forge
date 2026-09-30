@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "3 days left to exhibit: Turn visibility into your next opportunity at TechCrunch Disrupt 2026",
+      "summary": "Three days to lock in your TechCrunch Disrupt 2026 booth\u2014deadline October 2 at 11:59 p.m. PT. Pitch directly to 10,000+ founders, investors, and operators in one room. This is the visibility window your startup needs.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Expected attendees",
+      "stat_value": "10,000+"
+    },
+    {
+      "headline": "AI voice startup ElevenLabs doubles valuation to $22B",
+      "summary": "ElevenLabs, the AI voice platform, hit a $22B valuation through a $300M employee tender offer co-led by Wellington and T. Rowe Price. The secondary share sale lets early staff cash out while the company continues scaling its text-to-speech and voice cloning tech without needing fresh capital.",
+      "category": "AI",
+      "source": "TechCrunch",
+      "stat_label": "Valuation",
+      "stat_value": "$22B"
+    }
+  ],
+  "educational": {
+    "title": "Machine Learning vs. AI vs. LLMs \u2014 What's the Difference?",
+    "category": "TECH 101",
+    "points": [
+      "AI is the broad goal: machines performing tasks that normally need human intelligence",
+      "Machine learning is one method \u2014 systems that improve from data instead of fixed rules",
+      "Deep learning is a subset of ML using layered neural networks",
+      "LLMs (like the ones powering chatbots) are deep learning models trained on huge text data",
+      "Not all AI is an LLM, and not all machine learning involves neural networks"
+    ]
+  }
+}
