@@ -1480,5 +1480,31 @@
       "media_id": "18639357391051656",
       "status": "published"
     }
+  ],
+  "2026-09-30": [
+    {
+      "post_type": "news",
+      "index": 1,
+      "image_url": "https://github.com/Dhruvish97/content-forge/releases/download/daily-posts-2026-09-30/2026-09-30_news_1.jpg",
+      "container_id": "18098086667370395",
+      "media_id": "18143999212580238",
+      "status": "published"
+    },
+    {
+      "post_type": "news",
+      "index": 2,
+      "image_url": "https://github.com/Dhruvish97/content-forge/releases/download/daily-posts-2026-09-30/2026-09-30_news_2.jpg",
+      "container_id": "18098086697370395",
+      "media_id": "18108568562242936",
+      "status": "published"
+    },
+    {
+      "post_type": "educational",
+      "index": null,
+      "image_url": "https://github.com/Dhruvish97/content-forge/releases/download/daily-posts-2026-09-30/2026-09-30_educational.jpg",
+      "container_id": "18098086730370395",
+      "media_id": "17957204181013845",
+      "status": "published"
+    }
   ]
 }
