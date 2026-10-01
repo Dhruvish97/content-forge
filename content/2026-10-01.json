@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "Kalshi, Polymarket trading volumes on some products raise questions amid massive growth",
+      "summary": "Prediction market platforms Kalshi and Polymarket are facing questions about trading authenticity as unusual volume patterns emerge amid explosive growth. Experts are scrutinizing whether reported trading figures represent genuine market activity or something less organic.",
+      "category": "MARKETS",
+      "source": "CNBC"
+    },
+    {
+      "headline": "Accenture rallies more than 20% after earnings beat, heads for best day ever",
+      "summary": "Accenture stock jumped on stronger-than-expected fiscal Q4 earnings, marking its best day on record. The consulting giant's beat sent shares rallying as investors rewarded the solid performance.",
+      "category": "EARNINGS",
+      "source": "CNBC",
+      "stat_label": "Stock rally",
+      "stat_value": "+20%"
+    }
+  ],
+  "educational": {
+    "title": "What Is Bitcoin's 'Halving' and Why Does It Matter?",
+    "category": "CRYPTO 101",
+    "points": [
+      "Roughly every 4 years, Bitcoin's mining reward is cut in half by design",
+      "This slows how fast new bitcoin enters circulation, capping supply growth",
+      "It's baked into the code \u2014 no company or person decides when it happens",
+      "Historically, halvings have preceded major price cycles, though it's not guaranteed",
+      "The last coin will ever be mined around the year 2140 due to this schedule"
+    ]
+  }
+}
