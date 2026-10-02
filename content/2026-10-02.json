@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "TechCrunch Disrupt 2026: Blackstone\u2019s Jas Khaira on building the next generation of AI giants",
+      "summary": "Blackstone's Jas Khaira hits the Builders Stage at TechCrunch Disrupt 2026 to discuss constructing the next wave of AI powerhouses. Secure your pass now and grab 50% off a second ticket.",
+      "category": "TECH",
+      "source": "TechCrunch"
+    },
+    {
+      "headline": "Call it AI, call it Super Intelligence, only 2% of consumers are buying it",
+      "summary": "White House convened major tech CEOs to sign Trump's \"morally binding\" AI safety pledge this week. Trump simultaneously issued an executive order rebranding AI as \"super intelligence,\" while Meta and OpenAI work to soften their AI products' public image\u2014despite consumer adoption remaining flat.",
+      "category": "AI",
+      "source": "TechCrunch",
+      "stat_label": "Consumer adoption rate",
+      "stat_value": "2%"
+    }
+  ],
+  "educational": {
+    "title": "The Emergency Fund Rule Nobody Follows (But Should)",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "An emergency fund is 3-6 months of essential expenses, kept in cash, not invested",
+      "It's not for vacations \u2014 it's for job loss, medical bills, or a broken car",
+      "Without one, a single bad month can force you into high-interest debt",
+      "Keep it boring: a high-yield savings account, not the stock market",
+      "Build it before investing aggressively \u2014 it's the foundation everything else sits on"
+    ]
+  }
+}
