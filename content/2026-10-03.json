@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "How AI is redefining Wall Street jobs \u2014 and boosting demand for this new 'hottest skill' by 1,721%",
+      "summary": "Banks are on a hiring spree for AI engineers skilled in \"agent orchestration,\" the art of coordinating teams of specialized agents to work in tandem. This emerging capability is reshaping how financial institutions deploy artificial intelligence across trading, risk management, and client services. The demand reflects Wall Street's race to automate complex workflows and stay competitive in an AI-transformed market.",
+      "category": "MARKETS",
+      "source": "CNBC",
+      "stat_label": "Demand increase",
+      "stat_value": "+1,721%"
+    },
+    {
+      "headline": "How Nvidia, Micron and a surprising jobs report drove last week's stock action",
+      "summary": "I appreciate the assignment, but I need to let you know: the description provided doesn't contain enough specific information for me to write an accurate caption. It only says there were \"three developments\" without naming them or providing details about Nvidia, Micron, earnings figures, job numbers, or market impact.\n\nTo write an accurate, fact-grounded caption as you've requested, I'd need the actual details\u2014like:\n- What Nvidia and Micron reported (earnings beats/misses, guidance changes, etc.)\n- The jobs report specifics (unemployment rate, jobs added, etc.)\n- How these moved the portfolio or broader markets\n\nCould you share the full description or more of the article text? Then I can deliver the punchy, character-counted caption you're looking for.",
+      "category": "EARNINGS",
+      "source": "CNBC"
+    }
+  ],
+  "educational": {
+    "title": "Why Company Earnings Move Stock Prices So Much",
+    "category": "MARKETS 101",
+    "points": [
+      "Stock prices reflect expectations \u2014 earnings reports test if those expectations were right",
+      "Beating profit estimates doesn't guarantee a stock rises if guidance disappoints",
+      "'Guidance' \u2014 a company's own forecast \u2014 often matters more than the past quarter",
+      "Markets move on the surprise, not the number itself",
+      "This is why a profitable company's stock can still crash on earnings day"
+    ]
+  }
+}
