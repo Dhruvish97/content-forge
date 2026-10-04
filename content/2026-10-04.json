@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "'Uptober' Starts Green as Bitcoin ETFs Draw $134 Million",
+      "summary": "Spot Bitcoin ETFs pulled in $134.4M in October's first two trading days, reversing September's outflows as a softer jobs report eased expectations for further Fed rate hikes. The inflow signals renewed investor appetite for crypto amid shifting monetary policy signals.",
+      "category": "CRYPTO",
+      "source": "Decrypt",
+      "stat_label": "Bitcoin ETF inflows",
+      "stat_value": "$134.4M"
+    },
+    {
+      "headline": "'We Have Identified You, Sir': Near Intents Recovers $3.8 Million After 48-Hour Ultimatum",
+      "summary": "Near Protocol's Intents platform recovered $3.8M in stolen funds within 24 hours after publicly identifying the attacker and issuing a 48-hour ultimatum. The exploit drained the platform Thursday, but the direct approach worked\u2014funds were returned in full, demonstrating an unconventional but effective recovery method in crypto.",
+      "category": "CRYPTO",
+      "source": "Decrypt",
+      "stat_label": "Funds recovered",
+      "stat_value": "$3.8M"
+    }
+  ],
+  "educational": {
+    "title": "What a Recession Actually Means (And What It Doesn't)",
+    "category": "FINANCIAL LITERACY",
+    "points": [
+      "A recession is broadly defined as a significant decline in economic activity",
+      "It's not the same as a stock market crash \u2014 they can happen independently",
+      "Recessions typically bring rising unemployment and falling consumer spending",
+      "They're a normal part of economic cycles, not a rare catastrophe",
+      "Historically, markets have recovered from every recession, though timing varies"
+    ]
+  }
+}
