@@ -1,0 +1,29 @@
+{
+  "news": [
+    {
+      "headline": "HackerRank\u2019s AI interviewer offers a glimpse into what job interviews could become",
+      "summary": "HackerRank's AI interviewer has already conducted over 500,000 interviews, with major companies like Snowflake, Snorkel, and Capgemini piloting the technology. The tool signals a potential shift in how tech hiring could work at scale.",
+      "category": "AI",
+      "source": "TechCrunch",
+      "stat_label": "AI interviews conducted",
+      "stat_value": "500,000+"
+    },
+    {
+      "headline": "Brazilian stocks jump as Bolsonaro now seen as heavy favorite to win presidency",
+      "summary": "Brazil's stock market surged following Sunday's first-round presidential election results, with Bolsonaro emerging as the heavy favorite heading into an Oct. 25 runoff against incumbent Lula da Silva. Investors are pricing in expectations ahead of the decisive second round.",
+      "category": "MARKETS",
+      "source": "CNBC"
+    }
+  ],
+  "educational": {
+    "title": "Index Funds vs. Picking Individual Stocks",
+    "category": "INVESTING 101",
+    "points": [
+      "An index fund buys a whole market segment at once \u2014 instant diversification",
+      "Most professional stock-pickers underperform simple index funds over time",
+      "Individual stocks can outperform, but concentrate your risk in one company",
+      "Index investing trades excitement for consistency and much lower fees",
+      "A common approach: index funds as the base, individual picks as a smaller side bet"
+    ]
+  }
+}
