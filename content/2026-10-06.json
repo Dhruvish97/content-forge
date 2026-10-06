@@ -1,0 +1,27 @@
+{
+  "news": [
+    {
+      "headline": "Get all your questions answered at TechCrunch Disrupt 2026: The full breakout session agenda revealed",
+      "summary": "TechCrunch Disrupt 2026 drops its full breakout agenda for October 13\u201315 in San Francisco. Got scaling questions? Founders, operators, and tech leaders can get answers across dozens of sessions. Register now and save up to $100\u2014plus grab a second pass at half off.",
+      "category": "TECH",
+      "source": "TechCrunch"
+    },
+    {
+      "headline": "LibreOffice says \u2018no AI\u2019 is now a software feature",
+      "summary": "LibreOffice is doubling down on a privacy-first stance: the open-source document editor won't bake AI into its default setup, prioritizing user data protection over the latest tech trends. As AI features become table stakes for productivity software, the move positions LibreOffice as an alternative for users wary of algorithmic oversight.",
+      "category": "AI",
+      "source": "TechCrunch"
+    }
+  ],
+  "educational": {
+    "title": "What Cloud Computing Actually Means",
+    "category": "TECH 101",
+    "points": [
+      "\"The cloud\" is just someone else's data center, rented over the internet",
+      "It lets companies scale computing power up or down without buying hardware",
+      "Three big providers dominate: AWS, Microsoft Azure, and Google Cloud",
+      "This is why AI's growth is tightly linked to cloud/data-center spending",
+      "Nearly every app you use \u2014 banking, social media, streaming \u2014 runs on someone's cloud"
+    ]
+  }
+}
