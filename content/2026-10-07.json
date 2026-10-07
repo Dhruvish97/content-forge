@@ -1,0 +1,27 @@
+{
+  "news": [
+    {
+      "headline": "Get hands-on: The full lineup of interactive roundtables at TechCrunch Disrupt 2026",
+      "summary": "TechCrunch Disrupt 2026 is bringing together major players like Nvidia, Chime, Obvious Ventures, and Anthropic for interactive roundtables. Register now to lock in savings of up to $100 on your pass, plus grab a second pass at half off.",
+      "category": "TECH",
+      "source": "TechCrunch"
+    },
+    {
+      "headline": "Here comes third-quarter earnings season. Booming profits could propel the S&P 500 to new heights",
+      "summary": "Third-quarter earnings season kicks off this week with expectations running high for blockbuster corporate profits. Strong results could provide fresh momentum for the S&P 500 as investors parse through the numbers for clues on economic health and growth prospects.",
+      "category": "EARNINGS",
+      "source": "CNBC"
+    }
+  ],
+  "educational": {
+    "title": "Bull Market vs. Bear Market \u2014 What the Terms Actually Mean",
+    "category": "MARKETS 101",
+    "points": [
+      "A bull market is a sustained rise in prices; a bear market is a sustained fall",
+      "The common threshold: a 20%+ drop from a recent high defines a bear market",
+      "Bull markets historically last far longer than bear markets on average",
+      "Investor psychology often overshoots in both directions \u2014 greed, then fear",
+      "Long-term investors are taught to expect both phases, not just the good one"
+    ]
+  }
+}
