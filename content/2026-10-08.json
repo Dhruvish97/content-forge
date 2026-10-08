@@ -1,0 +1,31 @@
+{
+  "news": [
+    {
+      "headline": "Vesta raises $30M to bring swarms of agents to mortgage lenders",
+      "summary": "Vesta just closed a $30M funding round to power AI agent swarms for mortgage lenders, helping streamline loan origination at scale. The round was led by Conversion Capital, backing the startup's push to embed autonomous agents into the lending workflow.",
+      "category": "TECH",
+      "source": "TechCrunch",
+      "stat_label": "Series funding",
+      "stat_value": "$30M"
+    },
+    {
+      "headline": "Little relief expected for gas prices ahead of Election Day, according to prediction markets",
+      "summary": "Gas prices are forecast to stay above $4/gallon heading into Election Day, based on trader predictions on Kalshi's platform. Expect little relief at the pump before voters head to polls on Nov. 3.",
+      "category": "MARKETS",
+      "source": "CNBC",
+      "stat_label": "Expected gas price",
+      "stat_value": "Above $4/gallon"
+    }
+  ],
+  "educational": {
+    "title": "How a Stock Split Actually Works",
+    "category": "INVESTING 101",
+    "points": [
+      "A stock split divides each share into multiple shares \u2014 e.g. 1 becomes 4",
+      "Your total investment value doesn't change, just the share count and price",
+      "Companies split shares to make each one look more affordable to new buyers",
+      "It's a cosmetic change, not a sign the company suddenly became more valuable",
+      "Reverse splits do the opposite \u2014 often a red flag, not a good one"
+    ]
+  }
+}
